@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "#c:ingots/iron",
+    "L": "minecraft:leather"
+  },
+  "pattern": [
+    "I I",
+    "L L"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:farmer_boots"
+  }
+}

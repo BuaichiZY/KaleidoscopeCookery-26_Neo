@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#kaleidoscope_cookery:straw_bale",
+    "H": "#kaleidoscope_cookery:straw_hat",
+    "P": "minecraft:pumpkin",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " H ",
+    "SPS",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:scarecrow"
+  }
+}

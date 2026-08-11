@@ -1,0 +1,8 @@
+{
+  "type": "kaleidoscope_cookery:steamer",
+  "ingredient": "kaleidoscope_cookery:stuffed_dough_food",
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:baozi"
+  }
+}

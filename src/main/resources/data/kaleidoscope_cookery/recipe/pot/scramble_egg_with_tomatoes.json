@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "carrier": "minecraft:bowl",
+  "ingredients": [
+    "#c:eggs",
+    "#c:eggs",
+    "#c:eggs",
+    "#c:crops/tomato",
+    "#c:crops/tomato",
+    "#c:crops/tomato"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:scramble_egg_with_tomatoes"
+  }
+}

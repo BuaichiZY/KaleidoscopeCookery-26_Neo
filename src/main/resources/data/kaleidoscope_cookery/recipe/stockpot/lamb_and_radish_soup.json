@@ -1,0 +1,14 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "minecraft:carrot",
+    "minecraft:carrot",
+    "minecraft:carrot",
+    "#c:foods/raw_mutton",
+    "#c:foods/raw_mutton"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:lamb_and_radish_soup"
+  }
+}

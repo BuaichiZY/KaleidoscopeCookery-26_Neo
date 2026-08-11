@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "kaleidoscope_cookery:item/cold_cut_ham_slices"
+        },
+        "when": [
+          "gui",
+          "fixed"
+        ]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "kaleidoscope_cookery:item/cold_cut_ham_slices_block"
+    },
+    "property": "minecraft:display_context"
+  }
+}

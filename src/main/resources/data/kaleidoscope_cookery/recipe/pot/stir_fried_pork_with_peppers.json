@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "carrier": "minecraft:bowl",
+  "ingredients": [
+    "kaleidoscope_cookery:green_chili",
+    "kaleidoscope_cookery:green_chili",
+    "kaleidoscope_cookery:green_chili",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:stir_fried_pork_with_peppers"
+  }
+}

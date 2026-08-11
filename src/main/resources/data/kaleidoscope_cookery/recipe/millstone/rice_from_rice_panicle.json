@@ -1,0 +1,8 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "kaleidoscope_cookery:rice_panicle",
+  "result": {
+    "count": 3,
+    "id": "kaleidoscope_cookery:rice"
+  }
+}

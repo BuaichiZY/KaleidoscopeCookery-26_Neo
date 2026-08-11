@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:brick",
+    "I": "#c:ingots/iron"
+  },
+  "pattern": [
+    "B B",
+    "I I",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:stockpot"
+  }
+}

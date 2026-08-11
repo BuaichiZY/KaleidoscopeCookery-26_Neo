@@ -1,0 +1,12 @@
+{
+    "type":  "minecraft:crafting_shapeless",
+    "category":  "misc",
+    "ingredients":  [
+                        "minecraft:water_bucket",
+                        "kaleidoscope_cookery:flour"
+                    ],
+    "result":  {
+                   "count":  1,
+                   "id":  "kaleidoscope_cookery:raw_dough"
+               }
+}

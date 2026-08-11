@@ -1,0 +1,7 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "minecraft:stone",
+  "result": {
+    "id": "minecraft:cobblestone"
+  }
+}

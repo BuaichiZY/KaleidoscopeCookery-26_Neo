@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "carrier": "minecraft:bowl",
+  "ingredients": [
+    "minecraft:blaze_powder",
+    "minecraft:blaze_powder",
+    "minecraft:blaze_powder",
+    "#c:foods/raw_mutton",
+    "#c:foods/raw_mutton",
+    "#c:foods/raw_mutton"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:blaze_lamb_chop"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "#c:gravels",
+  "result": {
+    "id": "minecraft:sand"
+  }
+}

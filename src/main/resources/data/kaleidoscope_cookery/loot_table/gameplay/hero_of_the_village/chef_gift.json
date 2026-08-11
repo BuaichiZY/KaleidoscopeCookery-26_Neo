@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:scramble_egg_with_tomatoes_rice_bowl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:braised_beef_rice_bowl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:stir_fried_pork_with_peppers_rice_bowl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:sweet_and_sour_pork_rice_bowl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:fish_flavored_shredded_pork_rice_bowl"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "kaleidoscope_cookery:gameplay/hero_of_the_village/chef_gift"
+}

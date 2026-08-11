@@ -1,0 +1,18 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "carrier": "minecraft:bowl",
+  "ingredients": [
+    "minecraft:bamboo",
+    "minecraft:bamboo",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork",
+    "#c:foods/raw_pork"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:dongpo_pork"
+  }
+}

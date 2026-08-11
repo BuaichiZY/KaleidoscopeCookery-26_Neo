@@ -1,0 +1,7 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "minecraft:diorite",
+  "result": {
+    "id": "minecraft:polished_diorite"
+  }
+}

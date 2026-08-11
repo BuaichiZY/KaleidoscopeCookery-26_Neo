@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "#c:ingots/iron",
+    "N": "#c:nuggets/iron",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "I  ",
+    " N ",
+    "  S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:kitchen_shovel"
+  }
+}

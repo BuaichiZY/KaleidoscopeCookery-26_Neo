@@ -1,0 +1,17 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "carrier": "minecraft:barrier",
+  "ingredients": [
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food",
+    "kaleidoscope_cookery:stuffed_dough_food"
+  ],
+  "result": {
+    "count": 7,
+    "id": "kaleidoscope_cookery:dumpling"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "minecraft:rotten_flesh",
+    "minecraft:rotten_flesh",
+    "minecraft:rotten_flesh",
+    "minecraft:rotten_flesh",
+    "minecraft:sculk",
+    "minecraft:sculk",
+    "minecraft:sculk",
+    "minecraft:sculk",
+    "minecraft:sculk"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:fearsome_thick_soup"
+  },
+  "soup_base": "minecraft:lava"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "carrier": "minecraft:bowl",
+  "ingredients": [
+    "minecraft:amethyst_shard",
+    "minecraft:amethyst_shard",
+    "minecraft:amethyst_shard",
+    "#c:foods/raw_mutton",
+    "#c:foods/raw_mutton",
+    "#c:foods/raw_mutton"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:crystal_lamb_chop"
+  }
+}

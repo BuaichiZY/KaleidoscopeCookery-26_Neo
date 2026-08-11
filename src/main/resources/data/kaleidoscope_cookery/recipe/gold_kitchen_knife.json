@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:ingots/gold",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "##",
+    "#S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:gold_kitchen_knife"
+  }
+}

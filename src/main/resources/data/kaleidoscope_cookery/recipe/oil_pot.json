@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:bucket",
+    "P": "minecraft:heavy_weighted_pressure_plate",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "P ",
+    "BS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:oil_pot"
+  }
+}

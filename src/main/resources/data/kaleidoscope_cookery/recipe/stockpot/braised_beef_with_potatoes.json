@@ -1,0 +1,14 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "minecraft:potato",
+    "minecraft:potato",
+    "minecraft:potato",
+    "#c:foods/raw_beef",
+    "#c:foods/raw_beef"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:braised_beef_with_potatoes"
+  }
+}

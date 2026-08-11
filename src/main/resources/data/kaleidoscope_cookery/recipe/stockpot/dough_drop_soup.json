@@ -1,0 +1,15 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "#c:crops/lettuce",
+    "#c:crops/lettuce",
+    "#c:crops/lettuce",
+    "#c:crops/lettuce",
+    "#c:flour",
+    "#c:flour"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:dough_drop_soup"
+  }
+}

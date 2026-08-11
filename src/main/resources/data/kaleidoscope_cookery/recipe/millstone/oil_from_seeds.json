@@ -1,0 +1,7 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "#c:seeds",
+  "result": {
+    "id": "kaleidoscope_cookery:oil"
+  }
+}

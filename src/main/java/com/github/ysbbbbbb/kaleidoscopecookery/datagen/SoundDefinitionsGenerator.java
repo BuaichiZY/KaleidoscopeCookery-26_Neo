@@ -1,0 +1,69 @@
+package com.github.ysbbbbbb.kaleidoscopecookery.datagen;
+
+import com.github.ysbbbbbb.kaleidoscopecookery.init.ModSounds;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.SoundDefinition;
+import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
+import net.neoforged.neoforge.common.data.SoundDefinition.Sound;
+
+public class SoundDefinitionsGenerator extends SoundDefinitionsProvider {
+   protected SoundDefinitionsGenerator(PackOutput output, ExistingFileHelper helper) {
+      super(output, "kaleidoscope_cookery", helper);
+   }
+
+   public void registerSounds() {
+      SoundDefinition stockpotSound = definition().subtitle(subtitle("block.stockpot"));
+
+      for (int i = 0; i < 7; i++) {
+         stockpotSound.with(sound("block/stockpot/stockpot_" + i));
+      }
+
+      this.add((SoundEvent)ModSounds.BLOCK_STOCKPOT.get(), stockpotSound);
+      SoundDefinition paddySound = definition().subtitle(subtitle("block.paddy")).with(sound("block/paddy/paddy_0")).with(sound("block/paddy/paddy_1"));
+      this.add((SoundEvent)ModSounds.BLOCK_PADDY.get(), paddySound);
+      SoundDefinition fartSound = definition()
+         .subtitle(subtitle("entity.fart"))
+         .with(sound("entity/fart/fart_0"))
+         .with(sound("entity/fart/fart_1"))
+         .with(sound("entity/fart/fart_2"));
+      this.add((SoundEvent)ModSounds.ENTITY_FART.get(), fartSound);
+      SoundDefinition millstoneSound = definition()
+         .subtitle(subtitle("block.millstone"))
+         .with(sound("block/millstone/millstone_0"))
+         .with(sound("block/millstone/millstone_1"))
+         .with(sound("block/millstone/millstone_2"))
+         .with(sound("block/millstone/millstone_3"))
+         .with(sound("block/millstone/millstone_4"))
+         .with(sound("block/millstone/millstone_5"));
+      this.add((SoundEvent)ModSounds.BLOCK_MILLSTONE.get(), millstoneSound);
+      SoundDefinition teapotProcessingSound = definition()
+         .subtitle(subtitle("block.teapot"))
+         .with(sound("block/teapot/processing/teapot_0"))
+         .with(sound("block/teapot/processing/teapot_1"))
+         .with(sound("block/teapot/processing/teapot_2"))
+         .with(sound("block/teapot/processing/teapot_3"))
+         .with(sound("block/teapot/processing/teapot_4"));
+      this.add((SoundEvent)ModSounds.BLOCK_TEAPOT_PROCESSING.get(), teapotProcessingSound);
+      SoundDefinition trashCanSound = definition().subtitle(subtitle("block.trash_can")).with(sound("block/trash_can"));
+      this.add((SoundEvent)ModSounds.TRASH_CAN.get(), trashCanSound);
+      SoundDefinition recipeBlockSound = definition()
+         .subtitle(subtitle("block.recipe_block"))
+         .with(sound("block/recipe_block/recipe_block_0"))
+         .with(sound("block/recipe_block/recipe_block_1"))
+         .with(sound("block/recipe_block/recipe_block_2"));
+      this.add((SoundEvent)ModSounds.BLOCK_RECIPE_BLOCK.get(), recipeBlockSound);
+      SoundDefinition doughTransformSound = definition().subtitle(subtitle("item.dough_transform")).with(sound("item/dough_transform"));
+      this.add((SoundEvent)ModSounds.ITEM_DOUGH_TRANSFORM.get(), doughTransformSound);
+   }
+
+   protected static Sound sound(String name) {
+      return sound(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", name));
+   }
+
+   protected static String subtitle(String subtitle) {
+      return "subtitles.%s.%s".formatted("kaleidoscope_cookery", subtitle);
+   }
+}

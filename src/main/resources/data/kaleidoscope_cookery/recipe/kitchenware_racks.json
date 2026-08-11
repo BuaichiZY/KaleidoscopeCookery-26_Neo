@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "#c:ingots/iron",
+    "N": "#c:nuggets/iron",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "SSS",
+    "INI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:kitchenware_racks"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "kaleidoscope_cookery:item/raw_dough_0"
+    },
+    "on_true": {
+      "type": "minecraft:range_dispatch",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "kaleidoscope_cookery:item/raw_dough_1"
+          },
+          "threshold": 0.1
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "kaleidoscope_cookery:item/raw_dough_2"
+          },
+          "threshold": 1.0
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "kaleidoscope_cookery:item/raw_dough_3"
+          },
+          "threshold": 2.0
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "kaleidoscope_cookery:item/raw_dough_4"
+          },
+          "threshold": 3.0
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "kaleidoscope_cookery:item/raw_dough_0"
+      },
+      "property": "minecraft:use_duration",
+      "scale": 0.1
+    },
+    "property": "minecraft:using_item"
+  }
+}

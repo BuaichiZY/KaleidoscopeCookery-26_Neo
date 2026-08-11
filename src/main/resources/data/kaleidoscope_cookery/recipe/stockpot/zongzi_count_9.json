@@ -1,0 +1,19 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "carrier": "minecraft:barrier",
+  "ingredients": [
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi",
+    "kaleidoscope_cookery:raw_zongzi"
+  ],
+  "result": {
+    "count": 9,
+    "id": "kaleidoscope_cookery:zongzi"
+  }
+}

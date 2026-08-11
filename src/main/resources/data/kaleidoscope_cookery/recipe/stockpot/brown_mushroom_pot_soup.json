@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "carrier": "minecraft:flower_pot",
+  "ingredients": [
+    "minecraft:brown_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:brown_mushroom"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:brown_mushroom_pot_soup"
+  }
+}

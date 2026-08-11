@@ -1,0 +1,8 @@
+{
+  "type": "kaleidoscope_cookery:millstone",
+  "ingredient": "minecraft:pitcher_plant",
+  "result": {
+    "count": 2,
+    "id": "minecraft:cyan_dye"
+  }
+}

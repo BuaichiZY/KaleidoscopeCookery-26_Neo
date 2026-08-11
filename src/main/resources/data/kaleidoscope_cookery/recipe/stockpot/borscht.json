@@ -1,0 +1,15 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "#c:foods/raw_beef",
+    "#c:foods/raw_beef",
+    "#c:crops/tomato",
+    "#c:crops/tomato",
+    "#c:crops/tomato",
+    "#c:crops/tomato"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:borscht"
+  }
+}
