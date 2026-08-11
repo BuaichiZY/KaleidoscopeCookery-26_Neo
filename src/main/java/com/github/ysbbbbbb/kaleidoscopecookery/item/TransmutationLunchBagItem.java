@@ -15,9 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -61,11 +59,6 @@ public class TransmutationLunchBagItem extends Item {
 
    public TransmutationLunchBagItem() {
       super(ModRegistrationProperties.itemProperties().stacksTo(1));
-   }
-
-   @OnlyIn(Dist.CLIENT)
-   public static float getTexture(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-      return !hasItems(stack) ? 0.0F : 1.0F;
    }
 
    public static boolean hasItems(ItemStack bag) {

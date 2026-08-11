@@ -23,3 +23,12 @@
 ## Deferred modules
 
 The current core-first build still excludes the Minecraft 26 client-render migration, optional third-party integrations, data generators, and several world-generation/loot hooks. Their source remains in the project for later migration.
+
+## Dedicated-server fix v24
+
+- Removed obsolete client-only item predicate signatures from common item classes so static item registration no longer resolves `net.minecraft.client.multiplayer.ClientLevel` on a dedicated server.
+- Updated teapot tooltip/content decoding to use the registry provider supplied by the common item API instead of accessing the client `Minecraft` singleton.
+- Recompiled 12 affected item class files as Java 25 bytecode and replaced them in the branded JAR.
+- Verification: 316 packaged classes; zero `net/minecraft/client` references in item classes or other non-client/non-compat/non-datagen classes; original icon, cover, and NeoForge metadata retained.
+- Deliverable: `outputs/kaleidoscope_cookery-1.4.1-neoforge26.1.2.86+mc26.1.2-dedicated-server-fix-v24.jar`.
+- Deliverable SHA-256: `F055A4D6D5546BFA5441D8CB764C04EEE21664D3E77447372A5960B1EF1283CB`.

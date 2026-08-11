@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.CommonComponents;
@@ -39,7 +38,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
@@ -57,8 +55,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
@@ -88,11 +84,6 @@ public class RecipeItem extends BlockItem {
 
    public static boolean hasRecipe(ItemStack stack) {
       return stack.has(ModDataComponents.RECIPE_RECORD);
-   }
-
-   @OnlyIn(Dist.CLIENT)
-   public static float getTexture(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-      return hasRecipe(stack) ? 1.0F : 0.0F;
    }
 
    public Component getName(ItemStack pStack) {

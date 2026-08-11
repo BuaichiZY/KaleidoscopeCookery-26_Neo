@@ -6,10 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,8 +60,8 @@ public class TeapotItem extends BlockItem {
       return data == null ? null : data.copyTagWithoutId();
    }
 
-   private static ItemStack readItem(CompoundTag tag, String key, Level level) {
-      return TagValueInput.create(ProblemReporter.DISCARDING, level.registryAccess(), tag)
+   private static ItemStack readItem(CompoundTag tag, String key, HolderLookup.Provider registries) {
+      return TagValueInput.create(ProblemReporter.DISCARDING, registries, tag)
          .read(key, ItemStack.OPTIONAL_CODEC)
          .orElse(ItemStack.EMPTY);
    }
@@ -89,7 +88,7 @@ public class TeapotItem extends BlockItem {
          return ItemStack.EMPTY;
       } else {
          int status = tag.getIntOr("Status", 0);
-         return status != 2 ? ItemStack.EMPTY : readItem(tag, "Result", level);
+         return status != 2 ? ItemStack.EMPTY : readItem(tag, "Result", level.registryAccess());
       }
    }
 
@@ -98,7 +97,7 @@ public class TeapotItem extends BlockItem {
       if (tag != null) {
          int status = tag.getIntOr("Status", 0);
          if (status == 2) {
-            ItemStack result = readItem(tag, "Result", level);
+            ItemStack result = readItem(tag, "Result", level.registryAccess());
             if (!result.isEmpty()) {
                result.shrink(1);
                if (result.isEmpty()) {
@@ -306,9 +305,8 @@ public class TeapotItem extends BlockItem {
             list.add(Component.translatable(fluid.getFluidType().getDescriptionId()).withStyle(ChatFormatting.GRAY));
          }
 
-         ClientLevel level = Minecraft.getInstance().level;
-         if (status == 2 && level != null) {
-            ItemStack result = readItem(tag, "Result", level);
+         if (status == 2) {
+            ItemStack result = readItem(tag, "Result", context.registries());
             if (result.isEmpty()) {
                return;
             }

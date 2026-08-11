@@ -3,14 +3,11 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.PotBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModDataComponents;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
@@ -20,8 +17,6 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class KitchenShovelItem extends ShovelItem {
    public static final Identifier HAS_OIL_PROPERTY = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "has_oil");
@@ -38,11 +33,6 @@ public class KitchenShovelItem extends ShovelItem {
 
    public static boolean hasOil(ItemStack stack) {
       return stack.has(ModDataComponents.KITCHEN_SHOVEL_HAS_OIL) ? Boolean.TRUE.equals(stack.get(ModDataComponents.KITCHEN_SHOVEL_HAS_OIL)) : false;
-   }
-
-   @OnlyIn(Dist.CLIENT)
-   public static float getTexture(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-      return hasOil(stack) ? 1.0F : 0.0F;
    }
 
    public InteractionResult useOn(UseOnContext context) {

@@ -6,9 +6,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModSounds;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
 import com.github.ysbbbbbb.kaleidoscopecookery.util.ItemUtils;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,8 +23,6 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class RawDoughItem extends Item {
    public static final Identifier PULL_PROPERTY = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "pull");
@@ -34,15 +30,6 @@ public class RawDoughItem extends Item {
 
    public RawDoughItem() {
       super(ModRegistrationProperties.itemProperties());
-   }
-
-   @OnlyIn(Dist.CLIENT)
-   public static float getTexture(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-      if (entity == null) {
-         return 0.0F;
-      } else {
-         return entity.getUseItem() != stack ? 0.0F : entity.getTicksUsingItem() / 10.0F;
-      }
    }
 
    public int getUseDuration(ItemStack stack, LivingEntity entity) {
