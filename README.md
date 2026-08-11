@@ -1,12 +1,22 @@
+# Kaleidoscope Cookery Unofficial 26.1.2 森罗物语：厨房 非官方移植
+
+> I wanted to experience Kaleidoscope Cookery on newer versions of Minecraft so much that I decided to port it myself early just to scratch that itch.
+>
+>![Minecraft](https://img.shields.io/badge/Minecraft-Java%20Edition-brightgreen)
+![Forge](https://img.shields.io/badge/%20NeoForge%20-26.1.2.86%20|%2026.1.2-orange)
+![License](https://img.shields.io/badge/License-BSD%20|%20CC%20BY--NC--SA%204.0-blue)
+>
+> This build was developed with the assistance of AI. It implements most of the features from the original Kaleidoscope Cookery, but there may still be some bugs. If you encounter any issues, please feel free to report them. I will do my best to fix them.
+
+> The following section is taken from the original official documentation.
+
+
+
+
 # Kaleidoscope Cookery 森罗物语：厨房
 
 > A Minecraft mod that adds immersive cooking systems and delicious recipes to enhance your culinary adventure.
 
-![Minecraft](https://img.shields.io/badge/Minecraft-Java%20Edition-brightgreen)
-![Forge](https://img.shields.io/badge/Forge%20|%20NeoForge%20|%20Fabric-1.20.1%20|%201.21.1-orange)
-![License](https://img.shields.io/badge/License-BSD%20|%20CC%20BY--NC--SA%204.0-blue)
-![CurseForge](https://img.shields.io/curseforge/dt/1309203?logo=curseforge&label=CurseForge)
-![Modrinth](https://img.shields.io/modrinth/dt/v17FatAc?logo=modrinth&label=Modrinth)
 
 ## Introduction
 
