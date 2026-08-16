@@ -181,11 +181,14 @@ neoForge {
 
 // The sandbox cannot resolve the security configuration of the portable JDK
 // 25 used by ModDevGradle's artifact task. Run NFRT and its compiler launcher
-// with the installed JDK 26; NeoForm still emits the Minecraft 26 Java 25
-// target, and this mod's own compiler release remains fixed at 25 above.
+// with the configured JDK 26 toolchain; NeoForm still emits the Minecraft 26
+// Java 25 target, and this mod's own compiler release remains fixed at 25 above.
+def minecraftArtifactJava = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(26)
+}.map { launcher -> launcher.executablePath.asFile.absolutePath }
 tasks.named('createMinecraftArtifacts').configure {
-    javaExecutable.set('D:/DevelopeTool/Java/jdk-26.0.1/bin/java.exe')
-    toolsJavaExecutable.set('D:/DevelopeTool/Java/jdk-26.0.1/bin/java.exe')
+    javaExecutable.set(minecraftArtifactJava)
+    toolsJavaExecutable.set(minecraftArtifactJava)
 }
 
 // Sets up a dependency configuration called 'localRuntime'.
