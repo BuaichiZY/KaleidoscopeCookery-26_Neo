@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "C": "minecraft:campfire",
-    "I": "minecraft:chain"
+    "I": "minecraft:iron_chain"
   },
   "pattern": [
     "ICI",

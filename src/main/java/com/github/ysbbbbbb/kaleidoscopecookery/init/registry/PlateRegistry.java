@@ -36,7 +36,9 @@ public class PlateRegistry {
       SHENGJIAN_MANTOU_PLATE = registry.registerPlateData(
          "shengjian_mantou_plate", PlateRegistry.PlateData.create(5).setServingItems(ModItems.SHENGJIAN_MANTOU).setLootItem(Items.BOWL)
       );
-      BAOZI_PLATE = registry.registerPlateData("baozi_plate", PlateRegistry.PlateData.create(5).setServingItems(ModItems.BAOZI).setLootItem(Items.BOWL));
+      BAOZI_PLATE = registry.registerPlateData(
+         "baozi_plate", PlateRegistry.PlateData.create(5).setServingItems(ModItems.BAOZI).setLootItem(Items.BOWL)
+      );
       QINGTUAN_PLATE = registry.registerPlateData(
          "qingtuan_plate", PlateRegistry.PlateData.create(4).setServingItems(ModItems.QINGTUAN).setLootItem(Items.BOWL)
       );
@@ -152,5 +154,6 @@ public class PlateRegistry {
       public List<ItemLike> getLootItems() {
          return this.lootItems;
       }
+
    }
 }

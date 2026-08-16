@@ -4,12 +4,14 @@ import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeMills
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeScarecrowModel;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeTeapotModel;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeTrashCanModel;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeStrawHatModel;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeChoppingBoardRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeChairRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeFruitBasketRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeKitchenwareRacksRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeMillstoneRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimePotRenderer;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeRecipeBlockRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeScarecrowRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeShawarmaSpitRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeSitRenderer;
@@ -37,6 +39,7 @@ public final class CoreBlockEntityRenderers {
       event.registerLayerDefinition(RuntimeScarecrowModel.LAYER_LOCATION, RuntimeScarecrowModel::createBodyLayer);
       event.registerLayerDefinition(RuntimeTeapotModel.LAYER_LOCATION, RuntimeTeapotModel::createBodyLayer);
       event.registerLayerDefinition(RuntimeTrashCanModel.LAYER_LOCATION, RuntimeTrashCanModel::createBodyLayer);
+      event.registerLayerDefinition(RuntimeStrawHatModel.LAYER_LOCATION, RuntimeStrawHatModel::createBodyLayer);
    }
 
    @SubscribeEvent
@@ -50,6 +53,7 @@ public final class CoreBlockEntityRenderers {
       event.registerBlockEntityRenderer(ModBlocks.TEAPOT_BE.get(), RuntimeTeapotRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.KITCHENWARE_RACKS_BE.get(), RuntimeKitchenwareRacksRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.FRUIT_BASKET_BE.get(), RuntimeFruitBasketRenderer::new);
+      event.registerBlockEntityRenderer(ModBlocks.RECIPE_BLOCK_BE.get(), RuntimeRecipeBlockRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.TABLE_BE.get(), RuntimeTableRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.CHAIR_BE.get(), RuntimeChairRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.TRASH_CAN_BE.get(), RuntimeTrashCanRenderer::new);

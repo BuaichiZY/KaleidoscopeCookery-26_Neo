@@ -9,6 +9,8 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.placement.HorizontalAlignment;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -58,8 +60,16 @@ public class PotRecipeCategory implements IRecipeCategory<RecipeHolder<PotRecipe
       this.bgDraw.draw(guiGraphics);
       Component type = Component.translatable("jei.kaleidoscope_cookery.strict_recipe");
       this.drawCenteredString(guiGraphics, type, 88, 5);
-      Component stirFryCount = Component.translatable("jei.kaleidoscope_cookery.pot.stir_fry_count", new Object[]{((PotRecipe)recipe.value()).stirFryCount()});
-      this.drawCenteredString(guiGraphics, stirFryCount, 88, 85);
+   }
+
+   public void createRecipeExtras(IRecipeExtrasBuilder builder, RecipeHolder<PotRecipe> recipe, IFocusGroup focuses) {
+      Component stirFryCount = Component.translatable(
+         "jei.kaleidoscope_cookery.pot.stir_fry_count", recipe.value().stirFryCount()
+      );
+      builder.addText(stirFryCount, WIDTH, 10)
+         .setPosition(0, 85)
+         .setTextAlignment(HorizontalAlignment.CENTER)
+         .setColor(5592405);
    }
 
    private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {

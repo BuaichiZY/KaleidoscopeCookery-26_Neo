@@ -17,18 +17,24 @@ public class QualityEvaluator {
    private static final int MAX_CAPACITY = 9;
 
    public static Quality evaluate(List<ItemStack> inputs, List<Ingredient> ingredients, Identifier recipeId, long worldSeed) {
+      List<ItemStack> nonEmptyInputs = Lists.newArrayList();
+      inputs.forEach(stack -> {
+         if (!stack.isEmpty()) {
+            nonEmptyInputs.add(stack);
+         }
+      });
       List<Ingredient> nonEmpty = Lists.newArrayList();
       ingredients.forEach(ingredient -> {
          if (!ingredient.isEmpty()) {
             nonEmpty.add(ingredient);
          }
       });
-      if (!inputs.isEmpty() && !nonEmpty.isEmpty()) {
+      if (!nonEmptyInputs.isEmpty() && !nonEmpty.isEmpty()) {
          if (nonEmpty.size() == 1) {
-            return oneInputQuality(inputs, recipeId, worldSeed);
+            return oneInputQuality(nonEmptyInputs, recipeId, worldSeed);
          } else {
             List<Pair<Ingredient, Integer>> recipeVector = randomVector(nonEmpty, recipeId, worldSeed);
-            return evalQuality(inputs, recipeVector);
+            return evalQuality(nonEmptyInputs, recipeVector);
          }
       } else {
          return Quality.POOR;

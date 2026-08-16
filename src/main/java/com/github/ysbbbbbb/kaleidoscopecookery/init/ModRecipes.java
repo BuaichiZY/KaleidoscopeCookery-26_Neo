@@ -37,7 +37,14 @@ public class ModRecipes {
     * equals check can leak the barrier sentinel into recipe viewers.
     */
    public static boolean isEmptyIngredient(Ingredient ingredient) {
-      if (ingredient == null || ingredient.isEmpty() || ingredient == EMPTY_INGREDIENT || ingredient.equals(EMPTY_INGREDIENT)) {
+      // Check the in-memory sentinel before touching ingredient contents.
+      // Tag-backed ingredients cannot be inspected while a datapack reload is
+      // still rebinding item tags.
+      if (ingredient == null || ingredient == EMPTY_INGREDIENT || ingredient.equals(EMPTY_INGREDIENT)) {
+         return true;
+      }
+
+      if (ingredient.isEmpty()) {
          return true;
       }
 

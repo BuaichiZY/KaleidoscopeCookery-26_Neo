@@ -7,10 +7,9 @@ import com.github.ysbbbbbb.kaleidoscopecookery.item.quality.Quality;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.quality.QualityUtils;
 import com.google.common.collect.Lists;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
@@ -23,17 +22,14 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.alchemy.PotionContents;
-import org.jetbrains.annotations.Nullable;
 
 public class FoodWithEffectsItem extends Item {
    private final List<MobEffectInstance> effectInstances = Lists.newArrayList();
    private final Function<Quality, List<MobEffectInstance>> effectCache = Util.memoize(quality -> QualityUtils.modifyEffects(this.effectInstances, quality));
-   private final BiFunction<Quality, FoodProperties, FoodProperties> foodPropertiesCache = Util.memoize(
-      (quality, raw) -> QualityUtils.modifyFoodProperties(raw, quality)
-   );
 
    public FoodWithEffectsItem(FoodProperties properties) {
       super(ModRegistrationProperties.itemProperties().food(properties, ModFoods.consumableFor(properties)));
@@ -53,18 +49,15 @@ public class FoodWithEffectsItem extends Item {
       });
    }
 
-   @Nullable
-   public FoodProperties getFoodProperties(ItemStack stack, @Nullable LivingEntity entity) {
-      FoodProperties raw = stack.get(DataComponents.FOOD);
-      if (QualityUtils.hasQuality(stack) && raw != null) {
-         Quality quality = QualityUtils.getQuality(stack);
-         return this.foodPropertiesCache.apply(quality, raw);
-      } else {
-         return raw;
-      }
-   }
-
-   public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+   @Override
+   public void appendHoverText(
+      ItemStack stack,
+      TooltipContext context,
+      TooltipDisplay display,
+      Consumer<Component> tooltip,
+      TooltipFlag flag
+   ) {
+      tooltip.accept(Component.translatable("item_group.kaleidoscope_cookery.cookery_food.name").withStyle(ChatFormatting.BLUE));
       Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
       String key = "tooltip.%s.%s.maxim".formatted(id.getNamespace(), id.getPath());
       MutableComponent full = Component.translatable(key).withStyle(new ChatFormatting[]{ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC});
@@ -72,9 +65,9 @@ public class FoodWithEffectsItem extends Item {
 
       for (String line : text.split("\n")) {
          if (!line.isEmpty()) {
-            tooltip.add(Component.literal(line).withStyle(new ChatFormatting[]{ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC}));
+            tooltip.accept(Component.literal(line).withStyle(new ChatFormatting[]{ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC}));
          } else {
-            tooltip.add(CommonComponents.EMPTY);
+            tooltip.accept(CommonComponents.EMPTY);
          }
       }
 
@@ -83,14 +76,16 @@ public class FoodWithEffectsItem extends Item {
          && (Boolean)ClientConfig.SHOW_FOOD_EFFECT_TOOLTIPS.get();
       if (QualityUtils.hasQuality(stack)) {
          Quality quality = QualityUtils.getQuality(stack);
-         tooltip.add(quality.getTooltip());
+         tooltip.accept(quality.getTooltip());
          if (showEffect) {
-            tooltip.add(CommonComponents.space());
-            PotionContents.addPotionTooltip(this.effectCache.apply(quality), tooltip::add, 1.0F, context.tickRate());
+            tooltip.accept(CommonComponents.space());
+            PotionContents.addPotionTooltip(this.effectCache.apply(quality), tooltip, 1.0F, context.tickRate());
          }
       } else {
-         tooltip.add(CommonComponents.space());
-         PotionContents.addPotionTooltip(this.effectInstances, tooltip::add, 1.0F, context.tickRate());
+         if (showEffect) {
+            tooltip.accept(CommonComponents.space());
+            PotionContents.addPotionTooltip(this.effectInstances, tooltip, 1.0F, context.tickRate());
+         }
       }
    }
 }

@@ -26,6 +26,21 @@ sourceSets.main.resources {
     exclude("**/*.bbmodel") // BlockBench project files
 
     exclude("src/generated/**/.cache") // datagen cache files
+
+    // These legacy loot resources reference custom loot codecs whose Java
+    // registrations are intentionally not part of the Minecraft 26 build yet.
+    // Leaving them in the runtime jar makes every integrated-server datapack
+    // reload report invalid data. Preserve the source files for the later loot
+    // migration, but do not ship broken definitions in this build.
+    exclude 'data/kaleidoscope_cookery/loot_table/hoglin.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/pig.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/piglin.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/piglin_brute.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/straw_hat_seed_drop.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/zoglin.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/zombified_piglin.json'
+    exclude 'data/kaleidoscope_cookery/loot_table/chest/village_chest.json'
+    exclude 'data/neoforge/loot_modifiers/global_loot_modifiers.json'
 }
 
 // Optional integrations from the 1.21.1 reference target third-party APIs
@@ -36,7 +51,11 @@ sourceSets.main.java {
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/emi/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/farmersdelight/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/harvest/**'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/**'
+    // The Minecraft 26 Jade bridge lives in compat/jade/runtime. Keep the
+    // original 1.21 providers as reference sources, but compile the migrated
+    // providers against the optional local Jade API below.
+    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/ModPlugin.java'
+    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/block/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/kubejs/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/ponder/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/rei/**'
@@ -89,6 +108,7 @@ base {
 // Local migration workaround: use the installed JDK 26 compiler while still
 // emitting Java 25 bytecode. Restore the toolchain to 25 for distribution.
 java.toolchain.languageVersion = JavaLanguageVersion.of(26)
+java.withSourcesJar()
 
 tasks.withType(JavaCompile).configureEach {
     options.release = 25
@@ -182,7 +202,11 @@ configurations {
 dependencies {
     // Local JEI 29 API used by the Minecraft 26.1.2 compatibility layer.
     // The API remains optional at runtime and is not bundled into this mod.
-    compileOnly files('build-local/javac-libs/jei.jar')
+    compileOnly files('libs/jei-26.1.2-neoforge-29.21.0.66.jar')
+
+    // Jade 26.1 API used by the optional in-world recipe information bridge.
+    // Jade remains optional and is never bundled into the released jar.
+    compileOnly files('libs/jade-mc26.1-neoforge-26.1.8.jar')
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -214,6 +238,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,

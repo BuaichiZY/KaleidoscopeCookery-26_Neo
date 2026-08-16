@@ -13,6 +13,8 @@
     "VillagerMixin"
   ],
   "client": [
+    "GuiAccessor",
+    "PunchyRawDoughCompatMixin"
   ],
   "injectors": {
     "defaultRequire": 1

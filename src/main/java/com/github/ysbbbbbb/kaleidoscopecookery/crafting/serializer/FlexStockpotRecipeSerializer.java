@@ -19,7 +19,6 @@ public final class FlexStockpotRecipeSerializer {
             Ingredient.CODEC
                .listOf()
                .fieldOf("ingredients")
-               .xmap(list -> list, list -> list.stream().filter(i -> !i.isEmpty()).toList())
                .forGetter(FlexStockpotRecipe::getIngredients),
             Identifier.CODEC.optionalFieldOf("soup_base", StockpotRecipeSerializer.DEFAULT_SOUP_BASE).forGetter(FlexStockpotRecipe::soupBase),
             ItemStack.CODEC.fieldOf("result").forGetter(FlexStockpotRecipe::result),

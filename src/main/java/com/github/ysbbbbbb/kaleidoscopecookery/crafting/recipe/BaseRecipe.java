@@ -1,7 +1,7 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe;
 
-import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
 import java.util.List;
+import java.util.Objects;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,13 @@ public interface BaseRecipe<C extends RecipeInput> extends Recipe<C> {
 
    static Ingredient[] fillInputs(List<Ingredient> inputs) {
       return inputs.stream()
-         .filter(ingredient -> !ModRecipes.isEmptyIngredient(ingredient))
+         // During a second integrated-server load NeoForge decodes recipes
+         // before item tags have been rebound. Ingredient#isEmpty (and
+         // iterating Ingredient#items) dereferences tag contents and therefore
+         // throws for otherwise valid tag ingredients such as c:crops/lettuce.
+         // Recipe JSON lists are already dense, so only guard against nulls
+         // here and defer all ingredient inspection until recipes are used.
+         .filter(Objects::nonNull)
          .limit(RECIPES_SIZE)
          .toArray(Ingredient[]::new);
    }

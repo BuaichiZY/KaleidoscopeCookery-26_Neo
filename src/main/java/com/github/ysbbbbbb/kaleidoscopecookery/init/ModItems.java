@@ -177,7 +177,7 @@ public final class ModItems {
    public static DeferredItem<Item> DONKEY_BURGER = registerItem("donkey_burger", () -> new FoodWithEffectsItem(ModFoods.DONKEY_BURGER));
    public static DeferredItem<Item> BAOZI = registerItem("baozi", () -> new FoodWithEffectsItem(ModFoods.BAOZI));
    public static DeferredItem<Item> SHENGJIAN_MANTOU = registerItem("shengjian_mantou", () -> new FoodWithEffectsItem(ModFoods.SHENGJIAN_MANTOU_ITEM));
-   public static DeferredItem<Item> DUMPLING = registerItem("dumpling", () -> new Item(ModRegistrationProperties.itemProperties().food(ModFoods.DUMPLING, ModFoods.consumableFor(ModFoods.DUMPLING))));
+   public static DeferredItem<Item> DUMPLING = registerItem("dumpling", () -> new FoodWithEffectsItem(ModFoods.DUMPLING));
    public static DeferredItem<Item> SAMSA = registerItem("samsa", () -> new FoodWithEffectsItem(ModFoods.SAMSA));
    public static DeferredItem<Item> MANTOU = registerItem("mantou", () -> new FoodWithEffectsItem(ModFoods.MANTOU));
    public static DeferredItem<Item> MEAT_PIE = registerItem("meat_pie", () -> new FoodWithEffectsItem(ModFoods.MEAT_PIE));

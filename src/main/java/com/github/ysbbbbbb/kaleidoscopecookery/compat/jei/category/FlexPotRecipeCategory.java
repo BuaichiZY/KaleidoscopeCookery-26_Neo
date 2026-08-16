@@ -9,6 +9,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.placement.HorizontalAlignment;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.gui.widgets.ITextWidget;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -57,10 +58,6 @@ public class FlexPotRecipeCategory implements IRecipeCategory<RecipeHolder<FlexP
       this.bgDraw.draw(guiGraphics);
       Component type = Component.translatable("jei.kaleidoscope_cookery.flex_recipe");
       this.drawCenteredString(guiGraphics, type, 88, 5);
-      Component stirFryCount = Component.translatable(
-         "jei.kaleidoscope_cookery.pot.stir_fry_count", new Object[]{((FlexPotRecipe)recipe.value()).stirFryCount()}
-      );
-      this.drawCenteredString(guiGraphics, stirFryCount, 88, 85);
    }
 
    private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {
@@ -71,6 +68,14 @@ public class FlexPotRecipeCategory implements IRecipeCategory<RecipeHolder<FlexP
    public void createRecipeExtras(IRecipeExtrasBuilder builder, RecipeHolder<FlexPotRecipe> recipe, IFocusGroup focuses) {
       NonNullList<Ingredient> inputs = ((FlexPotRecipe)recipe.value()).getIngredients();
       Component text = Component.literal("*");
+
+      Component stirFryCount = Component.translatable(
+         "jei.kaleidoscope_cookery.pot.stir_fry_count", recipe.value().stirFryCount()
+      );
+      builder.addText(stirFryCount, WIDTH, 10)
+         .setPosition(0, 85)
+         .setTextAlignment(HorizontalAlignment.CENTER)
+         .setColor(5592405);
 
       for (int i = 0; i < inputs.size(); i++) {
          if (!((Ingredient)inputs.get(i)).isEmpty()) {

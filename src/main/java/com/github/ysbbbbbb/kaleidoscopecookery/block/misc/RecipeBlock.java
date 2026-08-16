@@ -136,6 +136,7 @@ public class RecipeBlock extends FaceAttachedHorizontalDirectionalBlock implemen
    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity livingEntity, ItemStack stack) {
       if (!pLevel.isClientSide() && pLevel.getBlockEntity(pPos) instanceof RecipeBlockEntity recipeBlockEntity) {
          recipeBlockEntity.getItems().setStackInSlot(0, stack.copyWithCount(1));
+         recipeBlockEntity.refresh();
       }
    }
 

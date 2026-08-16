@@ -20,7 +20,6 @@ public final class PotRecipeSerializer {
             Ingredient.CODEC
                .listOf()
                .fieldOf("ingredients")
-               .xmap(list -> list, list -> list.stream().filter(i -> !i.isEmpty()).toList())
                .forGetter(recipe -> recipe.ingredients().stream().toList()),
             ItemStack.CODEC.fieldOf("result").forGetter(PotRecipe::result)
          )

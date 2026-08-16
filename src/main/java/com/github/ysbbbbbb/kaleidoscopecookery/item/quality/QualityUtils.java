@@ -4,13 +4,26 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModDataComponents;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModFoods;
 import com.google.common.collect.Lists;
 import java.util.List;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.item.consume_effects.ConsumeEffect;
 
 public final class QualityUtils {
    public static void setQuality(ItemStack food, Quality quality) {
       food.set(ModDataComponents.QUALITY, quality);
+      FoodProperties rawFood = food.getItem().components().get(DataComponents.FOOD);
+      if (rawFood != null) {
+         food.set(DataComponents.FOOD, modifyFoodProperties(rawFood, quality));
+      }
+
+      Consumable rawConsumable = food.getItem().components().get(DataComponents.CONSUMABLE);
+      if (rawConsumable != null) {
+         food.set(DataComponents.CONSUMABLE, modifyConsumable(rawConsumable, quality));
+      }
    }
 
    public static Quality getQuality(ItemStack food) {
@@ -54,5 +67,28 @@ public final class QualityUtils {
       FoodProperties modified = new FoodProperties(nutrition, saturation, raw.canAlwaysEat());
       ModFoods.LEGACY_EFFECTS.put(modified, List.copyOf(effects));
       return modified;
+   }
+
+   private static Consumable modifyConsumable(Consumable raw, Quality quality) {
+      Consumable.Builder builder = Consumable.builder()
+         .consumeSeconds(raw.consumeSeconds())
+         .animation(raw.animation())
+         .sound(raw.sound())
+         .hasConsumeParticles(raw.hasConsumeParticles());
+
+      for (ConsumeEffect effect : raw.onConsumeEffects()) {
+         if (effect instanceof ApplyStatusEffectsConsumeEffect statusEffects) {
+            if (statusEffects.probability() >= 1.0F) {
+               List<MobEffectInstance> modified = modifyEffects(statusEffects.effects(), quality);
+               if (!modified.isEmpty()) {
+                  builder.onConsume(new ApplyStatusEffectsConsumeEffect(modified, statusEffects.probability()));
+               }
+            }
+         } else {
+            builder.onConsume(effect);
+         }
+      }
+
+      return builder.build();
    }
 }
