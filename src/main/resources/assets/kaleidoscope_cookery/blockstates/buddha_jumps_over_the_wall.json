@@ -224,6 +224,306 @@
     "bites=2,facing=west,quality=4": {
       "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
       "y": 270
+    },
+    "bites=3,facing=east,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=3,facing=east,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=3,facing=east,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=3,facing=east,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=3,facing=east,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=3,facing=north,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=3,facing=north,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=3,facing=north,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=3,facing=north,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=3,facing=north,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=3,facing=south,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=3,facing=south,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=3,facing=south,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=3,facing=south,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=3,facing=south,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=3,facing=west,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=3,facing=west,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=3,facing=west,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=3,facing=west,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=3,facing=west,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=4,facing=east,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=4,facing=east,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=4,facing=east,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=4,facing=east,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=4,facing=east,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=4,facing=north,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=4,facing=north,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=4,facing=north,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=4,facing=north,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=4,facing=north,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=4,facing=south,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=4,facing=south,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=4,facing=south,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=4,facing=south,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=4,facing=south,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=4,facing=west,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=4,facing=west,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=4,facing=west,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=4,facing=west,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=4,facing=west,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=5,facing=east,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=5,facing=east,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=5,facing=east,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=5,facing=east,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=5,facing=east,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=5,facing=north,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=5,facing=north,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=5,facing=north,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=5,facing=north,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=5,facing=north,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=5,facing=south,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=5,facing=south,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=5,facing=south,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=5,facing=south,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=5,facing=south,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=5,facing=west,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=5,facing=west,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=5,facing=west,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=5,facing=west,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=5,facing=west,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=6,facing=east,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=6,facing=east,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=6,facing=east,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=6,facing=east,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=6,facing=east,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 90
+    },
+    "bites=6,facing=north,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=6,facing=north,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=6,facing=north,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=6,facing=north,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=6,facing=north,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2"
+    },
+    "bites=6,facing=south,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=6,facing=south,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=6,facing=south,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=6,facing=south,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=6,facing=south,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 180
+    },
+    "bites=6,facing=west,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=6,facing=west,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=6,facing=west,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=6,facing=west,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
+    },
+    "bites=6,facing=west,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/buddha_jumps_over_the_wall/buddha_jumps_over_the_wall_2",
+      "y": 270
     }
   }
 }

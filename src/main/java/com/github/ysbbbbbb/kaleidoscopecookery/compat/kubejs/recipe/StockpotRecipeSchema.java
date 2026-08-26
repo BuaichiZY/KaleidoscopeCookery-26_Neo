@@ -14,10 +14,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public interface StockpotRecipeSchema {
    RecipeKey<ItemStack> OUTPUT = ItemStackComponent.ITEM_STACK.outputKey("result");
-   RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.instance().asListOrSelf().inputKey("ingredients");
+   RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.asListOrSelf().inputKey("ingredients");
    RecipeKey<String> SOUP_BASE = StringComponent.ID.inputKey("soup_base").optional(StockpotRecipeSerializer.DEFAULT_SOUP_BASE.toString());
    RecipeKey<Integer> TIME = NumberComponent.INT.otherKey("time").optional(300);
-   RecipeKey<Ingredient> CARRIER = IngredientComponent.INGREDIENT.inputKey("carrier").optional(StockpotRecipeSerializer.DEFAULT_CARRIER);
+   RecipeKey<Ingredient> CARRIER = IngredientComponent.OPTIONAL_INGREDIENT
+      .inputKey("carrier")
+      .optional(StockpotRecipeSerializer.DEFAULT_CARRIER);
    RecipeKey<String> COOKING_TEXTURE = StringComponent.ID.otherKey("cooking_texture").optional(StockpotVisuals.DEFAULT_COOKING_TEXTURE.toString());
    RecipeKey<String> FINISHED_TEXTURE = StringComponent.ID.otherKey("finished_texture").optional(StockpotVisuals.DEFAULT_FINISHED_TEXTURE.toString());
    RecipeKey<Integer> COOKING_BUBBLE_COLOR = NumberComponent.INT.otherKey("cooking_bubble_color").optional(16772291);

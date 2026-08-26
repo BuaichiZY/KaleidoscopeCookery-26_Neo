@@ -56,7 +56,6 @@ sourceSets.main.java {
     // providers against the optional local Jade API below.
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/ModPlugin.java'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/block/**'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/kubejs/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/ponder/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/rei/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/datagen/**'
@@ -95,6 +94,14 @@ repositories {
             gradleMetadata()
             mavenPom()
             artifact()
+        }
+    }
+    maven {
+        // Official KubeJS addon-development repository.
+        url = uri('https://maven.latvian.dev/releases')
+        content {
+            includeGroup 'dev.latvian.mods'
+            includeGroup 'dev.latvian.apps'
         }
     }
     // Add here additional repositories if required by some of the dependencies below.
@@ -210,6 +217,21 @@ dependencies {
     // Jade 26.1 API used by the optional in-world recipe information bridge.
     // Jade remains optional and is never bundled into the released jar.
     compileOnly files('libs/jade-mc26.1-neoforge-26.1.8.jar')
+
+    // KubeJS 8 integration for Minecraft 26.1.2. Both dependencies are
+    // compile-only: the core mod remains usable when KubeJS is not installed.
+    compileOnly('dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.4') {
+        transitive = false
+    }
+    compileOnly('dev.latvian.mods:rhino:2101.2.8-build.91') {
+        transitive = false
+    }
+    localRuntime('dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.4') {
+        transitive = false
+    }
+    localRuntime('dev.latvian.mods:rhino:2101.2.8-build.91') {
+        transitive = false
+    }
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

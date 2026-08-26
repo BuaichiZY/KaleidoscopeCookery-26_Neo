@@ -74,6 +74,21 @@
     "facing=west,servings=4": {
       "model": "kaleidoscope_cookery:block/plate/sticky_candy_plate/sticky_candy_plate_4",
       "y": 270
+    },
+    "facing=east,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/sticky_candy_plate/sticky_candy_plate_4",
+      "y": 90
+    },
+    "facing=north,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/sticky_candy_plate/sticky_candy_plate_4"
+    },
+    "facing=south,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/sticky_candy_plate/sticky_candy_plate_4",
+      "y": 180
+    },
+    "facing=west,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/sticky_candy_plate/sticky_candy_plate_4",
+      "y": 270
     }
   }
 }

@@ -899,6 +899,156 @@
     "bites=5,facing=west,position=1,quality=4": {
       "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
       "y": 270
+    },
+    "bites=6,facing=east,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 90
+    },
+    "bites=6,facing=north,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5"
+    },
+    "bites=6,facing=north,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5"
+    },
+    "bites=6,facing=north,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5"
+    },
+    "bites=6,facing=north,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5"
+    },
+    "bites=6,facing=north,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5"
+    },
+    "bites=6,facing=north,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5"
+    },
+    "bites=6,facing=north,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5"
+    },
+    "bites=6,facing=north,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5"
+    },
+    "bites=6,facing=north,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5"
+    },
+    "bites=6,facing=north,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5"
+    },
+    "bites=6,facing=south,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 180
+    },
+    "bites=6,facing=west,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_left_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/oil_splashed_fish/oil_splashed_fish_right_5",
+      "y": 270
     }
   }
 }

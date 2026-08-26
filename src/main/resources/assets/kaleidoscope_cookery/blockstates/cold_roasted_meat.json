@@ -599,6 +599,456 @@
     "bites=3,facing=west,position=1,quality=4": {
       "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
       "y": 270
+    },
+    "bites=4,facing=east,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=4,facing=east,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=4,facing=north,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=4,facing=north,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=4,facing=north,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=4,facing=north,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=4,facing=north,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=4,facing=north,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=4,facing=north,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=4,facing=north,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=4,facing=north,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=4,facing=north,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=4,facing=south,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=4,facing=south,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=4,facing=west,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=4,facing=west,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=5,facing=east,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=5,facing=east,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=5,facing=north,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=5,facing=north,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=5,facing=north,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=5,facing=north,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=5,facing=north,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=5,facing=north,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=5,facing=north,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=5,facing=north,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=5,facing=north,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=5,facing=north,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=5,facing=south,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=5,facing=south,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=5,facing=west,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=5,facing=west,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=6,facing=east,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=6,facing=east,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 90
+    },
+    "bites=6,facing=north,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=6,facing=north,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=6,facing=north,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=6,facing=north,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=6,facing=north,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3"
+    },
+    "bites=6,facing=north,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=6,facing=north,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=6,facing=north,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=6,facing=north,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=6,facing=north,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3"
+    },
+    "bites=6,facing=south,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=6,facing=south,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 180
+    },
+    "bites=6,facing=west,position=0,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=0,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_left_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=0": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=1": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=2": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=3": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
+    },
+    "bites=6,facing=west,position=1,quality=4": {
+      "model": "kaleidoscope_cookery:block/food/cold_roasted_meat/cold_roasted_meat_right_3",
+      "y": 270
     }
   }
 }

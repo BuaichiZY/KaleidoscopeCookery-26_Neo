@@ -59,6 +59,36 @@
     "facing=west,servings=3": {
       "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
       "y": 270
+    },
+    "facing=east,servings=4": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 90
+    },
+    "facing=north,servings=4": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3"
+    },
+    "facing=south,servings=4": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 180
+    },
+    "facing=west,servings=4": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 270
+    },
+    "facing=east,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 90
+    },
+    "facing=north,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3"
+    },
+    "facing=south,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 180
+    },
+    "facing=west,servings=5": {
+      "model": "kaleidoscope_cookery:block/plate/watermelon_platter/watermelon_platter_3",
+      "y": 270
     }
   }
 }

@@ -44,8 +44,10 @@ import org.jetbrains.annotations.Nullable;
 public class TeacupBlock extends HorizontalDirectionalBlock {
    public static final MapCodec<TeacupBlock> CODEC = simpleCodec(p -> new TeacupBlock());
    public static final VoxelShape AABB = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-   private static final IntegerProperty CUP_COUNT = IntegerProperty.create("cup_count", 1, 16);
-   private static final IntegerProperty TEA_COUNT = IntegerProperty.create("tea_count", 1, 16);
+   // All tea sets cap at four cups. Restricting the state domain prevents the
+   // model baker from enumerating 960 impossible cup/tea combinations per tea.
+   private static final IntegerProperty CUP_COUNT = IntegerProperty.create("cup_count", 1, 4);
+   private static final IntegerProperty TEA_COUNT = IntegerProperty.create("tea_count", 1, 4);
    protected final IntegerProperty cupCount;
    protected final IntegerProperty teaCount;
    protected final int maxCount;

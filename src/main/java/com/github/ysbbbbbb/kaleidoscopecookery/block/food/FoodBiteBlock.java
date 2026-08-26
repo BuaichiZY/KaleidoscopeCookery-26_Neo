@@ -38,7 +38,9 @@ import org.jetbrains.annotations.Nullable;
 public class FoodBiteBlock extends FoodBlock {
    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
    public static final IntegerProperty QUALITY = IntegerProperty.create("quality", 0, Quality.values().length);
-   private static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
+   // Registered foods use at most six bites. Keeping sixteen theoretical
+   // values forces the client to bake thousands of unreachable model states.
+   private static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 6);
    public static final int DEFAULT_QUALITY = Quality.values().length;
    protected final FoodProperties foodProperties;
    protected final IntegerProperty bites;

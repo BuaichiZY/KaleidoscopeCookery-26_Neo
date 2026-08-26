@@ -36,7 +36,8 @@ import org.jetbrains.annotations.Nullable;
 public class PlateBlock extends HorizontalDirectionalBlock {
    public static final VoxelShape AABB = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
    protected static final MapCodec<PlateBlock> PLATE_BLOCK_CODEC = simpleCodec(p -> new PlateBlock(1, List.of()));
-   private static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 16);
+   // Five is the largest serving count registered by any plate.
+   private static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 5);
    protected final IntegerProperty servings;
    protected final List<Supplier<Item>> items;
    protected final int maxCount;

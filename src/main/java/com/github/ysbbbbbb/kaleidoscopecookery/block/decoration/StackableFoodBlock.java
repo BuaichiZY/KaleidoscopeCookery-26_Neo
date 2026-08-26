@@ -35,7 +35,8 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public class StackableFoodBlock extends HorizontalDirectionalBlock {
    protected static final MapCodec<StackableFoodBlock> STACKABLE_FOOD_CODEC = simpleCodec(p -> new StackableFoodBlock(p, 1, () -> Items.AIR));
-   private static final IntegerProperty COUNT = IntegerProperty.create("count", 1, 16);
+   // Bamboo tube rice is the only registered stackable food and caps at four.
+   private static final IntegerProperty COUNT = IntegerProperty.create("count", 1, 4);
    protected final IntegerProperty countProperty;
    protected final int maxCount;
    protected final Supplier<Item> item;

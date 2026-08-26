@@ -61,3 +61,12 @@ The current core-first build still excludes the Minecraft 26 client-render migra
 - Targeted Java 25 compilation succeeded; updated item-definition and retained shawarma recipe JSON pass package verification.
 - Deliverable: `outputs/kaleidoscope_cookery-1.4.1-neoforge26.1.2.86+mc26.1.2-tea-hat-dough-fix-v27.jar`.
 - Deliverable SHA-256: `D744720D93C15CC34CC610E646AB56CF073617A81115B24F707BC496D2B6DE82`.
+
+## KubeJS 8 compatibility update 1.2.10 (2026-08-26)
+
+- Restored the optional KubeJS integration and migrated its recipe schemas to KubeJS 8.0.4 for Minecraft 26.1.2.
+- Added the current KubeJS plugin declaration in `kubejs.plugins.txt` and kept KubeJS optional in NeoForge metadata, so the core mod still starts without KubeJS installed.
+- Updated stockpot and pot recipe schemas to the current list and optional-ingredient APIs.
+- Added the official KubeJS Maven repository together with compile-only and development-runtime dependencies for KubeJS 8.0.4 and Rhino 91.
+- Verification: Gradle build succeeded; a development server discovered the Kaleidoscope Cookery KubeJS plugin, loaded 2,063 recipes, and reported zero failed recipes.
+- Deliverables: `outputs/kaleidoscope_cookery_mc26.1.2_1.2.10.jar` and `outputs/kaleidoscope_cookery_mc26.1.2_1.2.10-sources.jar`.
