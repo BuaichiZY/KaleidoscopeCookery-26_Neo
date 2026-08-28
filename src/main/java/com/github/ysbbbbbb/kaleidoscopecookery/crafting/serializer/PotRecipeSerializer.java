@@ -7,7 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
@@ -21,7 +21,7 @@ public final class PotRecipeSerializer {
                .listOf()
                .fieldOf("ingredients")
                .forGetter(recipe -> recipe.ingredients().stream().toList()),
-            ItemStack.CODEC.fieldOf("result").forGetter(PotRecipe::result)
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(PotRecipe::resultTemplate)
          )
          .apply(instance, PotRecipe::new)
    );
@@ -34,8 +34,8 @@ public final class PotRecipeSerializer {
       PotRecipe::carrier,
       Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
       PotRecipe::ingredients,
-      ItemStack.STREAM_CODEC,
-      PotRecipe::result,
+      ItemStackTemplate.STREAM_CODEC,
+      PotRecipe::resultTemplate,
       PotRecipe::new
    );
 

@@ -24,6 +24,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntitySpawnRequest;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LightningBolt;
@@ -323,7 +324,7 @@ public class ScarecrowEntity extends LivingEntity {
    private void respawnEntityOnShoulder(CompoundTag tag) {
       if (this.level() instanceof ServerLevel serverLevel && !tag.isEmpty()) {
          ValueInput input = TagValueInput.create(ProblemReporter.DISCARDING, this.level().registryAccess(), tag);
-         EntityType.create(input, this.level(), EntitySpawnReason.LOAD).ifPresent(entity -> {
+         EntityType.create(input, this.level(), new EntitySpawnRequest(EntitySpawnReason.LOAD, false)).ifPresent(entity -> {
             entity.setPos(this.getX(), this.getY() + 1.675, this.getZ());
             serverLevel.addWithUUID(entity);
          });

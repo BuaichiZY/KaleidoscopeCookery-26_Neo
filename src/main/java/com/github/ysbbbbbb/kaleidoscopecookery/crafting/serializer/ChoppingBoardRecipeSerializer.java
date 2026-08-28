@@ -8,7 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
@@ -17,7 +17,7 @@ public final class ChoppingBoardRecipeSerializer {
    public static final MapCodec<ChoppingBoardRecipe> CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
             Ingredient.CODEC.fieldOf("ingredient").forGetter(ChoppingBoardRecipe::getIngredient),
-            ItemStack.CODEC.fieldOf("result").forGetter(ChoppingBoardRecipe::getResult),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(ChoppingBoardRecipe::getResultTemplate),
             Codec.INT.optionalFieldOf("cut_count", 3).forGetter(ChoppingBoardRecipe::getCutCount),
             Identifier.CODEC.optionalFieldOf("model_id", EMPTY).forGetter(ChoppingBoardRecipe::getModelId)
          )
@@ -26,8 +26,8 @@ public final class ChoppingBoardRecipeSerializer {
    public static final StreamCodec<RegistryFriendlyByteBuf, ChoppingBoardRecipe> STREAM_CODEC = StreamCodec.composite(
       Ingredient.CONTENTS_STREAM_CODEC,
       ChoppingBoardRecipe::getIngredient,
-      ItemStack.STREAM_CODEC,
-      ChoppingBoardRecipe::getResult,
+      ItemStackTemplate.STREAM_CODEC,
+      ChoppingBoardRecipe::getResultTemplate,
       ByteBufCodecs.INT,
       ChoppingBoardRecipe::getCutCount,
       Identifier.STREAM_CODEC,

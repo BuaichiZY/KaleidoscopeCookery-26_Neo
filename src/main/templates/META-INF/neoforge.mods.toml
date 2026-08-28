@@ -31,8 +31,9 @@ displayName="${mod_name}" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 
-# A file name (in the root of the mod JAR) containing a logo for display
-logoFile="kaleidoscope_cookery_icon.png" # Official Kaleidoscope Cookery project icon
+# Image files in the root of the mod JAR, used by the NeoForge 26.2 mod UI.
+iconFile="kaleidoscope_cookery_icon.png"
+bannerFile="kaleidoscope_cookery_cover.png"
 
 # A text field displayed in the mod UI
 #credits="" #optional
@@ -86,7 +87,7 @@ config="${mod_id}.mixins.json"
     modId="kubejs"
     type="optional"
     reason="Enables Kaleidoscope Cookery recipe schemas and scripting helpers."
-    versionRange="[26.1.2-8.0.4,)"
+    versionRange="${kubejs_version_range}"
     ordering="AFTER"
     side="BOTH"
 

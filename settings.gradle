@@ -1,13 +1,9 @@
 pluginManagement {
     repositories {
-        maven { url = uri('../local-maven') }
         gradlePluginPortal()
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == 'net.neoforged.moddev') {
-                useModule("net.neoforged:moddev-gradle:${requested.version}")
-            }
-        }
-    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }

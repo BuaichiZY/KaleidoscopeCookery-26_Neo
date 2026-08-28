@@ -5,6 +5,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.npc.villager.Villager;
@@ -36,7 +37,7 @@ public class VitalityEvent {
 
             if (entity instanceof Zombie mob && !mob.isBaby()) {
                if (level.getRandom().nextInt(20) == 0) {
-                  Villager villager = new Villager(EntityType.VILLAGER, level);
+                  Villager villager = new Villager(EntityTypes.VILLAGER, level);
                   villager.setBaby(true);
                   villager.setPos(pos);
                   level.addFreshEntity(villager);

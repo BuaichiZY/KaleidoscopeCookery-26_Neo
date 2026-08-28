@@ -11,6 +11,7 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,14 +19,50 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 
 public record FlexStockpotRecipe(
-   NonNullList<Ingredient> ingredients, Identifier soupBase, ItemStack result, int time, Ingredient carrier, StockpotVisuals visuals
+   NonNullList<Ingredient> ingredients, Identifier soupBase, ItemStackTemplate resultTemplate, int time, Ingredient carrier, StockpotVisuals visuals
 ) implements BaseRecipe<StockpotInput> {
    public FlexStockpotRecipe(List<Ingredient> ingredients, Identifier soupBase, ItemStack result, int time, Ingredient carrier, StockpotVisuals visuals) {
-      this(NonNullList.of(com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes.EMPTY_INGREDIENT, BaseRecipe.fillInputs(ingredients)), soupBase, result, time, carrier, visuals);
+      this(
+         NonNullList.of(com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes.EMPTY_INGREDIENT, BaseRecipe.fillInputs(ingredients)),
+         soupBase,
+         ItemStackTemplate.fromNonEmptyStack(result),
+         time,
+         carrier,
+         visuals
+      );
+   }
+
+   public FlexStockpotRecipe(
+      List<Ingredient> ingredients,
+      Identifier soupBase,
+      ItemStackTemplate resultTemplate,
+      int time,
+      Ingredient carrier,
+      StockpotVisuals visuals
+   ) {
+      this(
+         NonNullList.of(com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes.EMPTY_INGREDIENT, BaseRecipe.fillInputs(ingredients)),
+         soupBase,
+         resultTemplate,
+         time,
+         carrier,
+         visuals
+      );
    }
 
    public FlexStockpotRecipe(NonNullList<Ingredient> ingredients, ItemStack result, int time, ItemStack container) {
-      this(ingredients, StockpotRecipeSerializer.DEFAULT_SOUP_BASE, result, time, Ingredient.of(container.getItem()), StockpotVisuals.DEFAULT);
+      this(
+         ingredients,
+         StockpotRecipeSerializer.DEFAULT_SOUP_BASE,
+         ItemStackTemplate.fromNonEmptyStack(result),
+         time,
+         Ingredient.of(container.getItem()),
+         StockpotVisuals.DEFAULT
+      );
+   }
+
+   public ItemStack result() {
+      return this.resultTemplate.create();
    }
 
    public Identifier cookingTexture() {
@@ -73,7 +110,7 @@ public record FlexStockpotRecipe(
    }
 
    public ItemStack getResultItem(Provider registryAccess) {
-      return this.result;
+      return this.resultTemplate.create();
    }
 
    public RecipeSerializer<FlexStockpotRecipe> getSerializer() {

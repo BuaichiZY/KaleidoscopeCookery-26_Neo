@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.143'
+    id 'net.neoforged.moddev' version '2.0.144'
     id 'idea'
 }
 
@@ -87,13 +87,11 @@ sourceSets.main.java {
 
 repositories {
     maven {
-        // Use a normalized copy: the original extracted repository contains a
-        // Log4j artifact that Gradle can read but cannot snapshot on Windows.
-        url = uri('../local-maven-clean')
-        metadataSources {
-            gradleMetadata()
-            mavenPom()
-            artifact()
+        // Portable 26.2 JEI and Jade development artifacts.
+        name = 'Modrinth'
+        url = uri('https://api.modrinth.com/maven')
+        content {
+            includeGroup 'maven.modrinth'
         }
     }
     maven {
@@ -111,14 +109,11 @@ base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 25 to end users in 26.1.2, so mods should target Java 25.
-// Local migration workaround: use the installed JDK 26 compiler while still
-// emitting Java 25 bytecode. Restore the toolchain to 25 for distribution.
-java.toolchain.languageVersion = JavaLanguageVersion.of(26)
+// Mojang ships Java 25 to end users in 26.2, so mods target Java 25.
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 java.withSourcesJar()
 
 tasks.withType(JavaCompile).configureEach {
-    options.release = 25
     options.incremental = false
 }
 
@@ -136,6 +131,11 @@ neoForge {
             client()
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            // Optional unattended compatibility smoke test:
+            // gradle runClient -PquickPlayWorld=<save-folder>
+            if (project.hasProperty('quickPlayWorld')) {
+                programArgument "--quickPlaySingleplayer=${project.property('quickPlayWorld')}"
+            }
         }
 
         server {
@@ -186,16 +186,11 @@ neoForge {
     }
 }
 
-// The sandbox cannot resolve the security configuration of the portable JDK
-// 25 used by ModDevGradle's artifact task. Run NFRT and its compiler launcher
-// with the configured JDK 26 toolchain; NeoForm still emits the Minecraft 26
-// Java 25 target, and this mod's own compiler release remains fixed at 25 above.
-def minecraftArtifactJava = javaToolchains.launcherFor {
-    languageVersion = JavaLanguageVersion.of(26)
-}.map { launcher -> launcher.executablePath.asFile.absolutePath }
-tasks.named('createMinecraftArtifacts').configure {
-    javaExecutable.set(minecraftArtifactJava)
-    toolsJavaExecutable.set(minecraftArtifactJava)
+def java25Launcher = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(25)
+}
+tasks.withType(net.neoforged.nfrtgradle.NeoFormRuntimeTask).configureEach {
+    javaExecutable.set(java25Launcher.map { it.executablePath.asFile.absolutePath })
 }
 
 // Sets up a dependency configuration called 'localRuntime'.
@@ -210,26 +205,21 @@ configurations {
 }
 
 dependencies {
-    // Local JEI 29 API used by the Minecraft 26.1.2 compatibility layer.
-    // The API remains optional at runtime and is not bundled into this mod.
-    compileOnly files('libs/jei-26.1.2-neoforge-29.21.0.66.jar')
+    // JEI 30 and Jade 26.2 remain optional and are never bundled.
+    def jeiDependency = "maven.modrinth:jei:${jei_modrinth_version}"
+    def jadeDependency = "maven.modrinth:nvQzSEkH:${jade_modrinth_version}"
+    compileOnly jeiDependency
+    localRuntime jeiDependency
+    compileOnly jadeDependency
+    localRuntime jadeDependency
 
-    // Jade 26.1 API used by the optional in-world recipe information bridge.
-    // Jade remains optional and is never bundled into the released jar.
-    compileOnly files('libs/jade-mc26.1-neoforge-26.1.8.jar')
-
-    // KubeJS 8 integration for Minecraft 26.1.2. Both dependencies are
-    // compile-only: the core mod remains usable when KubeJS is not installed.
-    compileOnly('dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.4') {
+    // KubeJS has not published a Minecraft 26.2 artifact yet. Compile the
+    // retained optional bridge against its latest KubeJS 8 API, but do not
+    // place the incompatible 26.1.2 mod in 26.2 development runs.
+    compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_compile_version}") {
         transitive = false
     }
-    compileOnly('dev.latvian.mods:rhino:2101.2.8-build.91') {
-        transitive = false
-    }
-    localRuntime('dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.4') {
-        transitive = false
-    }
-    localRuntime('dev.latvian.mods:rhino:2101.2.8-build.91') {
+    compileOnly("dev.latvian.mods:rhino:${rhino_compile_version}") {
         transitive = false
     }
 
@@ -264,6 +254,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
             neo_version_range      : neo_version_range,
+            kubejs_version_range   : kubejs_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
@@ -296,7 +287,7 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-    options.compilerArgs.addAll(['-Xmaxerrs', '1000'])
+    options.compilerArgs.addAll(['-Xmaxerrs', '1000', '-nowarn', '-Xlint:none'])
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

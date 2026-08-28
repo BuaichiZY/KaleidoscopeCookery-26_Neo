@@ -8,7 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
@@ -22,7 +22,7 @@ public final class TeapotRecipeSerializer {
             Ingredient.CODEC.fieldOf("ingredient").forGetter(TeapotRecipe::ingredient),
             Codec.INT.optionalFieldOf("ingredient_count", 12).forGetter(TeapotRecipe::ingredientCount),
             Codec.INT.optionalFieldOf("time", 2400).forGetter(TeapotRecipe::time),
-            ItemStack.CODEC.fieldOf("result").forGetter(TeapotRecipe::result)
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(TeapotRecipe::resultTemplate)
          )
          .apply(inst, TeapotRecipe::new)
    );
@@ -35,8 +35,8 @@ public final class TeapotRecipeSerializer {
       TeapotRecipe::ingredientCount,
       ByteBufCodecs.VAR_INT,
       TeapotRecipe::time,
-      ItemStack.STREAM_CODEC,
-      TeapotRecipe::result,
+      ItemStackTemplate.STREAM_CODEC,
+      TeapotRecipe::resultTemplate,
       TeapotRecipe::new
    );
 

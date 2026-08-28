@@ -75,7 +75,7 @@ public final class RuntimePotOverlay implements GuiLayer {
       }
 
       int y = gui.guiHeight() - 72;
-      if (((GuiAccessor)minecraft.gui).kaleidoscopeCookery$getOverlayMessageTime() > 0) {
+      if (((GuiAccessor)minecraft.gui.hud).kaleidoscopeCookery$getOverlayMessageTime() > 0) {
          y -= 12;
       }
 

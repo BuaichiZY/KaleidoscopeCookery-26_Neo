@@ -2,7 +2,7 @@ package com.github.ysbbbbbb.kaleidoscopecookery.effect;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModAttachmentType;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
-import net.minecraft.advancements.criterion.DistanceTrigger;
+import net.minecraft.advancements.triggers.DistanceTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;

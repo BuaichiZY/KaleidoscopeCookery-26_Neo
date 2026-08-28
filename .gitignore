@@ -1,6 +1,8 @@
 ### Gradle ###
 .gradle
+.gradle-user-home/
 build/
+build-local/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/**/build/
 
@@ -34,6 +36,7 @@ bin/
 
 ### Minecraft Modding ###
 run/
+work/
 !**/src/**/run/
 **/src/generated/**/.cache/
 repo/

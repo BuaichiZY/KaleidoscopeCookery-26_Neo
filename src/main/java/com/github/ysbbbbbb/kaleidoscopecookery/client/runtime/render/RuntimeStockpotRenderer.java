@@ -36,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
@@ -180,22 +181,22 @@ public final class RuntimeStockpotRenderer implements BlockEntityRenderer<Stockp
 
    private static EntityType<?> mobType(Identifier soupBase) {
       if (ModSoupBases.AXOLOTL_BUCKET.equals(soupBase)) {
-         return EntityType.AXOLOTL;
+         return EntityTypes.AXOLOTL;
       }
       if (ModSoupBases.COD_BUCKET.equals(soupBase)) {
-         return EntityType.COD;
+         return EntityTypes.COD;
       }
       if (ModSoupBases.SALMON_BUCKET.equals(soupBase)) {
-         return EntityType.SALMON;
+         return EntityTypes.SALMON;
       }
       if (ModSoupBases.TROPICAL_FISH_BUCKET.equals(soupBase)) {
-         return EntityType.TROPICAL_FISH;
+         return EntityTypes.TROPICAL_FISH;
       }
       if (ModSoupBases.PUFFERFISH_BUCKET.equals(soupBase)) {
-         return EntityType.PUFFERFISH;
+         return EntityTypes.PUFFERFISH;
       }
       if (ModSoupBases.TADPOLE_BUCKET.equals(soupBase)) {
-         return EntityType.TADPOLE;
+         return EntityTypes.TADPOLE;
       }
       return null;
    }
