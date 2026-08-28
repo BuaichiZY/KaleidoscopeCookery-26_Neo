@@ -3,7 +3,7 @@
 > I wanted to experience Kaleidoscope Cookery on newer versions of Minecraft so much that I decided to port it myself early just to scratch that itch.
 >
 >![Minecraft](https://img.shields.io/badge/Minecraft-Java%20Edition-brightgreen)
-![Forge](https://img.shields.io/badge/%20NeoForge%20-26.1.2.86%20|%2026.1.2-orange)
+![Forge](https://img.shields.io/badge/%20NeoForge%20-26.1.2.86%20|26.2.0.67-orange)
 ![License](https://img.shields.io/badge/License-BSD%20|%20CC%20BY--NC--SA%204.0-blue)
 >
 > This build was developed with the assistance of AI. It implements most of the features from the original Kaleidoscope Cookery, but there may still be some bugs. If you encounter any issues, please feel free to report them. I will do my best to fix them.
