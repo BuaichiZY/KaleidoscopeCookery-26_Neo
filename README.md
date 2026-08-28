@@ -1,4 +1,4 @@
-# Kaleidoscope Cookery Unofficial 26.1.2 森罗物语：厨房 非官方移植
+# Kaleidoscope Cookery Unofficial 26 森罗物语：厨房 非官方移植
 
 > I wanted to experience Kaleidoscope Cookery on newer versions of Minecraft so much that I decided to port it myself early just to scratch that itch.
 >
