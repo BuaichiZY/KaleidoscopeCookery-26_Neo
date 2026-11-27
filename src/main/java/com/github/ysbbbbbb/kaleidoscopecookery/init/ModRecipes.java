@@ -1,6 +1,7 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.init;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.ChoppingBoardRecipe;
+import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.BambooTrayRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.FlexPotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.FlexStockpotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.MillstoneRecipe;
@@ -9,6 +10,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.SteamerRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.StockpotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.TeapotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.ChoppingBoardRecipeSerializer;
+import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.BambooTrayRecipeSerializer;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.FlexPotRecipeSerializer;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.FlexStockpotRecipeSerializer;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.MillstoneRecipeSerializer;
@@ -69,6 +71,9 @@ public class ModRecipes {
    public static DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> CHOPPING_BOARD_SERIALIZER = RECIPE_SERIALIZERS.register(
       "chopping_board", () -> new RecipeSerializer<>(ChoppingBoardRecipeSerializer.CODEC, ChoppingBoardRecipeSerializer.STREAM_CODEC)
    );
+   public static DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> BAMBOO_TRAY_SERIALIZER = RECIPE_SERIALIZERS.register(
+      "bamboo_tray", () -> new RecipeSerializer<>(BambooTrayRecipeSerializer.CODEC, BambooTrayRecipeSerializer.STREAM_CODEC)
+   );
    public static DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> STOCKPOT_SERIALIZER = RECIPE_SERIALIZERS.register(
       "stockpot", () -> new RecipeSerializer<>(StockpotRecipeSerializer.CODEC, StockpotRecipeSerializer.STREAM_CODEC)
    );
@@ -88,6 +93,7 @@ public class ModRecipes {
    public static final RecipeType<PotRecipe> POT_RECIPE = recipeType("pot");
    public static final RecipeType<FlexPotRecipe> FLEX_POT_RECIPE = recipeType("flex_pot");
    public static final RecipeType<ChoppingBoardRecipe> CHOPPING_BOARD_RECIPE = recipeType("chopping_board");
+   public static final RecipeType<BambooTrayRecipe> BAMBOO_TRAY_RECIPE = recipeType("bamboo_tray");
    public static final RecipeType<StockpotRecipe> STOCKPOT_RECIPE = recipeType("stockpot");
    public static final RecipeType<FlexStockpotRecipe> FLEX_STOCKPOT_RECIPE = recipeType("flex_stockpot");
    public static final RecipeType<MillstoneRecipe> MILLSTONE_RECIPE = recipeType("millstone");

@@ -108,7 +108,7 @@ public class EnamelBasinBlock extends Block implements SimpleWaterloggedBlock {
                return InteractionResult.SUCCESS;
             }
          } else {
-            return mainHandItem.is((Item)ModItems.KITCHEN_SHOVEL.get())
+            return mainHandItem.is(com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod.KITCHEN_SHOVELS)
                ? this.onShovelClick(state, level, pos, player, mainHandItem)
                : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
          }

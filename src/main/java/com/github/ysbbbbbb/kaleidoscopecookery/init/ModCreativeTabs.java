@@ -34,7 +34,9 @@ public class ModCreativeTabs {
             output.accept((ItemLike)ModItems.STEAMER.get());
             output.accept((ItemLike)ModItems.TEAPOT.get());
             output.accept((ItemLike)ModItems.TRASH_CAN.get());
+            output.accept(ModItems.KITCHEN_SHELF.get());
             output.accept((ItemLike)ModItems.KITCHENWARE_RACKS.get());
+            output.accept((ItemLike)ModItems.BAMBOO_TRAY.get());
             output.accept((ItemLike)ModItems.FRUIT_BASKET.get());
             output.accept((ItemLike)ModItems.SCARECROW.get());
             output.accept((ItemLike)ModItems.ENAMEL_BASIN.get());
@@ -42,6 +44,7 @@ public class ModCreativeTabs {
             output.accept(OilPotItem.getFullOilPot());
             output.accept((ItemLike)ModItems.OIL.get());
             output.accept((ItemLike)ModItems.RECIPE_ITEM.get());
+            output.accept((ItemLike)ModItems.TEA_BANNER.get());
             output.accept((ItemLike)ModItems.TRANSMUTATION_LUNCH_BAG.get());
             output.accept((ItemLike)ModItems.FLOUR.get());
             output.accept((ItemLike)ModItems.RAW_DOUGH.get());
@@ -52,6 +55,7 @@ public class ModCreativeTabs {
             output.accept((ItemLike)ModItems.CHILI_RISTRA.get());
             output.accept((ItemLike)ModItems.STRUNG_MUSHROOMS.get());
             output.accept((ItemLike)ModItems.RICE_SEED.get());
+            output.accept((ItemLike)ModItems.TEA_SEED.get());
             output.accept((ItemLike)ModItems.WILD_RICE_SEED.get());
             output.accept((ItemLike)ModItems.TOMATO_SEED.get());
             output.accept((ItemLike)ModItems.CHILI_SEED.get());
@@ -100,6 +104,9 @@ public class ModCreativeTabs {
             output.accept((ItemLike)ModItems.TABLE_JUNGLE.get());
             output.accept((ItemLike)ModItems.TABLE_MANGROVE.get());
             output.accept((ItemLike)ModItems.TABLE_WARPED.get());
+            output.accept((ItemLike)ModItems.LONG_BENCH.get());
+            output.accept((ItemLike)ModItems.EIGHT_IMMORTALS_TABLE.get());
+            output.accept((ItemLike)ModItems.RED_LANTERN.get());
          })
          .build()
    );
@@ -115,7 +122,19 @@ public class ModCreativeTabs {
             output.accept((ItemLike)ModItems.GREEN_CHILI.get());
             output.accept((ItemLike)ModItems.LETTUCE.get());
             output.accept((ItemLike)ModItems.RICE_PANICLE.get());
+            output.accept((ItemLike)ModItems.FRESH_TEA_LEAVES.get());
+            output.accept((ItemLike)ModItems.DRIED_TEA_LEAVES.get());
             output.accept((ItemLike)ModItems.CATERPILLAR.get());
+            output.accept(ModItems.GLOW_BERRY_SKEWER.get());
+            output.accept(ModItems.SWEET_BERRY_SKEWER.get());
+            output.accept(ModItems.CHORUS_FRUIT_SKEWER.get());
+            output.accept(ModItems.APPLE_SKEWER.get());
+            output.accept(ModItems.CATERPILLAR_SKEWER.get());
+            output.accept(ModItems.CANDIED_GLOW_BERRY_SKEWER.get());
+            output.accept(ModItems.CANDIED_SWEET_BERRY_SKEWER.get());
+            output.accept(ModItems.CANDIED_CHORUS_FRUIT_SKEWER.get());
+            output.accept(ModItems.CANDIED_APPLE_SKEWER.get());
+            output.accept(ModItems.CANDIED_CATERPILLAR_SKEWER.get());
             output.accept((ItemLike)ModItems.SASHIMI.get());
             output.accept((ItemLike)ModItems.RAW_LAMB_CHOPS.get());
             output.accept((ItemLike)ModItems.COOKED_LAMB_CHOPS.get());
@@ -135,6 +154,7 @@ public class ModCreativeTabs {
             output.accept((ItemLike)ModItems.MEAT_PIE.get());
             output.accept((ItemLike)ModItems.DUMPLING.get());
             output.accept((ItemLike)ModItems.FRIED_EGG.get());
+            output.accept((ItemLike)ModItems.TEA_EGG.get());
             output.accept((ItemLike)ModItems.STICKY_CANDY.get());
             output.accept((ItemLike)ModItems.STICKY_RICE_CAKE.get());
             output.accept((ItemLike)ModItems.BAMBOO_TUBE_RICE.get());
@@ -180,6 +200,13 @@ public class ModCreativeTabs {
                output.accept(plateItem);
             });
             output.accept((ItemLike)ModItems.EMPTY_CUP.get());
+            output.accept((ItemLike)ModItems.CLAY_POT_MILK_TEA.get());
+            output.accept((ItemLike)ModItems.TIEGUANYIN_TEA_BAG.get());
+            output.accept((ItemLike)ModItems.BILUOCHUN_TEA_BAG.get());
+            output.accept((ItemLike)ModItems.OOLONG_TEA_BAG.get());
+            output.accept((ItemLike)ModItems.SAKURA_FUBUKI_TEA_BAG.get());
+            output.accept((ItemLike)ModItems.BARLEY_TEA_BAG.get());
+            output.accept((ItemLike)ModItems.BUTTER_TEA_BAG.get());
             TeacupRegistry.TEACUP_DATA_MAP.keySet().forEach(teacupName -> {
                Item teacupItem = (Item)BuiltInRegistries.ITEM.getValue(teacupName);
                output.accept(teacupItem);

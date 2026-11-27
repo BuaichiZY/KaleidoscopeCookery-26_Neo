@@ -1,0 +1,57 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 5
+  },
+  "gives": {
+    "id": "kaleidoscope_cookery:recipe_item",
+    "count": 1,
+    "components": {
+      "kaleidoscope_cookery:recipe_record": {
+        "input": [
+          {
+            "id": "minecraft:bamboo",
+            "count": 1
+          },
+          {
+            "id": "minecraft:bamboo",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          },
+          {
+            "id": "minecraft:porkchop",
+            "count": 1
+          }
+        ],
+        "output": {
+          "id": "kaleidoscope_cookery:dongpo_pork",
+          "count": 1
+        },
+        "type": "kaleidoscope_cookery:pot",
+        "flex_recipe": false
+      }
+    }
+  },
+  "max_uses": 16,
+  "xp": 4,
+  "reputation_discount": 0.1
+}

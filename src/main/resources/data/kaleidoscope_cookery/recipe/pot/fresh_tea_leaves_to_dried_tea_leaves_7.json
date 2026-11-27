@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:pot",
+  "ingredients": [
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves",
+    "kaleidoscope_cookery:fresh_tea_leaves"
+  ],
+  "result": {
+    "count": 7,
+    "id": "kaleidoscope_cookery:dried_tea_leaves"
+  }
+}

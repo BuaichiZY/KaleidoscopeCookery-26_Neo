@@ -36,11 +36,12 @@ public final class StockpotRecipeSerializer {
             ItemStackTemplate.CODEC.fieldOf("result").forGetter(StockpotRecipe::resultTemplate),
             Codec.INT.optionalFieldOf("time", 300).forGetter(StockpotRecipe::time),
             Ingredient.CODEC.optionalFieldOf("carrier", DEFAULT_CARRIER).forGetter(StockpotRecipe::carrier),
-            StockpotVisuals.CODEC.forGetter(StockpotRecipe::visuals)
+            StockpotVisuals.CODEC.forGetter(StockpotRecipe::visuals),
+            Codec.BOOL.optionalFieldOf("syrup", false).forGetter(StockpotRecipe::syrup)
          )
          .apply(instance, StockpotRecipe::new)
    );
-   public static final StreamCodec<RegistryFriendlyByteBuf, StockpotRecipe> STREAM_CODEC = StreamCodec.composite(
+   public static final StreamCodec<RegistryFriendlyByteBuf, StockpotRecipe> STREAM_CODEC = com.github.ysbbbbbb.kaleidoscopecookery.util.StreamCodecUtil.composite(
       Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
       StockpotRecipe::getIngredients,
       Identifier.STREAM_CODEC,
@@ -53,6 +54,7 @@ public final class StockpotRecipeSerializer {
       StockpotRecipe::carrier,
       StockpotVisuals.STREAM_CODEC,
       StockpotRecipe::visuals,
+      ByteBufCodecs.BOOL, StockpotRecipe::syrup,
       StockpotRecipe::new
    );
 

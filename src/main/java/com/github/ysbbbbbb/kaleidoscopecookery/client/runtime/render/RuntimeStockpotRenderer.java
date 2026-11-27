@@ -92,7 +92,8 @@ public final class RuntimeStockpotRenderer implements BlockEntityRenderer<Stockp
             TextureAtlasSprite sprite = this.sprites.get(new SpriteId(TextureAtlas.LOCATION_BLOCKS, texture));
         int maxCount = Math.max(1, Math.min(blockEntity.getResult().getCount(), 9));
         float height = blockEntity.getStatus() == 3
-                ? 0.065F + 0.315F / maxCount * Math.min(blockEntity.getTakeoutCount(), maxCount)
+                ? (blockEntity.getSyrupUses() > 0 ? 0.13F + 0.3F / 9 * blockEntity.getSyrupUses()
+                    : 0.065F + 0.315F / maxCount * Math.min(blockEntity.getTakeoutCount(), maxCount))
                 : 0.38F;
             state.surface = new Surface(sprite, color, height);
          }

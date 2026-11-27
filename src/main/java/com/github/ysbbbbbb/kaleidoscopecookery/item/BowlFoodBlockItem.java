@@ -69,7 +69,7 @@ public class BowlFoodBlockItem extends BlockItem implements IHasContainer {
    }
 
    private static Properties createProperties(FoodProperties properties, @Nullable ItemLike usingConvertsTo) {
-      Properties result = ModRegistrationProperties.itemProperties().stacksTo(16).food(properties, ModFoods.consumableFor(properties));
+      Properties result = ModRegistrationProperties.blockItemProperties().stacksTo(16).food(properties, ModFoods.consumableFor(properties));
       if (usingConvertsTo != null) {
          result.usingConvertsTo(usingConvertsTo.asItem());
       }

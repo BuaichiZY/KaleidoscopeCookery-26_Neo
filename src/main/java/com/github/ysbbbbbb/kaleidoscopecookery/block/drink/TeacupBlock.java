@@ -1,7 +1,9 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.block.drink;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
+import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModParticles;
+import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.FoodBiteAnimateTicks;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TeapotItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.util.ItemUtils;
@@ -52,10 +54,17 @@ public class TeacupBlock extends HorizontalDirectionalBlock {
    protected final IntegerProperty teaCount;
    protected final int maxCount;
    protected VoxelShape aabb = AABB;
+   @Nullable
+   protected final FoodBiteAnimateTicks.AnimateTick animateTick;
 
    public TeacupBlock(int maxCount) {
+      this(maxCount, null);
+   }
+
+   public TeacupBlock(int maxCount, @Nullable FoodBiteAnimateTicks.AnimateTick animateTick) {
       super(ModRegistrationProperties.blockProperties().forceSolidOn().instabreak().mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion());
       this.maxCount = maxCount;
+      this.animateTick = animateTick;
       this.cupCount = CUP_COUNT;
       this.teaCount = TEA_COUNT;
       this.registerDefaultState(
@@ -160,6 +169,10 @@ public class TeacupBlock extends HorizontalDirectionalBlock {
                   ItemUtils.getItemToLivingEntity(player, teaStack);
                   if (cupCountNum == 1) {
                      level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                  } else if (teaCountNum == 1) {
+                     level.setBlockAndUpdate(pos, ModBlocks.EMPTY_CUP.get().defaultBlockState()
+                        .setValue(EmptyCupBlock.CUP_COUNT, cupCountNum - 1)
+                        .setValue(FACING, state.getValue(FACING)));
                   } else {
                      level.setBlockAndUpdate(
                         pos, (BlockState)((BlockState)state.setValue(this.teaCount, teaCountNum - 1)).setValue(this.cupCount, cupCountNum - 1)
@@ -194,6 +207,10 @@ public class TeacupBlock extends HorizontalDirectionalBlock {
    }
 
    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+      if (this.animateTick != null) {
+         this.animateTick.animateTick(state, level, pos, random);
+         return;
+      }
       if (random.nextInt(20) == 0) {
          double x = pos.getX() + 0.5;
          double y = pos.getY() + 0.5;

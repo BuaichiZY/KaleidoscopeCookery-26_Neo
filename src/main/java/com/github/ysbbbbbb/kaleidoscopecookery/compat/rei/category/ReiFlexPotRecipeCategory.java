@@ -23,7 +23,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -54,7 +54,7 @@ public class ReiFlexPotRecipeCategory implements DisplayCategory<ReiFlexPotRecip
       Component stirFryCount = Component.translatable("jei.kaleidoscope_cookery.pot.stir_fry_count", new Object[]{display.stirFryCount});
       widgets.add(Widgets.createRecipeBase(bounds));
       widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 102));
-      widgets.add(Widgets.withTranslate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
+      widgets.add(ReiUtil.translate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
          this.drawCenteredString(guiGraphics, Component.translatable("jei.kaleidoscope_cookery.flex_recipe"), 88, 5);
          this.drawCenteredString(guiGraphics, stirFryCount, 88, 85);
       }), startX, startY, 0.0));
@@ -66,9 +66,9 @@ public class ReiFlexPotRecipeCategory implements DisplayCategory<ReiFlexPotRecip
          widgets.add(Widgets.createSlot(new Point(startX + xOffset, startY + yOffset)).entries((Collection)inputs.get(i)).disableBackground().markInput());
          if (!inputs.get(i).isEmpty()) {
             widgets.add(
-               Widgets.withTranslate(
+               ReiUtil.translate(
                   Widgets.createDrawableWidget(
-                     (guiGraphics, mouseX, mouseY, v) -> guiGraphics.drawString(
+                     (guiGraphics, mouseX, mouseY, v) -> guiGraphics.text(
                         Minecraft.getInstance().font, Component.literal("*"), xOffset, yOffset, 16777215, true
                      )
                   ),
@@ -90,10 +90,10 @@ public class ReiFlexPotRecipeCategory implements DisplayCategory<ReiFlexPotRecip
       return widgets;
    }
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+   private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {
       Font font = Minecraft.getInstance().font;
       FormattedCharSequence sequence = text.getVisualOrderText();
-      guiGraphics.drawString(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
+      guiGraphics.text(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
    }
 
    public int getDisplayWidth(ReiFlexPotRecipeCategory.FlexPotRecipeDisplay display) {
@@ -117,22 +117,26 @@ public class ReiFlexPotRecipeCategory implements DisplayCategory<ReiFlexPotRecip
       registry.addWorkstations(
          ID,
          new EntryIngredient[]{
-            ReiUtil.ofItem((Item)ModItems.POT.get()), ReiUtil.ofIngredient(Ingredient.of(TagMod.KITCHEN_SHOVEL)), ReiUtil.ofItem((Item)ModItems.OIL.get())
+            ReiUtil.ofItem((Item)ModItems.POT.get()), ReiUtil.ofIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(TagMod.KITCHEN_SHOVEL))), ReiUtil.ofItem((Item)ModItems.OIL.get())
          }
       );
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.FLEX_POT_RECIPE).forEach(holder -> {
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.FLEX_POT_RECIPE).forEach(holder -> {
          FlexPotRecipe r = (FlexPotRecipe)holder.value();
          List<EntryIngredient> inputs = ReiUtil.ofIngredients(r.getIngredients());
          List<EntryIngredient> output = ReiUtil.ofItemStacks(r.getResultItem(RegistryAccess.EMPTY));
          EntryIngredient carrier = r.carrier().isEmpty() ? EntryIngredient.empty() : ReiUtil.ofIngredient(r.carrier());
-         registry.add(new ReiFlexPotRecipeCategory.FlexPotRecipeDisplay(holder.id(), inputs, output, carrier, r.stirFryCount()));
+         registry.add(new ReiFlexPotRecipeCategory.FlexPotRecipeDisplay(holder.id().identifier(), inputs, output, carrier, r.stirFryCount()));
       });
    }
 
    public static class FlexPotRecipeDisplay extends BasicDisplay {
+      // Displays are built from synced recipes on the client, not serialized by REI.
+      @Override
+      public @org.jetbrains.annotations.Nullable me.shedaniel.rei.api.common.display.DisplaySerializer<? extends me.shedaniel.rei.api.common.display.Display> getSerializer() { return null; }
+
       public final EntryIngredient carrier;
       public final int stirFryCount;
 

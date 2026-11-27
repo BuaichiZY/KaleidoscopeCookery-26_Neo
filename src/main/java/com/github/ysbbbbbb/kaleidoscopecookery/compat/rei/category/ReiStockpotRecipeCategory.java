@@ -25,7 +25,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -57,7 +57,7 @@ public class ReiStockpotRecipeCategory implements DisplayCategory<ReiStockpotRec
       widgets.add(Widgets.createRecipeBase(bounds));
       widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 102));
       widgets.add(
-         Widgets.withTranslate(
+         ReiUtil.translate(
             Widgets.createDrawableWidget(
                (guiGraphics, mouseX, mouseY, v) -> this.drawCenteredString(
                   guiGraphics, Component.translatable("jei.kaleidoscope_cookery.strict_recipe"), 88, 90
@@ -90,10 +90,10 @@ public class ReiStockpotRecipeCategory implements DisplayCategory<ReiStockpotRec
       return widgets;
    }
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+   private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {
       Font font = Minecraft.getInstance().font;
       FormattedCharSequence sequence = text.getVisualOrderText();
-      guiGraphics.drawString(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
+      guiGraphics.text(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
    }
 
    public int getDisplayWidth(ReiStockpotRecipeCategory.StockpotRecipeDisplay display) {
@@ -118,7 +118,7 @@ public class ReiStockpotRecipeCategory implements DisplayCategory<ReiStockpotRec
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      List<RecipeHolder<StockpotRecipe>> list = new ArrayList<>(registry.getRecipeManager().getAllRecipesFor(ModRecipes.STOCKPOT_RECIPE));
+      List<RecipeHolder<StockpotRecipe>> list = new ArrayList<>(com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.STOCKPOT_RECIPE));
       FarmersDelightCompat.getTransformRecipeForJei(Minecraft.getInstance().level, list);
       list.forEach(
          r -> {
@@ -132,13 +132,17 @@ public class ReiStockpotRecipeCategory implements DisplayCategory<ReiStockpotRec
                throw new RuntimeException("No soup found for " + ((StockpotRecipe)r.value()).soupBase());
             } else {
                EntryIngredient soupBaseEntry = ReiUtil.ofItemStack(soupBase.getDisplayStack());
-               registry.add(new ReiStockpotRecipeCategory.StockpotRecipeDisplay(r.id(), inputs, output, carrier, soupBaseEntry));
+               registry.add(new ReiStockpotRecipeCategory.StockpotRecipeDisplay(r.id().identifier(), inputs, output, carrier, soupBaseEntry));
             }
          }
       );
    }
 
    public static class StockpotRecipeDisplay extends BasicDisplay {
+      // Displays are built from synced recipes on the client, not serialized by REI.
+      @Override
+      public @org.jetbrains.annotations.Nullable me.shedaniel.rei.api.common.display.DisplaySerializer<? extends me.shedaniel.rei.api.common.display.Display> getSerializer() { return null; }
+
       public final EntryIngredient carrier;
       public final EntryIngredient soupBase;
 

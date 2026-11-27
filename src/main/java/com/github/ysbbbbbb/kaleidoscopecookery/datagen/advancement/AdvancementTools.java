@@ -16,7 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.ItemLike;
 
 public class AdvancementTools {
-   public static final Identifier BG = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "textures/advancement/background.png");
+   public static final Identifier BG = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "advancement/background");
 
    public static Builder makeTask(ItemLike item, String key) {
       MutableComponent title = Component.translatable("advancements.kaleidoscope_cookery.%s.title".formatted(key));

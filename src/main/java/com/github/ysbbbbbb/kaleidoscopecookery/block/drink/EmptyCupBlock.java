@@ -84,6 +84,19 @@ public class EmptyCupBlock extends HorizontalDirectionalBlock {
             } else {
                return InteractionResult.CONSUME;
             }
+         } else if (itemInHand.getItem() instanceof TeacupItem teacupItem
+                    && teacupItem.getBlock() instanceof TeacupBlock teacupBlock) {
+            int currentCount = state.getValue(CUP_COUNT);
+            if (currentCount < teacupBlock.getMaxCount()) {
+               level.setBlockAndUpdate(pos, teacupBlock.defaultBlockState()
+                  .setValue(teacupBlock.getCupCountProperty(), currentCount + 1)
+                  .setValue(teacupBlock.getTeaCountProperty(), 1)
+                  .setValue(FACING, state.getValue(FACING)));
+               level.playSound(player, pos, this.soundType.getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+               itemInHand.shrink(1);
+               return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.CONSUME;
          } else if (itemInHand.is((Item)ModItems.EMPTY_CUP.get())) {
             int count = (Integer)state.getValue(CUP_COUNT);
             if (count < 4) {

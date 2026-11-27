@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:iron_chain",
+    "D": "minecraft:red_dye",
+    "L": "minecraft:candle",
+    "P": "minecraft:paper"
+  },
+  "pattern": [
+    "PCP",
+    "DLD",
+    "PDP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:red_lantern"
+  }
+}

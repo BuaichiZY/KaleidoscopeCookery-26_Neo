@@ -16,6 +16,8 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModSounds;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.LegacyItemResourceHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.MillstoneInputHandler;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -79,6 +81,15 @@ public class MillstoneBlockEntity extends BaseBlockEntity implements IMillstone 
          MillstoneBlockEntity.this.refresh();
       }
    };
+   private final IItemHandler automationInput = new MillstoneInputHandler(this);
+   private final ResourceHandler<ItemResource> automationResource = new LegacyItemResourceHandler(this.automationInput, (slot, stack) -> {
+      this.input = stack.copy();
+      if (stack.isEmpty()) {
+         this.previewOutput = ItemStack.EMPTY;
+         this.progress = 0;
+      }
+      this.refresh();
+   });
    private ItemStack input = ItemStack.EMPTY;
    private ItemStack previewOutput = ItemStack.EMPTY;
    private UUID entityId = Util.NIL_UUID;
@@ -87,7 +98,7 @@ public class MillstoneBlockEntity extends BaseBlockEntity implements IMillstone 
    private float liftAngle = 5.0F;
    private int progress = 0;
    @Nullable
-   private Mob bindEntity;
+   private LivingEntity bindEntity;
    private Vec3 offset = Vec3.ZERO;
 
    public MillstoneBlockEntity(BlockPos pos, BlockState state) {
@@ -125,7 +136,7 @@ public class MillstoneBlockEntity extends BaseBlockEntity implements IMillstone 
             Vec3 center = Vec3.atBottomCenterOf(this.getBlockPos());
             double maxDistanceSqr = 25.0;
             if (this.bindEntity == null) {
-               if (!(serverLevel.getEntity(this.entityId) instanceof Mob mob)
+               if (!(serverLevel.getEntity(this.entityId) instanceof LivingEntity mob)
                   || !mob.isAlive()
                   || !(mob.distanceToSqr(center) < maxDistanceSqr)
                   || !this.canBindEntity(mob)) {
@@ -141,7 +152,7 @@ public class MillstoneBlockEntity extends BaseBlockEntity implements IMillstone 
                || this.bindEntity.distanceToSqr(center) >= maxDistanceSqr
                || this.bindEntity.fallDistance > 0.5F
                || this.bindEntity.isInWall()
-               || this.saddleEntityIsControlling(this.bindEntity)) {
+              ) {
                this.entityId = Util.NIL_UUID;
                this.bindEntity = null;
                this.cacheRot = rot;
@@ -298,28 +309,27 @@ public class MillstoneBlockEntity extends BaseBlockEntity implements IMillstone 
       return mob.isSaddled() && mob.getControllingPassenger() != null;
    }
 
-   public boolean canBindEntity(Mob mob) {
-      if (!mob.getType().builtInRegistryHolder().is(TagMod.MILLSTONE_BINDABLE)
-         && !MillstoneBindableDataReloadListener.INSTANCE.containsKey(mob.getType())) {
-         return false;
-      } else if (mob.getVehicle() != null) {
-         return false;
-      } else if (mob.isBaby()) {
-         return false;
-      } else if (this.saddleEntityIsControlling(mob)) {
-         return false;
-      } else if (mob instanceof AbstractHorse horse) {
-         return horse.isTamed();
-      } else if (mob instanceof TamableAnimal tamableAnimal) {
-         return tamableAnimal.isTame();
-      } else {
-         return mob instanceof OwnableEntity ownable ? ownable.getOwnerReference() != null : true;
-      }
+   public boolean canBindEntity(LivingEntity entity) {
+      return entity.getBbHeight() >= 1.0F
+         && !entity.getType().builtInRegistryHolder().is(TagMod.MILLSTONE_BIND_BLACKLIST)
+         && entity.getVehicle() == null
+         && (!(entity instanceof Mob mob) || !this.saddleEntityIsControlling(mob));
    }
 
-   public void bindEntity(Mob mob) {
+   public boolean isBoundTo(LivingEntity entity) {
+      return this.bindEntity == entity || this.entityId.equals(entity.getUUID());
+   }
+
+   public void unbindEntity() {
+      this.entityId = Util.NIL_UUID;
+      this.bindEntity = null;
+      this.liftAngle = 0.0F;
+      this.refresh();
+   }
+
+   public void bindEntity(LivingEntity mob) {
       if (this.level != null && !this.level.isClientSide()) {
-         if (mob.isAlive()) {
+         if (mob.isAlive() && this.canBindEntity(mob)) {
             this.entityId = mob.getUUID();
             this.bindEntity = mob;
             float rot = this.getRotation(this.level, 0.0F);
@@ -417,6 +427,10 @@ tag.readChild("OutputItem",          this.outputs);
 
    public IItemHandler getOutputs() {
       return this.outputs;
+   }
+
+   public ResourceHandler<ItemResource> getInputResourceHandler() {
+      return this.automationResource;
    }
 
    public boolean isOutputEmpty() {

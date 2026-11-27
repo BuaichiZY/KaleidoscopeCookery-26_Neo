@@ -50,7 +50,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class TeapotItem extends BlockItem {
    public TeapotItem() {
-      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    private static CompoundTag getBlockData(ItemStack stack) {

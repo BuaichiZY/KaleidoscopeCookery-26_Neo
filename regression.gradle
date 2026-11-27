@@ -1,0 +1,23 @@
+// Opt-in validation only; neither the helper mod nor its resources enter release jars.
+sourceSets {
+    regression {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}
+neoForge.mods {
+    cookery_regression {
+        sourceSet sourceSets.regression
+    }
+}
+
+dependencies { regressionImplementation files(tasks.named('jar').flatMap { it.archiveFile }) }
+tasks.named('compileRegressionJava') { dependsOn tasks.named('jar') }
+neoForge.runs.configureEach { logLevel = org.slf4j.event.Level.INFO }
+
+
+// Exercise the distributed jar instead of development class/resource directories.
+if (project.hasProperty('releaseJarTest')) {
+    neoForge.mods.remove(neoForge.mods.getByName(project.mod_id))
+    dependencies { localRuntime files(tasks.named('jar').flatMap { it.archiveFile }) }
+}

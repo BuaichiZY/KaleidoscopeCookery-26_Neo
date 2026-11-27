@@ -1,5 +1,6 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.emi.category;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.api.recipe.soupbase.ISoupBase;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.farmersdelight.FarmersDelightCompat;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.StockpotRecipe;
@@ -12,78 +13,89 @@ import dev.emi.emi.api.recipe.BasicEmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
-import dev.emi.emi.api.widget.TextWidget.Alignment;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.ItemLike;
+
+import java.util.List;
 
 public class EmiStockpotRecipe extends BasicEmiRecipe {
-   public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(
-      Identifier.parse(ModRecipes.STOCKPOT_RECIPE.toString()), EmiIngredient.of(Ingredient.of(new ItemLike[]{(ItemLike)ModItems.STOCKPOT.get()}))
-   );
-   private static final Identifier BG = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "textures/gui/jei/stockpot.png");
-   public static final int WIDTH = 176;
-   public static final int HEIGHT = 102;
-   private final EmiStack soupBase;
+    public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(
+            ResourceLocation.parse(ModRecipes.STOCKPOT_RECIPE.toString()),
+            EmiIngredient.of(Ingredient.of(ModItems.STOCKPOT.get()))
+    );
 
-   public EmiStockpotRecipe(Identifier id, List<EmiIngredient> inputs, List<EmiStack> outputs, List<EmiIngredient> catalysts, EmiStack soupBase) {
-      super(CATEGORY, id, 176, 102);
-      this.inputs = inputs;
-      this.outputs = outputs;
-      this.catalysts = catalysts;
-      this.soupBase = soupBase;
-   }
+    private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "textures/gui/jei/stockpot.png");
+    public static final int WIDTH = 176;
+    public static final int HEIGHT = 102;
 
-   public static void register(EmiRegistry registry) {
-      registry.addCategory(CATEGORY);
-      registry.addWorkstation(CATEGORY, EmiStack.of((ItemLike)ModItems.STOCKPOT.get()));
-      registry.addWorkstation(CATEGORY, EmiStack.of((ItemLike)ModItems.STOCKPOT_LID.get()));
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.STOCKPOT_RECIPE).forEach(r -> registerRecipe(registry, r));
-      List<RecipeHolder<StockpotRecipe>> compatRecipes = Lists.newArrayList();
-      FarmersDelightCompat.getTransformRecipeForJei(Minecraft.getInstance().level, compatRecipes);
-      if (!compatRecipes.isEmpty()) {
-         compatRecipes.forEach(r -> registerRecipe(registry, (RecipeHolder<StockpotRecipe>)r));
-      }
-   }
+    private final EmiStack soupBase;
 
-   private static void registerRecipe(EmiRegistry registry, RecipeHolder<StockpotRecipe> holder) {
-      StockpotRecipe recipe = (StockpotRecipe)holder.value();
-      List<EmiIngredient> inputs = recipe.getIngredients().stream().<EmiIngredient>map(EmiIngredient::of).toList();
-      List<EmiStack> outputs = List.of(EmiStack.of(recipe.getResultItem(RegistryAccess.EMPTY)));
-      List<EmiIngredient> catalysts = recipe.carrier().isEmpty() ? List.of() : List.of(EmiIngredient.of(recipe.carrier()));
-      ISoupBase soupBase = SoupBaseManager.getSoupBase(recipe.soupBase());
-      if (soupBase == null) {
-         throw new RuntimeException("No soup found for " + recipe.soupBase());
-      } else {
-         EmiStack soupBaseItem = EmiStack.of(soupBase.getDisplayStack());
-         registry.addRecipe(new EmiStockpotRecipe(holder.id(), inputs, outputs, catalysts, soupBaseItem));
-      }
-   }
+    public EmiStockpotRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs, List<EmiIngredient> catalysts, EmiStack soupBase) {
+        super(CATEGORY, id, WIDTH, HEIGHT);
+        this.inputs = inputs;
+        this.outputs = outputs;
+        this.catalysts = catalysts;
+        this.soupBase = soupBase;
+    }
 
-   public void addWidgets(WidgetHolder widgets) {
-      widgets.addTexture(BG, 1, 1, 176, 102, 0, 0);
-      widgets.addText(Component.translatable("jei.kaleidoscope_cookery.strict_recipe"), 88, 90, 5592405, false).horizontalAlign(Alignment.CENTER);
+    public static void register(EmiRegistry registry) {
+        registry.addCategory(CATEGORY);
+        registry.addWorkstation(CATEGORY, EmiStack.of(ModItems.STOCKPOT.get()));
+        registry.addWorkstation(CATEGORY, EmiStack.of(ModItems.STOCKPOT_LID.get()));
 
-      for (int i = 0; i < this.inputs.size(); i++) {
-         int xOffset = i % 3 * 18 + 15;
-         int yOffset = i / 3 * 18 + 25;
-         widgets.addSlot((EmiIngredient)this.inputs.get(i), xOffset, yOffset).drawBack(false);
-      }
+        registry.getRecipeManager().getAllRecipesFor(ModRecipes.STOCKPOT_RECIPE).forEach(r -> {
+            registerRecipe(registry, r);
+        });
 
-      if (!this.soupBase.isEmpty()) {
-         widgets.addSlot(this.soupBase, 72, 61).drawBack(false);
-      }
+        // 农夫乐事兼容
+        List<RecipeHolder<StockpotRecipe>> compatRecipes = Lists.newArrayList();
+        FarmersDelightCompat.getTransformRecipeForJei(Minecraft.getInstance().level, compatRecipes);
+        if (!compatRecipes.isEmpty()) {
+            compatRecipes.forEach(r -> registerRecipe(registry, r));
+        }
+    }
 
-      if (!this.catalysts.isEmpty()) {
-         widgets.addSlot((EmiIngredient)this.catalysts.getFirst(), 133, 18).drawBack(false);
-      }
+    private static void registerRecipe(EmiRegistry registry, RecipeHolder<StockpotRecipe> holder) {
+        StockpotRecipe recipe = holder.value();
+        List<EmiIngredient> inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
+        List<EmiStack> outputs = List.of(EmiStack.of(recipe.getResultItem(RegistryAccess.EMPTY)));
+        List<EmiIngredient> catalysts = recipe.carrier().isEmpty() ? List.of() : List.of(EmiIngredient.of(recipe.carrier()));
+        ISoupBase soupBase = SoupBaseManager.getSoupBase(recipe.soupBase());
+        if (soupBase == null) {
+            throw new RuntimeException("No soup found for " + recipe.soupBase());
+        }
+        EmiStack soupBaseItem = EmiStack.of(soupBase.getDisplayStack());
+        registry.addRecipe(new EmiStockpotRecipe(holder.id(), inputs, outputs, catalysts, soupBaseItem));
+    }
 
-      widgets.addSlot((EmiIngredient)this.outputs.getFirst(), 143, 60).drawBack(false).recipeContext(this);
-   }
+    @Override
+    public void addWidgets(WidgetHolder widgets) {
+        widgets.addTexture(BG, 1, 1, WIDTH, HEIGHT, 0, 0);
+        widgets.addText(Component.translatable("jei.kaleidoscope_cookery.strict_recipe"), WIDTH / 2, 90, 0x555555, false)
+                .horizontalAlign(TextWidget.Alignment.CENTER);
+
+        for (int i = 0; i < inputs.size(); i++) {
+            int xOffset = (i % 3) * 18 + 15;
+            int yOffset = (i / 3) * 18 + 25;
+            widgets.addSlot(inputs.get(i), xOffset, yOffset)
+                    .drawBack(false);
+        }
+        if (!soupBase.isEmpty()) {
+            widgets.addSlot(soupBase, 72, 61)
+                    .drawBack(false);
+        }
+        if (!catalysts.isEmpty()) {
+            widgets.addSlot(catalysts.getFirst(), 133, 18)
+                    .drawBack(false);
+        }
+        widgets.addSlot(outputs.getFirst(), 143, 60)
+                .drawBack(false)
+                .recipeContext(this);
+    }
 }

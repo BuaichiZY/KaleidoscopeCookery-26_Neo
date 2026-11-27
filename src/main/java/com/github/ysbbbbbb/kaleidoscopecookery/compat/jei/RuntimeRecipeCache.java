@@ -26,4 +26,12 @@ public final class RuntimeRecipeCache {
    public static <I extends net.minecraft.world.item.crafting.RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> getRecipes(RecipeType<T> type) {
       return List.copyOf(recipes.byType(type));
    }
+
+   @SuppressWarnings("unchecked")
+   public static <T extends Recipe<?>> List<RecipeHolder<T>> getRecipesByClass(Class<T> recipeClass) {
+      return recipes.values().stream()
+         .filter(holder -> recipeClass.isInstance(holder.value()))
+         .map(holder -> (RecipeHolder<T>)(RecipeHolder<?>)holder)
+         .toList();
+   }
 }

@@ -242,7 +242,7 @@ public class PotBlockEntity extends BaseBlockEntity implements IPot {
          stack.shrink(1);
          ((ModEventTrigger)ModTrigger.EVENT.get()).trigger(user, "put_oil_in_pot");
          return true;
-      } else if (stack.is((Item)ModItems.KITCHEN_SHOVEL.get()) && KitchenShovelItem.hasOil(stack)) {
+      } else if (stack.is(com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod.KITCHEN_SHOVELS) && KitchenShovelItem.hasOil(stack)) {
          this.placeOil(level, user, level.getRandom());
          KitchenShovelItem.setHasOil(stack, false);
          ((ModEventTrigger)ModTrigger.EVENT.get()).trigger(user, "put_oil_in_pot");

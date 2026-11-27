@@ -27,29 +27,17 @@ sourceSets.main.resources {
 
     exclude("src/generated/**/.cache") // datagen cache files
 
-    // These legacy loot resources reference custom loot codecs whose Java
-    // registrations are intentionally not part of the Minecraft 26 build yet.
-    // Leaving them in the runtime jar makes every integrated-server datapack
-    // reload report invalid data. Preserve the source files for the later loot
-    // migration, but do not ship broken definitions in this build.
-    exclude 'data/kaleidoscope_cookery/loot_table/hoglin.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/pig.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/piglin.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/piglin_brute.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/straw_hat_seed_drop.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/zoglin.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/zombified_piglin.json'
-    exclude 'data/kaleidoscope_cookery/loot_table/chest/village_chest.json'
-    exclude 'data/neoforge/loot_modifiers/global_loot_modifiers.json'
+    // Oil drops use vanilla entity equipment predicates and NeoForge add_table.
+    // Grass seed drops and village chest recipe generation are enabled as well.
+    // 26.2 discovers each loot modifier directly; there is no legacy global manifest.
 }
 
-// Optional integrations from the 1.21.1 reference target third-party APIs
-// that are not present on the Minecraft 26.1.2 compile classpath. Keep their
-// sources in the project, but build the standalone core mod first.
+// Keep legacy reference sources for integrations without a 26.2 runtime.
+// JEI, Jade, REI and Farmers Delight use the migrated implementations.
 sourceSets.main.java {
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/create/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/emi/**'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/farmersdelight/**'
+    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/everycomp/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/harvest/**'
     // The Minecraft 26 Jade bridge lives in compat/jade/runtime. Keep the
     // original 1.21 providers as reference sources, but compile the migrated
@@ -57,12 +45,10 @@ sourceSets.main.java {
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/ModPlugin.java'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/jade/block/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/ponder/**'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/compat/rei/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/datagen/**'
 
-    // Minecraft 26 replaced the complete client rendering pipeline with
-    // render-state based APIs. Keep the sources for the later visual pass,
-    // while compiling the standalone gameplay/core layer first.
+    // The 26.x render-state implementations live in client/runtime.
+    // Exclude the superseded renderer sources while retaining them for reference.
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/api/client/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/client/animation/**'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/client/event/**'
@@ -75,14 +61,11 @@ sourceSets.main.java {
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/client/particle/CookingParticle.java'
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/client/particle/StockpotParticle.java'
 
-    // These hooks depend on registries/events that were removed or redesigned
-    // in 26.1.2. They are isolated from core cooking gameplay for the first
-    // runnable build and remain in source for a follow-up worldgen/loot pass.
+    // Trades use villager_trade/trade_set data in 26.2. Loot predicates use
+    // vanilla equipment conditions; the old event and codecs are obsolete.
     exclude 'com/github/ysbbbbbb/kaleidoscopecookery/event/ModTradesEvent.java'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/event/AddVillageStructuresEvent.java'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/event/effect/FlatulenceEvent.java'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/loot/**'
-    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/init/ModLootModifier.java'
+    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/loot/AdvanceBlockMatchTool.java'
+    exclude 'com/github/ysbbbbbb/kaleidoscopecookery/loot/AdvanceEntityMatchTool.java'
 }
 
 repositories {
@@ -205,13 +188,17 @@ configurations {
 }
 
 dependencies {
+    compileOnly files('libs/FarmersDelight-26.2-1.3.3-fix.jar', 'libs/RoughlyEnoughItems-26.2.820.jar', 'libs/architectury-neoforge-21.0.7.jar', 'libs/cloth-config-26.2.155.jar')
+    if (project.hasProperty('farmersDelightTest')) localRuntime files('libs/FarmersDelight-26.2-1.3.3-fix.jar')
+    if (project.hasProperty('reiTest')) localRuntime files('libs/RoughlyEnoughItems-26.2.820.jar', 'libs/architectury-neoforge-21.0.7.jar', 'libs/cloth-config-26.2.155.jar')
+
     // JEI 30 and Jade 26.2 remain optional and are never bundled.
     def jeiDependency = "maven.modrinth:jei:${jei_modrinth_version}"
-    def jadeDependency = "maven.modrinth:nvQzSEkH:${jade_modrinth_version}"
+    def jadeDependency = files('libs/Jade-mc26.2-NeoForge-26.2.8.jar')
     compileOnly jeiDependency
-    localRuntime jeiDependency
+    if (!project.hasProperty("reiTest") && !project.hasProperty("coreOnly")) localRuntime jeiDependency
     compileOnly jadeDependency
-    localRuntime jadeDependency
+    if (!project.hasProperty("coreOnly")) localRuntime jadeDependency
 
     // KubeJS has not published a Minecraft 26.2 artifact yet. Compile the
     // retained optional bridge against its latest KubeJS 8 API, but do not
@@ -296,4 +283,17 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+// Enable only when running the isolated gameplay regression suite.
+if (project.hasProperty("cookeryRegression")) {
+    apply from: "regression.gradle"
+}
+
+// Keep the public port revision synchronized in runtime and source artifacts.
+tasks.named('jar') {
+    archiveFileName = "${mod_id}_${minecraft_version}_${upstream_version}.jar"
+}
+tasks.named('sourcesJar') {
+    archiveFileName = "${mod_id}_${minecraft_version}_${upstream_version}-sources.jar"
 }

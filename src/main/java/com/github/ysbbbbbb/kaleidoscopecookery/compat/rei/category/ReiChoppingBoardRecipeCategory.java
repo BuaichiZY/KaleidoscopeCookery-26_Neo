@@ -49,6 +49,11 @@ public class ReiChoppingBoardRecipeCategory implements DisplayCategory<DefaultCu
       widgets.add(
          Widgets.createSlot(new Point(startX + 128, startY + 30)).entries((Collection)display.getOutputEntries().get(0)).disableBackground().markOutput()
       );
+      int outputX = 128 - (display.getOutputEntries().size() - 2) * 12;
+      for (int index = 1; index < display.getOutputEntries().size(); index++) {
+         widgets.add(Widgets.createSlot(new Point(startX + outputX + (index - 1) * 24, startY + 54))
+            .entries(display.getOutputEntries().get(index)).markOutput());
+      }
       return widgets;
    }
 
@@ -71,15 +76,15 @@ public class ReiChoppingBoardRecipeCategory implements DisplayCategory<DefaultCu
    public static void registerCategories(CategoryRegistry registry) {
       registry.add(new ReiChoppingBoardRecipeCategory());
       registry.addWorkstations(
-         ID, new EntryIngredient[]{ReiUtil.ofItem((Item)ModItems.CHOPPING_BOARD.get()), ReiUtil.ofIngredient(Ingredient.of(TagMod.KITCHEN_KNIFE))}
+         ID, new EntryIngredient[]{ReiUtil.ofItem((Item)ModItems.CHOPPING_BOARD.get()), ReiUtil.ofIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(TagMod.KITCHEN_KNIFE)))}
       );
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.CHOPPING_BOARD_RECIPE).forEach(r -> {
-         List<EntryIngredient> input = ReiUtil.ofIngredients(((ChoppingBoardRecipe)r.value()).getIngredients());
-         List<EntryIngredient> output = ReiUtil.ofItemStacks(((ChoppingBoardRecipe)r.value()).getResult());
-         registry.add(new DefaultCustomDisplay(r, input, output) {
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.CHOPPING_BOARD_RECIPE).forEach(r -> {
+         List<EntryIngredient> input = ReiUtil.ofIngredients(((ChoppingBoardRecipe)r.value()).getIngredient());
+         List<EntryIngredient> output = r.value().getResults().stream().flatMap(result -> ReiUtil.ofItemStacks(result).stream()).toList();
+         registry.add(new DefaultCustomDisplay(input, output, java.util.Optional.of(r.id().identifier())) {
             public CategoryIdentifier<?> getCategoryIdentifier() {
                return ReiChoppingBoardRecipeCategory.ID;
             }

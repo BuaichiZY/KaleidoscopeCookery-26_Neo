@@ -11,6 +11,7 @@ public class ModSounds {
    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_STOCKPOT = registerSound("block.stockpot");
    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_PADDY = registerSound("block.paddy");
    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MILLSTONE = registerSound("block.millstone");
+   public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_KITCHEN_SHELF = registerSound("block.kitchen_shelf");
    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_RECIPE_BLOCK = registerSound("block.recipe_block");
    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_TEAPOT_PROCESSING = registerSound("block.teapot.processing");
    public static final DeferredHolder<SoundEvent, SoundEvent> TRASH_CAN = registerSound("block.trash_can");

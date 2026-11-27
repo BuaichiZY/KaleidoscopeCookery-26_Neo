@@ -2,7 +2,7 @@
   "type": "kaleidoscope_cookery:flex_stockpot",
   "ingredients": [
     "#c:crops/lettuce",
-    "#c:flour"
+    "#c:flours/wheat"
   ],
   "result": {
     "count": 1,

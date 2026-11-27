@@ -16,6 +16,7 @@ public final class RuntimeRecipeSync {
          ModRecipes.POT_RECIPE,
          ModRecipes.FLEX_POT_RECIPE,
          ModRecipes.CHOPPING_BOARD_RECIPE,
+         ModRecipes.BAMBOO_TRAY_RECIPE,
          ModRecipes.STOCKPOT_RECIPE,
          ModRecipes.FLEX_STOCKPOT_RECIPE,
          ModRecipes.MILLSTONE_RECIPE,

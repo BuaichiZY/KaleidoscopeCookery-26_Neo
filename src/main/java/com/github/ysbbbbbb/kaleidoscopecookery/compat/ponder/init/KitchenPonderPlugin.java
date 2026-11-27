@@ -1,29 +1,34 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.ponder.init;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.createmod.ponder.foundation.PonderIndex;
-import org.jspecify.annotations.NullMarked;
-import net.minecraft.resources.Identifier;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.resources.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@NullMarked
+@MethodsReturnNonnullByDefault
 public class KitchenPonderPlugin implements PonderPlugin {
-   public String getModId() {
-      return "kaleidoscope_cookery";
-   }
+    @Override
+    public String getModId() {
+        return KaleidoscopeCookery.MOD_ID;
+    }
 
-   public void registerScenes(PonderSceneRegistrationHelper<Identifier> helper) {
-      KitchenBlockPonderScreen.register(helper);
-   }
+    @Override
+    public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+        KitchenBlockPonderScreen.register(helper);
+    }
 
-   public void registerTags(PonderTagRegistrationHelper<Identifier> helper) {
-      KitchenBlockPonderTag.register(helper);
-   }
+    @Override
+    public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
+        KitchenBlockPonderTag.register(helper);
+    }
 
-   public static void init() {
-      PonderIndex.addPlugin(new KitchenPonderPlugin());
-   }
+    public static void init() {
+        PonderIndex.addPlugin(new KitchenPonderPlugin());
+    }
 }

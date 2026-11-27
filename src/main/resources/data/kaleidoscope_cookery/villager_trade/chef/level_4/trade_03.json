@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "kaleidoscope_cookery:seafood_miso_soup",
+    "count": 1
+  },
+  "gives": {
+    "id": "minecraft:emerald",
+    "count": 1
+  },
+  "max_uses": 16,
+  "xp": 10,
+  "reputation_discount": 0.1
+}

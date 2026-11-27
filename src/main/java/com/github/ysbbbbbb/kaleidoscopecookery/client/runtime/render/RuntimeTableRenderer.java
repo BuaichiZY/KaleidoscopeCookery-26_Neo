@@ -76,7 +76,7 @@ public final class RuntimeTableRenderer implements BlockEntityRenderer<TableBloc
                itemState, stack, ItemDisplayContext.FIXED, blockEntity.getLevel(), null, (int)(blockEntity.getBlockPos().asLong() + slot)
             );
             state.items.add(itemState);
-            state.blockItems.add(stack.getItem() instanceof BlockItem);
+            state.blockItems.add(stack.getItem() instanceof BlockItem && itemState.usesBlockLight());
          }
       }
    }

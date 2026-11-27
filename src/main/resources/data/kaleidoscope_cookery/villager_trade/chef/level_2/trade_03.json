@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 3
+  },
+  "gives": {
+    "id": "kaleidoscope_cookery:stockpot_lid",
+    "count": 1
+  },
+  "max_uses": 16,
+  "xp": 4,
+  "reputation_discount": 0.1
+}
