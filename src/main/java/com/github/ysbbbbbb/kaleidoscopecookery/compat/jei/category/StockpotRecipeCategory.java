@@ -53,7 +53,9 @@ public class StockpotRecipeCategory implements IRecipeCategory<RecipeHolder<Stoc
    }
 
    public static List<RecipeHolder<StockpotRecipe>> getRecipes() {
-      return RuntimeRecipeCache.getRecipes(ModRecipes.STOCKPOT_RECIPE);
+      var recipes = new java.util.ArrayList<>(RuntimeRecipeCache.getRecipes(ModRecipes.STOCKPOT_RECIPE));
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.farmersdelight.FarmersDelightCompat.getTransformRecipeForJei(net.minecraft.client.Minecraft.getInstance().level, recipes);
+      return recipes;
    }
 
    public void draw(RecipeHolder<StockpotRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {

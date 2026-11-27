@@ -21,6 +21,10 @@ public class SoupBaseManager {
       registerSoupBase(new FluidSoupBase(name, bucketItem, bubbleColor));
    }
 
+   public static void registerBucketSoupBase(Identifier name, Item bucketItem, int bubbleColor) {
+      registerSoupBase(new BucketSoupBase(name, bucketItem, bubbleColor));
+   }
+
    public static void registerMobSoupBase(Identifier name, Item bucketItem, int bubbleColor) {
       registerSoupBase(new MobSoupBase(name, bucketItem, bubbleColor));
    }

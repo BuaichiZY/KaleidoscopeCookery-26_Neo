@@ -57,6 +57,23 @@ public final class ModRegistrationProperties {
       return new Item.Properties().setId(id);
    }
 
+   /**
+    * Minecraft 26 no longer makes {@link net.minecraft.world.item.BlockItem}
+    * inherit its block's translation key automatically. Use this for block
+    * items whose item and block registry paths are identical.
+    */
+   public static Item.Properties blockItemProperties() {
+      return itemProperties().useBlockDescriptionPrefix();
+   }
+
+   /**
+    * Uses the translation key of a block whose registry path differs from the
+    * item path, such as {@code recipe_item -> recipe_block}.
+    */
+   public static Item.Properties blockItemProperties(String blockPath) {
+      return itemProperties().overrideDescription("block.kaleidoscope_cookery." + blockPath);
+   }
+
    private static <T> void restore(ThreadLocal<T> local, T previous) {
       if (previous == null) {
          local.remove();

@@ -86,7 +86,7 @@ config="${mod_id}.mixins.json"
     modId="kubejs"
     type="optional"
     reason="Enables Kaleidoscope Cookery recipe schemas and scripting helpers."
-    versionRange="[26.1.2-8.0.4,)"
+    versionRange="${kubejs_version_range}"
     ordering="AFTER"
     side="BOTH"
 

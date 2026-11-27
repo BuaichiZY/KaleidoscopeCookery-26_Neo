@@ -63,7 +63,7 @@ public class TeacupItem extends BlockItem implements IHasContainer {
       effects.forEach(effect -> consumable.onConsume(
          new ApplyStatusEffectsConsumeEffect(effect.getFirst().get(), effect.getSecond())
       ));
-      return ModRegistrationProperties.itemProperties()
+      return ModRegistrationProperties.blockItemProperties()
          .stacksTo(16)
          .component(DataComponents.CONSUMABLE, consumable.build());
    }

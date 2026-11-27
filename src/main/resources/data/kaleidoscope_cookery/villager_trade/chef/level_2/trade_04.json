@@ -1,0 +1,49 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 3
+  },
+  "gives": {
+    "id": "kaleidoscope_cookery:recipe_item",
+    "count": 1,
+    "components": {
+      "kaleidoscope_cookery:recipe_record": {
+        "input": [
+          {
+            "id": "kaleidoscope_cookery:fried_egg",
+            "count": 1
+          },
+          {
+            "id": "kaleidoscope_cookery:fried_egg",
+            "count": 1
+          },
+          {
+            "id": "kaleidoscope_cookery:fried_egg",
+            "count": 1
+          },
+          {
+            "id": "kaleidoscope_cookery:tomato",
+            "count": 1
+          },
+          {
+            "id": "kaleidoscope_cookery:tomato",
+            "count": 1
+          },
+          {
+            "id": "kaleidoscope_cookery:tomato",
+            "count": 1
+          }
+        ],
+        "output": {
+          "id": "kaleidoscope_cookery:scramble_egg_with_tomatoes",
+          "count": 1
+        },
+        "type": "kaleidoscope_cookery:pot",
+        "flex_recipe": false
+      }
+    }
+  },
+  "max_uses": 16,
+  "xp": 4,
+  "reputation_discount": 0.1
+}

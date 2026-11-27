@@ -18,7 +18,7 @@ public class KitchenKnifeItem extends Item {
    }
 
    public KitchenKnifeItem(ToolMaterial material, Properties properties) {
-      super(material.applySwordProperties(properties, 0.0F, -2.0F));
+      super(material.applySwordProperties(properties, 3.0F, -2.4F));
    }
 
    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {

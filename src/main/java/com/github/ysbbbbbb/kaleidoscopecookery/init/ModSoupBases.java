@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 public class ModSoupBases {
    public static final Identifier WATER = Identifier.fromNamespaceAndPath("minecraft", "water");
    public static final Identifier LAVA = Identifier.fromNamespaceAndPath("minecraft", "lava");
+   public static final Identifier MILK = Identifier.fromNamespaceAndPath("minecraft", "milk");
    public static final Identifier AXOLOTL_BUCKET = Identifier.fromNamespaceAndPath("minecraft", "axolotl_bucket");
    public static final Identifier COD_BUCKET = Identifier.fromNamespaceAndPath("minecraft", "cod_bucket");
    public static final Identifier SALMON_BUCKET = Identifier.fromNamespaceAndPath("minecraft", "salmon_bucket");
@@ -17,6 +18,7 @@ public class ModSoupBases {
    public static void registerAll() {
       SoupBaseManager.registerFluidSoupBase(WATER, Items.WATER_BUCKET, 4159204);
       SoupBaseManager.registerFluidSoupBase(LAVA, Items.LAVA_BUCKET, 16750648);
+      SoupBaseManager.registerBucketSoupBase(MILK, Items.MILK_BUCKET, 0xFFF4D6);
       SoupBaseManager.registerMobSoupBase(AXOLOTL_BUCKET, Items.AXOLOTL_BUCKET);
       SoupBaseManager.registerMobSoupBase(COD_BUCKET, Items.COD_BUCKET);
       SoupBaseManager.registerMobSoupBase(SALMON_BUCKET, Items.SALMON_BUCKET);

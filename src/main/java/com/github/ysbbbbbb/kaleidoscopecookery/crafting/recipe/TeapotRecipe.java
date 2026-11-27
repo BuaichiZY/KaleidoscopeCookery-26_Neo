@@ -5,13 +5,22 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record TeapotRecipe(Identifier teaFluid, Ingredient ingredient, int ingredientCount, int time, ItemStack result) implements BaseRecipe<TeapotInput> {
+public record TeapotRecipe(Identifier teaFluid, Ingredient ingredient, int ingredientCount, int time, ItemStackTemplate resultTemplate) implements BaseRecipe<TeapotInput> {
    public static final int OUTPUT_COUNT = 12;
+
+   public TeapotRecipe(Identifier teaFluid, Ingredient ingredient, int ingredientCount, int time, ItemStack result) {
+      this(teaFluid, ingredient, ingredientCount, time, ItemStackTemplate.fromNonEmptyStack(result));
+   }
+
+   public ItemStack result() {
+      return this.resultTemplate.create();
+   }
 
    public boolean matches(TeapotInput container, Level level) {
       ItemStack stack = container.getItemStack();
@@ -20,7 +29,7 @@ public record TeapotRecipe(Identifier teaFluid, Ingredient ingredient, int ingre
    }
 
    public ItemStack getResultItem(Provider provider) {
-      return this.result;
+      return this.resultTemplate.create();
    }
 
    public ItemStack assemble(TeapotInput container, Provider registryAccess) {

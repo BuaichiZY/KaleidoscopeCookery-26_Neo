@@ -1,10 +1,11 @@
 {
   "type": "kaleidoscope_cookery:teapot",
-  "ingredient": "#minecraft:small_flowers",
+  "ingredient": "#kaleidoscope_cookery:flower_tea_ingredients",
   "result": {
     "count": 1,
     "id": "kaleidoscope_cookery:flower_tea"
   },
   "tea_fluid": "minecraft:water",
-  "time": 240
+  "time": 240,
+  "ingredient_count": 1
 }

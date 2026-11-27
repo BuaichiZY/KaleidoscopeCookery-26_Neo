@@ -7,9 +7,12 @@ import com.github.ysbbbbbb.kaleidoscopecookery.api.blockentity.IChoppingBoard;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.BaseBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.ChoppingBoardRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
+import com.github.ysbbbbbb.kaleidoscopecookery.init.ModEnchantments;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import java.util.Optional;
+import java.util.List;
+import net.minecraft.core.registries.Registries;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
@@ -45,7 +48,7 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
    private int maxCutCount = 0;
    private int currentCutCount = 0;
    private ItemStack currentCutStack = ItemStack.EMPTY;
-   private ItemStack result = ItemStack.EMPTY;
+   private List<ItemStack> results = List.of();
 
    public ChoppingBoardBlockEntity(BlockPos pos, BlockState blockState) {
       super(ModBlocks.CHOPPING_BOARD_BE.get(), pos, blockState);
@@ -61,7 +64,7 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
 
    @Override
    public boolean onPutItem(Level level, LivingEntity user, ItemStack putOnItem) {
-      if (!this.result.isEmpty()) {
+      if (!this.results.isEmpty()) {
          return false;
       } else {
          if (!(level instanceof ServerLevel serverLevel)) {
@@ -77,7 +80,7 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
             this.maxCutCount = recipe.getCutCount();
             this.currentCutCount = 0;
             this.currentCutStack = putOnItem.split(1);
-            this.result = recipe.assemble(container);
+            this.results = recipe.getResults();
             this.refresh();
             level.playSound(null, this.worldPosition, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.2F);
             return true;
@@ -89,15 +92,17 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
 
    @Override
    public boolean onCutItem(Level level, LivingEntity user, ItemStack cutterItem) {
-      if (this.result.isEmpty()) {
+      if (this.results.isEmpty()) {
          return false;
       } else if (this.currentCutCount >= this.maxCutCount) {
-         popResource(level, this.worldPosition, this.result.copy());
+         for (ItemStack result : this.results) popResource(level, this.worldPosition, result.copy());
          this.resetBoardData();
          level.playSound(null, this.worldPosition, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 2.0F + level.getRandom().nextFloat() * 0.2F);
          return true;
       } else if (cutterItem.is(TagMod.KITCHEN_KNIFE)) {
-         this.currentCutCount++;
+         int quickKnifeLevel = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
+            .get(ModEnchantments.QUICK_KNIFE).map(cutterItem::getEnchantmentLevel).orElse(0);
+         this.currentCutCount = Math.min(this.maxCutCount, this.currentCutCount + (1 << Math.clamp(quickKnifeLevel, 0, 2)));
          this.playParticlesSound();
          this.refresh();
          return true;
@@ -144,7 +149,7 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
 
    private void resetBoardData() {
       this.modelId = null;
-      this.result = ItemStack.EMPTY;
+      this.results = List.of();
       this.currentCutStack = ItemStack.EMPTY;
       this.currentCutCount = 0;
       this.maxCutCount = 0;
@@ -160,7 +165,7 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
       tag.putInt("MaxCutCount", this.maxCutCount);
       tag.putInt("CurrentCutCount", this.currentCutCount);
       tag.store("CurrentCutStack", ItemStack.OPTIONAL_CODEC, this.currentCutStack);
-      tag.store("ResultItem", ItemStack.OPTIONAL_CODEC, this.result);
+      tag.store("ResultItems", ItemStack.OPTIONAL_CODEC.listOf(), this.results);
    }
 
    protected void loadAdditional(ValueInput tag) {
@@ -177,9 +182,9 @@ public class ChoppingBoardBlockEntity extends BaseBlockEntity implements IChoppi
          this.currentCutStack = tag.read("CurrentCutStack", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
       }
 
-      if (tag.keySet().contains("ResultItem")) {
-         this.result = tag.read("ResultItem", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
-      }
+      this.results = tag.read("ResultItems", ItemStack.OPTIONAL_CODEC.listOf())
+         .orElseGet(() -> tag.read("ResultItem", ItemStack.OPTIONAL_CODEC)
+            .filter(stack -> !stack.isEmpty()).map(List::of).orElseGet(List::of));
    }
 
    @Nullable

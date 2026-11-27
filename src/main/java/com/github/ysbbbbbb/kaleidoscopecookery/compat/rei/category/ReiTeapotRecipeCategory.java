@@ -1,14 +1,10 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.ReiUtil;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.TeapotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -27,101 +23,114 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 public class ReiTeapotRecipeCategory implements DisplayCategory<ReiTeapotRecipeCategory.TeapotRecipeDisplay> {
-   public static final CategoryIdentifier<ReiTeapotRecipeCategory.TeapotRecipeDisplay> ID = CategoryIdentifier.of("kaleidoscope_cookery", "plugin/teapot");
-   private static final Identifier BG = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "textures/gui/jei/teapot.png");
-   private static final MutableComponent TITLE = Component.translatable("block.kaleidoscope_cookery.teapot");
-   public static final int WIDTH = 176;
-   public static final int HEIGHT = 88;
+    public static final CategoryIdentifier<TeapotRecipeDisplay> ID = CategoryIdentifier.of(KaleidoscopeCookery.MOD_ID, "plugin/teapot");
+    private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "textures/gui/jei/teapot.png");
+    private static final MutableComponent TITLE = Component.translatable("block.kaleidoscope_cookery.teapot");
+    public static final int WIDTH = 176;
+    public static final int HEIGHT = 88;
 
-   public CategoryIdentifier<ReiTeapotRecipeCategory.TeapotRecipeDisplay> getCategoryIdentifier() {
-      return ID;
-   }
+    @Override
+    public CategoryIdentifier<TeapotRecipeDisplay> getCategoryIdentifier() {
+        return ID;
+    }
 
-   public List<Widget> setupDisplay(ReiTeapotRecipeCategory.TeapotRecipeDisplay display, Rectangle bounds) {
-      List<Widget> widgets = new ArrayList<>();
-      int startX = bounds.x;
-      int startY = bounds.y + 4;
-      Component brewTime = Component.translatable("jei.kaleidoscope_cookery.teapot.time", new Object[]{display.brewTime / 20});
-      widgets.add(Widgets.createRecipeBase(bounds));
-      widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 88));
-      widgets.add(
-         Widgets.withTranslate(
-            Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> this.drawCenteredString(guiGraphics, brewTime, 88, 70)), startX, startY, 0.0
-         )
-      );
-      widgets.add(Widgets.createSlot(new Point(startX + 65, startY + 3)).entries((Collection)display.getInputEntries().get(0)).markInput());
-      widgets.add(Widgets.createSlot(new Point(startX + 83, startY + 3)).entries((Collection)display.getInputEntries().get(1)).markInput());
-      widgets.add(
-         Widgets.createSlot(new Point(startX + 128, startY + 30)).entries((Collection)display.getOutputEntries().get(0)).backgroundEnabled(false).markOutput()
-      );
-      return widgets;
-   }
+    @Override
+    public List<Widget> setupDisplay(TeapotRecipeDisplay display, Rectangle bounds) {
+        List<Widget> widgets = new ArrayList<>();
+        int startX = bounds.x;
+        int startY = bounds.y + 4;
+        Component brewTime = Component.translatable("jei.kaleidoscope_cookery.teapot.time", display.brewTime / 20);
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
-      Font font = Minecraft.getInstance().font;
-      guiGraphics.drawString(font, text, centerX - font.width(text) / 2, y, 5592405, false);
-   }
+        widgets.add(Widgets.createRecipeBase(bounds));
+        widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0, 0, WIDTH, HEIGHT));
+        widgets.add(Widgets.withTranslate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
+            drawCenteredString(guiGraphics, brewTime, WIDTH / 2, 70);
+        }), startX, startY, 0));
+        widgets.add(Widgets.createSlot(new Point(startX + 65, startY))
+                .entries(display.getInputEntries().get(0))
+                .markInput());
+        widgets.add(Widgets.createSlot(new Point(startX + 83, startY))
+                .entries(display.getInputEntries().get(1))
+                .markInput());
+        widgets.add(Widgets.createSlot(new Point(startX + 122, startY))
+                .entry(EntryStacks.of(ModItems.EMPTY_CUP.get()))
+                .disableBackground());
+        widgets.add(Widgets.createSlot(new Point(startX + 128, startY + 45))
+                .entries(display.getOutputEntries().get(0))
+                .backgroundEnabled(false)
+                .markOutput());
 
-   public int getDisplayWidth(ReiTeapotRecipeCategory.TeapotRecipeDisplay display) {
-      return 176;
-   }
+        return widgets;
+    }
 
-   public int getDisplayHeight() {
-      return 88;
-   }
+    private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+        Font font = Minecraft.getInstance().font;
+        guiGraphics.drawString(font, text, centerX - font.width(text) / 2, y, 0x555555, false);
+    }
 
-   public Component getTitle() {
-      return TITLE;
-   }
+    @Override
+    public int getDisplayWidth(TeapotRecipeDisplay display) {
+        return WIDTH;
+    }
 
-   public Renderer getIcon() {
-      return EntryStacks.of((ItemLike)ModItems.TEAPOT.get());
-   }
+    @Override
+    public int getDisplayHeight() {
+        return HEIGHT;
+    }
 
-   public static void registerCategories(CategoryRegistry registry) {
-      registry.add(new ReiTeapotRecipeCategory());
-      registry.addWorkstations(ID, new EntryIngredient[]{ReiUtil.ofItem((Item)ModItems.TEAPOT.get())});
-   }
+    @Override
+    public Component getTitle() {
+        return TITLE;
+    }
 
-   public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager()
-         .getAllRecipesFor(ModRecipes.TEAPOT_RECIPE)
-         .forEach(
-            r -> {
-               Fluid fluid = (Fluid)BuiltInRegistries.FLUID.getValue(((TeapotRecipe)r.value()).teaFluid());
-               Item bucket = fluid.getBucket();
-               List<EntryIngredient> fluidInput = ReiUtil.ofItems(bucket);
-               List<EntryIngredient> inputs = List.of(
-                  EntryIngredient.of(
-                     Arrays.stream(((TeapotRecipe)r.value()).ingredient().getItems())
-                        .map(stack -> EntryStacks.of(stack.copyWithCount(((TeapotRecipe)r.value()).ingredientCount())))
-                        .toList()
-                  )
-               );
-               List<EntryIngredient> output = ReiUtil.ofItemStacks(((TeapotRecipe)r.value()).result().copyWithCount(12));
-               registry.add(new ReiTeapotRecipeCategory.TeapotRecipeDisplay(r.id(), fluidInput, inputs, output, ((TeapotRecipe)r.value()).time()));
-            }
-         );
-   }
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(ModItems.TEAPOT.get());
+    }
 
-   public static class TeapotRecipeDisplay extends BasicDisplay {
-      public final int brewTime;
+    public static void registerCategories(CategoryRegistry registry) {
+        registry.add(new ReiTeapotRecipeCategory());
+        registry.addWorkstations(ReiTeapotRecipeCategory.ID, ReiUtil.ofItem(ModItems.TEAPOT.get()));
+    }
 
-      public TeapotRecipeDisplay(
-         Identifier location, List<EntryIngredient> fluidInput, List<EntryIngredient> ingredientInput, List<EntryIngredient> outputs, int brewTime
-      ) {
-         super(List.of(fluidInput.getFirst(), ingredientInput.getFirst()), outputs, Optional.of(location));
-         this.brewTime = brewTime;
-      }
+    public static void registerDisplays(DisplayRegistry registry) {
+        registry.getRecipeManager().getAllRecipesFor(ModRecipes.TEAPOT_RECIPE)
+                .forEach(r -> {
+                    Fluid fluid = BuiltInRegistries.FLUID.get(r.value().teaFluid());
+                    Item bucket = fluid.getBucket();
+                    List<EntryIngredient> fluidInput = ReiUtil.ofItems(bucket);
+                    List<EntryIngredient> inputs = List.of(EntryIngredient.of(Arrays.stream(r.value().ingredient().getItems())
+                            .map(stack -> EntryStacks.of(stack.copyWithCount(r.value().ingredientCount())))
+                            .toList()));
+                    List<EntryIngredient> output = ReiUtil.ofItemStacks(r.value().result().copyWithCount(TeapotRecipe.OUTPUT_COUNT));
 
-      public CategoryIdentifier<?> getCategoryIdentifier() {
-         return ReiTeapotRecipeCategory.ID;
-      }
-   }
+                    registry.add(new TeapotRecipeDisplay(r.id(), fluidInput, inputs, output, r.value().time()));
+                });
+    }
+
+    public static class TeapotRecipeDisplay extends BasicDisplay {
+        public final int brewTime;
+
+        public TeapotRecipeDisplay(ResourceLocation location, List<EntryIngredient> fluidInput,
+                                   List<EntryIngredient> ingredientInput,
+                                   List<EntryIngredient> outputs, int brewTime) {
+            super(List.of(fluidInput.getFirst(), ingredientInput.getFirst()), outputs, Optional.of(location));
+            this.brewTime = brewTime;
+        }
+
+        @Override
+        public CategoryIdentifier<?> getCategoryIdentifier() {
+            return ID;
+        }
+    }
 }

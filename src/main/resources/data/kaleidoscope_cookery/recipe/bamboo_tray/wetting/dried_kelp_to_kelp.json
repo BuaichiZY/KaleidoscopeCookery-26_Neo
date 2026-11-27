@@ -1,0 +1,10 @@
+{
+  "type": "kaleidoscope_cookery:bamboo_tray",
+  "duration": 900,
+  "ingredient": "minecraft:dried_kelp",
+  "result": {
+    "count": 1,
+    "id": "minecraft:kelp"
+  },
+  "subtype": "wetting"
+}

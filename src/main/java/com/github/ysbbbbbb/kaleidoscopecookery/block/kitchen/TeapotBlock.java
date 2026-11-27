@@ -8,6 +8,8 @@ import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +21,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,6 +38,9 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -53,7 +60,8 @@ public class TeapotBlock extends HorizontalDirectionalBlock implements SimpleWat
    public static final VoxelShape AABB = Shapes.or(Block.box(3.0, 0.0, 3.0, 13.0, 6.0, 13.0), Block.box(5.0, 6.0, 5.0, 11.0, 8.0, 11.0));
 
    public TeapotBlock() {
-      super(ModRegistrationProperties.blockProperties().sound(SoundType.LANTERN).mapColor(MapColor.COLOR_ORANGE).noOcclusion().instabreak());
+      super(ModRegistrationProperties.blockProperties().sound(SoundType.LANTERN).mapColor(MapColor.COLOR_ORANGE)
+         .noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks().instabreak());
       this.registerDefaultState(
          (BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(WATERLOGGED, false))
             .setValue(VARIANT, 0)
@@ -79,6 +87,29 @@ public class TeapotBlock extends HorizontalDirectionalBlock implements SimpleWat
    @Nullable
    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
       return new TeapotBlockEntity(pos, state);
+   }
+
+   @Override
+   public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+      if (!(level.getBlockEntity(pos) instanceof TeapotBlockEntity teapot) || !teapot.canReceiveDripstoneFluid()) return;
+      BlockPos tipPos = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, pos);
+      if (tipPos == null) return;
+      Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, tipPos);
+      if (fluid == Fluids.WATER || fluid == Fluids.LAVA) {
+         level.levelEvent(LevelEvent.DRIPSTONE_DRIP, tipPos, 0);
+         level.scheduleTick(pos, this, 50 + tipPos.getY() - pos.getY());
+      }
+   }
+
+   @Override
+   public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+      BlockPos tipPos = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, pos);
+      if (tipPos == null) return;
+      Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, tipPos);
+      if (level.getBlockEntity(pos) instanceof TeapotBlockEntity teapot && teapot.receiveDripstoneFluid(fluid)) {
+         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(state));
+         level.levelEvent(fluid == Fluids.LAVA ? LevelEvent.SOUND_DRIP_LAVA_INTO_CAULDRON : LevelEvent.SOUND_DRIP_WATER_INTO_CAULDRON, pos, 0);
+      }
    }
 
    public BlockState updateShape(

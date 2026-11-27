@@ -23,10 +23,17 @@ public class TeacupRegistry {
    public static Identifier BILUOCHUN;
    public static Identifier OOLONG;
    public static Identifier SAKURA_FUBUKI;
+   public static Identifier BUTTER_TEA;
    public static Identifier FLOWER_TEA;
+   public static Identifier MYSTERY_TEA;
 
    public static void init() {
       TeacupRegistry registry = new TeacupRegistry();
+      MYSTERY_TEA = registry.registerTeacupData(
+         "mystery_tea", TeacupRegistry.TeacupData.create(4)
+            .addEffect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 300))
+            .setAnimateTick(FoodBiteAnimateTicks.SUSPICIOUS_STIR_FRY_ANIMATE_TICK)
+      );
       BARLEY_TEA = registry.registerTeacupData(
          "barley_tea", TeacupRegistry.TeacupData.create(4).addEffect(() -> new MobEffectInstance(ModEffects.VITALITY, 9600))
       );
@@ -44,6 +51,10 @@ public class TeacupRegistry {
       );
       SAKURA_FUBUKI = registry.registerTeacupData(
          "sakura_fubuki", TeacupRegistry.TeacupData.create(4).addEffect(() -> new MobEffectInstance(ModEffects.HINDER, 7200))
+      );
+      BUTTER_TEA = registry.registerTeacupData(
+         "butter_tea", TeacupRegistry.TeacupData.create(4)
+            .addEffect(() -> new MobEffectInstance(ModEffects.PROJECTILE_DODGE, 900))
       );
       FLOWER_TEA = registry.registerTeacupData(
          "flower_tea", TeacupRegistry.TeacupData.create(4).addEffect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400))
@@ -72,6 +83,8 @@ public class TeacupRegistry {
       private final List<Pair<Supplier<MobEffectInstance>, Float>> effects = Lists.newArrayList();
       @Nullable
       private VoxelShape aabb = null;
+      @Nullable
+      private FoodBiteAnimateTicks.AnimateTick animateTick = null;
 
       private TeacupData(int maxCount) {
          this.maxCount = maxCount;
@@ -93,6 +106,16 @@ public class TeacupRegistry {
       public TeacupRegistry.TeacupData setAABB(VoxelShape aabb) {
          this.aabb = aabb;
          return this;
+      }
+
+      public TeacupRegistry.TeacupData setAnimateTick(FoodBiteAnimateTicks.AnimateTick animateTick) {
+         this.animateTick = animateTick;
+         return this;
+      }
+
+      @Nullable
+      public FoodBiteAnimateTicks.AnimateTick getAnimateTick() {
+         return this.animateTick;
       }
 
       public int getMaxCount() {

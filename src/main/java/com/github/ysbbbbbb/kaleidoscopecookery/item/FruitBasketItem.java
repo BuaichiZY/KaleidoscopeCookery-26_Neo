@@ -21,7 +21,7 @@ public class FruitBasketItem extends BlockItem {
    private static final int MAX_SLOTS = 8;
 
    public FruitBasketItem() {
-      super((Block)ModBlocks.FRUIT_BASKET.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.FRUIT_BASKET.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    public static ItemStackHandler getItems(ItemStack stack) {

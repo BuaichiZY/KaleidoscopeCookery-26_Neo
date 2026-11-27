@@ -60,7 +60,7 @@ public class StoveBlock extends HorizontalDirectionalBlock {
             .randomTicks()
             .strength(1.5F, 6.0F)
       );
-      this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.SOUTH)).setValue(LIT, false));
+      this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.SOUTH)).setValue(LIT, true));
    }
 
    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
@@ -130,7 +130,7 @@ public class StoveBlock extends HorizontalDirectionalBlock {
          ((ModEventTrigger)ModTrigger.EVENT.get()).trigger(player, "lit_the_stove");
          return InteractionResult.SUCCESS;
       } else if ((Boolean)state.getValue(LIT) && itemInHand.is(TagMod.EXTINGUISH_STOVE)) {
-         if (itemInHand.is((Item)ModItems.KITCHEN_SHOVEL.get()) && KitchenShovelItem.hasOil(itemInHand)) {
+         if (itemInHand.is(com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod.KITCHEN_SHOVELS) && KitchenShovelItem.hasOil(itemInHand)) {
             KitchenShovelItem.setHasOil(itemInHand, false);
          }
 

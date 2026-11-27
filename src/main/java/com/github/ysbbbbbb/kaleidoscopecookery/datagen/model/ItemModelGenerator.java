@@ -1,323 +1,338 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.datagen.model;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.FoodBiteRegistry;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.PlateRegistry;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.TeacupRegistry;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.KitchenShovelItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.OilPotItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.RawDoughItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.RecipeItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.SteamerItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.StockpotLidItem;
-import com.github.ysbbbbbb.kaleidoscopecookery.item.TransmutationLunchBagItem;
-import java.util.Objects;
-import net.minecraft.client.renderer.block.model.BlockModel.GuiLight;
+import com.github.ysbbbbbb.kaleidoscopecookery.item.*;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.Objects;
+
 public class ItemModelGenerator extends ItemModelProvider {
-   public ItemModelGenerator(PackOutput output, ExistingFileHelper existingFileHelper) {
-      super(output, "kaleidoscope_cookery", existingFileHelper);
-   }
+    public ItemModelGenerator(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, KaleidoscopeCookery.MOD_ID, existingFileHelper);
+    }
 
-   protected void registerModels() {
-      this.withExistingParent("stove", this.modLoc("block/stove"));
-      this.withExistingParent("pot", this.modLoc("block/pot"));
-      this.withExistingParent("stockpot", this.modLoc("block/stockpot"));
-      this.handheldItem((Item)ModItems.IRON_KITCHEN_KNIFE.get());
-      this.handheldItem((Item)ModItems.GOLD_KITCHEN_KNIFE.get());
-      this.handheldItem((Item)ModItems.DIAMOND_KITCHEN_KNIFE.get());
-      this.handheldItem((Item)ModItems.NETHERITE_KITCHEN_KNIFE.get());
-      this.handheldItem((Item)ModItems.SICKLE.get());
-      this.basicItem((Item)ModItems.OIL.get());
-      this.basicItem((Item)ModItems.FRIED_EGG.get());
-      this.basicItem((Item)ModItems.SCARECROW.get());
-      this.basicItem((Item)ModItems.TOMATO.get());
-      this.basicItem((Item)ModItems.SCRAMBLE_EGG_WITH_TOMATOES.get());
-      this.basicItem((Item)ModItems.SCRAMBLE_EGG_WITH_TOMATOES_RICE_BOWL.get());
-      this.basicItem((Item)ModItems.BRAISED_BEEF.get());
-      this.basicItem((Item)ModItems.BRAISED_BEEF_RICE_BOWL.get());
-      this.basicItem((Item)ModItems.STIR_FRIED_PORK_WITH_PEPPERS.get());
-      this.basicItem((Item)ModItems.STIR_FRIED_PORK_WITH_PEPPERS_RICE_BOWL.get());
-      this.basicItem((Item)ModItems.SWEET_AND_SOUR_PORK.get());
-      this.basicItem((Item)ModItems.SWEET_AND_SOUR_PORK_RICE_BOWL.get());
-      this.basicItem((Item)ModItems.FISH_FLAVORED_SHREDDED_PORK.get());
-      this.basicItem((Item)ModItems.FISH_FLAVORED_SHREDDED_PORK_RICE_BOWL.get());
-      this.basicItem((Item)ModItems.EGG_FRIED_RICE.get());
-      this.basicItem((Item)ModItems.PORK_BONE_SOUP.get());
-      this.basicItem((Item)ModItems.SEAFOOD_MISO_SOUP.get());
-      this.basicItem((Item)ModItems.FEARSOME_THICK_SOUP.get());
-      this.basicItem((Item)ModItems.LAMB_AND_RADISH_SOUP.get());
-      this.basicItem((Item)ModItems.BRAISED_BEEF_WITH_POTATOES.get());
-      this.basicItem((Item)ModItems.WILD_MUSHROOM_RABBIT_SOUP.get());
-      this.basicItem((Item)ModItems.PUFFERFISH_SOUP.get());
-      this.basicItem((Item)ModItems.BORSCHT.get());
-      this.basicItem((Item)ModItems.BEEF_MEATBALL_SOUP.get());
-      this.basicItem((Item)ModItems.CHICKEN_AND_MUSHROOM_STEW.get());
-      this.basicItem((Item)ModItems.STRAW_HAT.get());
-      this.basicItem((Item)ModItems.STRAW_HAT_FLOWER.get());
-      this.basicItem((Item)ModItems.FARMER_CHEST_PLATE.get());
-      this.basicItem((Item)ModItems.FARMER_LEGGINGS.get());
-      this.basicItem((Item)ModItems.FARMER_BOOTS.get());
-      this.basicItem((Item)ModItems.TOMATO_SEED.get());
-      this.basicItem((Item)ModItems.RICE_SEED.get());
-      this.basicItem((Item)ModItems.WILD_RICE_SEED.get());
-      this.basicItem((Item)ModItems.RICE_PANICLE.get());
-      this.basicItem((Item)ModItems.SASHIMI.get());
-      this.basicItem((Item)ModItems.RAW_LAMB_CHOPS.get());
-      this.basicItem((Item)ModItems.RAW_COW_OFFAL.get());
-      this.basicItem((Item)ModItems.RAW_PORK_BELLY.get());
-      this.basicItem((Item)ModItems.COOKED_LAMB_CHOPS.get());
-      this.basicItem((Item)ModItems.COOKED_COW_OFFAL.get());
-      this.basicItem((Item)ModItems.COOKED_PORK_BELLY.get());
-      this.basicItem((Item)ModItems.COOKED_RICE.get());
-      this.basicItem((Item)ModItems.RED_CHILI.get());
-      this.basicItem((Item)ModItems.GREEN_CHILI.get());
-      this.basicItem((Item)ModItems.CHILI_SEED.get());
-      this.basicItem((Item)ModItems.LETTUCE.get());
-      this.basicItem((Item)ModItems.LETTUCE_SEED.get());
-      this.basicItem((Item)ModItems.CATERPILLAR.get());
-      this.basicItem((Item)ModItems.ENAMEL_BASIN.get());
-      this.basicItem((Item)ModItems.KITCHENWARE_RACKS.get());
-      this.basicItem((Item)ModItems.MILLSTONE.get());
-      this.basicItem((Item)ModItems.RAW_NOODLES.get());
-      this.basicItem((Item)ModItems.STUFFED_DOUGH_FOOD.get());
-      this.basicItem((Item)ModItems.DONKEY_BURGER.get());
-      this.basicItem((Item)ModItems.FLOUR.get());
-      this.basicItem((Item)ModItems.RAW_CUT_SMALL_MEATS.get());
-      this.basicItem((Item)ModItems.COOKED_CUT_SMALL_MEATS.get());
-      this.basicItem((Item)ModItems.RAW_MEATBALL.get());
-      this.basicItem((Item)ModItems.COOKED_MEATBALL.get());
-      this.basicItem((Item)ModItems.BAOZI.get());
-      this.basicItem((Item)ModItems.SHENGJIAN_MANTOU.get());
-      this.basicItem((Item)ModItems.DUMPLING.get());
-      this.basicItem((Item)ModItems.SAMSA.get());
-      this.basicItem((Item)ModItems.MANTOU.get());
-      this.basicItem((Item)ModItems.MEAT_PIE.get());
-      this.basicItem((Item)ModItems.STICKY_CANDY.get());
-      this.basicItem((Item)ModItems.STICKY_RICE_CAKE.get());
-      this.basicItem((Item)ModItems.QINGTUAN.get());
-      this.basicItem((Item)ModItems.RAW_ZONGZI.get());
-      this.basicItem((Item)ModItems.ZONGZI.get());
-      this.basicItem((Item)ModItems.RAW_BAMBOO_TUBE_RICE.get());
-      this.basicItem((Item)ModItems.BAMBOO_TUBE_RICE.get());
-      this.basicItem((Item)ModItems.BEEF_NOODLE.get());
-      this.basicItem((Item)ModItems.HUI_NOODLE.get());
-      this.basicItem((Item)ModItems.UDON_NOODLE.get());
-      this.basicItem((Item)ModItems.HOT_DRY_NOODLES.get());
-      this.basicItem((Item)ModItems.LABA_CONGEE.get());
-      this.basicItem(this.modLoc("honey"));
-      this.basicItem(this.modLoc("egg"));
-      this.basicItem(this.modLoc("oil_in_millstone"));
-      Identifier chileRistra = BuiltInRegistries.ITEM.getKey((Item)ModItems.CHILI_RISTRA.get());
-      ((ItemModelBuilder)((ItemModelBuilder)this.getBuilder(chileRistra.toString())).parent(new UncheckedModelFile("item/generated")))
-         .texture("layer0", Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "block/chili_ristra/head"));
-      Identifier strungMushrooms = BuiltInRegistries.ITEM.getKey((Item)ModItems.STRUNG_MUSHROOMS.get());
-      ((ItemModelBuilder)((ItemModelBuilder)this.getBuilder(strungMushrooms.toString())).parent(new UncheckedModelFile("item/generated")))
-         .texture("layer0", Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "block/strung_mushrooms/head"));
-      Identifier shovel = BuiltInRegistries.ITEM.getKey((Item)ModItems.KITCHEN_SHOVEL.get());
-      ItemModelBuilder shovelNoOil = this.handheldItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "kitchen_shovel_no_oil"));
-      ItemModelBuilder shovelHasOil = this.handheldItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "kitchen_shovel_has_oil"));
-      ((ItemModelBuilder)this.getBuilder(shovel.toString()))
-         .override()
-         .model(shovelNoOil)
-         .predicate(KitchenShovelItem.HAS_OIL_PROPERTY, 0.0F)
-         .end()
-         .override()
-         .model(shovelHasOil)
-         .predicate(KitchenShovelItem.HAS_OIL_PROPERTY, 1.0F)
-         .end();
-      Identifier stockpotLid = BuiltInRegistries.ITEM.getKey((Item)ModItems.STOCKPOT_LID.get());
-      ModelFile normal = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/stockpot_lid_normal"));
-      ModelFile using = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/stockpot_lid_using"));
-      ((ItemModelBuilder)this.getBuilder(stockpotLid.toString()))
-         .override()
-         .model(normal)
-         .predicate(StockpotLidItem.USING_PROPERTY, 0.0F)
-         .end()
-         .override()
-         .model(using)
-         .predicate(StockpotLidItem.USING_PROPERTY, 1.0F)
-         .end();
-      Identifier oilPot = BuiltInRegistries.ITEM.getKey((Item)ModItems.OIL_POT.get());
-      if (oilPot != null) {
-         ItemModelBuilder potNoOil = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "pot_no_oil"));
-         ItemModelBuilder potHasOil = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "pot_has_oil"));
-         ((ItemModelBuilder)this.getBuilder(oilPot.toString()))
-            .override()
-            .model(potNoOil)
-            .predicate(OilPotItem.HAS_OIL_PROPERTY, 0.0F)
-            .end()
-            .override()
-            .model(potHasOil)
-            .predicate(OilPotItem.HAS_OIL_PROPERTY, 1.0F)
-            .end();
-      }
+    @Override
+    protected void registerModels() {
+        withExistingParent("stove", modLoc("block/stove"));
+        withExistingParent("pot", modLoc("block/pot"));
+        withExistingParent("stockpot", modLoc("block/stockpot"));
 
-      Identifier recipeItem = BuiltInRegistries.ITEM.getKey((Item)ModItems.RECIPE_ITEM.get());
-      if (recipeItem != null) {
-         ItemModelBuilder noRecipe = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "recipe_item_no_recipe"));
-         ItemModelBuilder hasRecipe = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "recipe_item_has_recipe"));
-         ((ItemModelBuilder)this.getBuilder(recipeItem.toString()))
-            .override()
-            .model(noRecipe)
-            .predicate(RecipeItem.HAS_RECIPE_PROPERTY, 0.0F)
-            .end()
-            .override()
-            .model(hasRecipe)
-            .predicate(RecipeItem.HAS_RECIPE_PROPERTY, 1.0F)
-            .end();
-      }
+        handheldItem(ModItems.IRON_KITCHEN_KNIFE.get());
+        handheldItem(ModItems.GOLD_KITCHEN_KNIFE.get());
+        handheldItem(ModItems.DIAMOND_KITCHEN_KNIFE.get());
+        handheldItem(ModItems.NETHERITE_KITCHEN_KNIFE.get());
+        handheldItem(ModItems.SICKLE.get());
 
-      Identifier bagItem = BuiltInRegistries.ITEM.getKey((Item)ModItems.TRANSMUTATION_LUNCH_BAG.get());
-      if (bagItem != null) {
-         ItemModelBuilder noItems = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "transmutation_lunch_bag_no_items"));
-         ItemModelBuilder hasItems = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "transmutation_lunch_bag_has_items"));
-         ((ItemModelBuilder)this.getBuilder(bagItem.toString()))
-            .override()
-            .model(noItems)
-            .predicate(TransmutationLunchBagItem.HAS_ITEMS_PROPERTY, 0.0F)
-            .end()
-            .override()
-            .model(hasItems)
-            .predicate(TransmutationLunchBagItem.HAS_ITEMS_PROPERTY, 1.0F)
-            .end();
-      }
+        basicItem(ModItems.OIL.get());
+        basicItem(ModItems.FRIED_EGG.get());
+        basicItem(ModItems.TEA_EGG.get());
+        basicItem(ModItems.SCARECROW.get());
+        basicItem(ModItems.TEA_BANNER.get());
+        basicItem(ModItems.TOMATO.get());
+        basicItem(ModItems.SCRAMBLE_EGG_WITH_TOMATOES.get());
+        basicItem(ModItems.SCRAMBLE_EGG_WITH_TOMATOES_RICE_BOWL.get());
+        basicItem(ModItems.BRAISED_BEEF.get());
+        basicItem(ModItems.BRAISED_BEEF_RICE_BOWL.get());
+        basicItem(ModItems.STIR_FRIED_PORK_WITH_PEPPERS.get());
+        basicItem(ModItems.STIR_FRIED_PORK_WITH_PEPPERS_RICE_BOWL.get());
+        basicItem(ModItems.SWEET_AND_SOUR_PORK.get());
+        basicItem(ModItems.SWEET_AND_SOUR_PORK_RICE_BOWL.get());
+        basicItem(ModItems.FISH_FLAVORED_SHREDDED_PORK.get());
+        basicItem(ModItems.FISH_FLAVORED_SHREDDED_PORK_RICE_BOWL.get());
+        basicItem(ModItems.EGG_FRIED_RICE.get());
+        basicItem(ModItems.PORK_BONE_SOUP.get());
+        basicItem(ModItems.SEAFOOD_MISO_SOUP.get());
+        basicItem(ModItems.FEARSOME_THICK_SOUP.get());
+        basicItem(ModItems.LAMB_AND_RADISH_SOUP.get());
+        basicItem(ModItems.BRAISED_BEEF_WITH_POTATOES.get());
+        basicItem(ModItems.WILD_MUSHROOM_RABBIT_SOUP.get());
+        basicItem(ModItems.PUFFERFISH_SOUP.get());
+        basicItem(ModItems.BORSCHT.get());
+        basicItem(ModItems.BEEF_MEATBALL_SOUP.get());
+        basicItem(ModItems.CHICKEN_AND_MUSHROOM_STEW.get());
+        basicItem(ModItems.STRAW_HAT.get());
+        basicItem(ModItems.STRAW_HAT_FLOWER.get());
+        basicItem(ModItems.FARMER_CHEST_PLATE.get());
+        basicItem(ModItems.FARMER_LEGGINGS.get());
+        basicItem(ModItems.FARMER_BOOTS.get());
+        basicItem(ModItems.TOMATO_SEED.get());
+        basicItem(ModItems.TEA_SEED.get());
+        basicItem(ModItems.FRESH_TEA_LEAVES.get());
+        basicItem(ModItems.DRIED_TEA_LEAVES.get());
+        basicItem(ModItems.TIEGUANYIN_TEA_BAG.get());
+        basicItem(ModItems.BILUOCHUN_TEA_BAG.get());
+        basicItem(ModItems.OOLONG_TEA_BAG.get());
+        basicItem(ModItems.SAKURA_FUBUKI_TEA_BAG.get());
+        basicItem(ModItems.BARLEY_TEA_BAG.get());
+        basicItem(ModItems.BUTTER_TEA_BAG.get());
+        basicItem(ModItems.CLAY_POT_MILK_TEA.get());
+        basicItem(ModItems.RICE_SEED.get());
+        basicItem(ModItems.WILD_RICE_SEED.get());
+        basicItem(ModItems.RICE_PANICLE.get());
+        basicItem(ModItems.SASHIMI.get());
+        basicItem(ModItems.RAW_LAMB_CHOPS.get());
+        basicItem(ModItems.RAW_COW_OFFAL.get());
+        basicItem(ModItems.RAW_PORK_BELLY.get());
+        basicItem(ModItems.COOKED_LAMB_CHOPS.get());
+        basicItem(ModItems.COOKED_COW_OFFAL.get());
+        basicItem(ModItems.COOKED_PORK_BELLY.get());
+        basicItem(ModItems.COOKED_RICE.get());
+        basicItem(ModItems.RED_CHILI.get());
+        basicItem(ModItems.GREEN_CHILI.get());
+        basicItem(ModItems.CHILI_SEED.get());
+        basicItem(ModItems.LETTUCE.get());
+        basicItem(ModItems.LETTUCE_SEED.get());
+        basicItem(ModItems.CATERPILLAR.get());
+        basicItem(ModItems.ENAMEL_BASIN.get());
+        basicItem(ModItems.KITCHENWARE_RACKS.get());
+        basicItem(ModItems.MILLSTONE.get());
+        basicItem(ModItems.RAW_NOODLES.get());
+        basicItem(ModItems.STUFFED_DOUGH_FOOD.get());
+        basicItem(ModItems.DONKEY_BURGER.get());
+        basicItem(ModItems.FLOUR.get());
+        basicItem(ModItems.RAW_CUT_SMALL_MEATS.get());
+        basicItem(ModItems.COOKED_CUT_SMALL_MEATS.get());
+        basicItem(ModItems.RAW_MEATBALL.get());
+        basicItem(ModItems.COOKED_MEATBALL.get());
 
-      Identifier rawDough = BuiltInRegistries.ITEM.getKey((Item)ModItems.RAW_DOUGH.get());
-      if (rawDough != null) {
-         ItemModelBuilder builder = (ItemModelBuilder)this.getBuilder(rawDough.toString());
-         UncheckedModelFile file0 = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/raw_dough_0"));
-         UncheckedModelFile file1 = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/raw_dough_1"));
-         UncheckedModelFile file2 = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/raw_dough_2"));
-         UncheckedModelFile file3 = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/raw_dough_3"));
-         UncheckedModelFile file4 = new UncheckedModelFile(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "item/raw_dough_4"));
-         builder.override().model(file0).predicate(RawDoughItem.PULL_PROPERTY, 0.0F).end();
-         builder.override().model(file1).predicate(RawDoughItem.PULL_PROPERTY, 0.1F).end();
-         builder.override().model(file2).predicate(RawDoughItem.PULL_PROPERTY, 1.0F).end();
-         builder.override().model(file3).predicate(RawDoughItem.PULL_PROPERTY, 2.0F).end();
-         builder.override().model(file4).predicate(RawDoughItem.PULL_PROPERTY, 3.0F).end();
-      }
+        basicItem(ModItems.BAOZI.get());
+        basicItem(ModItems.SHENGJIAN_MANTOU.get());
+        basicItem(ModItems.DUMPLING.get());
+        basicItem(ModItems.SAMSA.get());
+        basicItem(ModItems.MANTOU.get());
+        basicItem(ModItems.MEAT_PIE.get());
+        basicItem(ModItems.STICKY_CANDY.get());
+        basicItem(ModItems.STICKY_RICE_CAKE.get());
+        basicItem(ModItems.QINGTUAN.get());
+        basicItem(ModItems.RAW_ZONGZI.get());
+        basicItem(ModItems.ZONGZI.get());
+        basicItem(ModItems.RAW_BAMBOO_TUBE_RICE.get());
+        basicItem(ModItems.BAMBOO_TUBE_RICE.get());
 
-      Identifier steamerItem = BuiltInRegistries.ITEM.getKey((Item)ModItems.STEAMER.get());
-      if (steamerItem != null) {
-         ItemModelBuilder noItems = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "steamer_no_items"));
-         ItemModelBuilder hasItems = this.basicItem(Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "steamer_has_items"));
-         ((ItemModelBuilder)this.getBuilder(steamerItem.toString()))
-            .override()
-            .model(noItems)
-            .predicate(SteamerItem.HAS_ITEMS, 0.0F)
-            .end()
-            .override()
-            .model(hasItems)
-            .predicate(SteamerItem.HAS_ITEMS, 1.0F)
-            .end();
-      }
+        basicItem(ModItems.BEEF_NOODLE.get());
+        basicItem(ModItems.HUI_NOODLE.get());
+        basicItem(ModItems.UDON_NOODLE.get());
+        basicItem(ModItems.HOT_DRY_NOODLES.get());
+        basicItem(ModItems.LABA_CONGEE.get());
 
-      FoodBiteRegistry.FOOD_DATA_MAP.forEach((key, value) -> {
-         Item item = (Item)BuiltInRegistries.ITEM.getValue(key);
-         this.basicItem(item);
-      });
-      PlateRegistry.PLATE_DATA_MAP.forEach((key, value) -> {
-         Item item = (Item)BuiltInRegistries.ITEM.getValue(key);
-         this.basicItem(item);
-      });
-      this.basicItem((Item)ModItems.EMPTY_CUP.get());
-      TeacupRegistry.TEACUP_DATA_MAP.forEach((key, value) -> {
-         Item item = (Item)BuiltInRegistries.ITEM.getValue(key);
-         this.basicItem(item);
-      });
-      this.withExistingParent("cook_stool_oak", this.modLoc("block/cook_stool/oak"));
-      this.withExistingParent("cook_stool_spruce", this.modLoc("block/cook_stool/spruce"));
-      this.withExistingParent("cook_stool_acacia", this.modLoc("block/cook_stool/acacia"));
-      this.withExistingParent("cook_stool_bamboo", this.modLoc("block/cook_stool/bamboo"));
-      this.withExistingParent("cook_stool_birch", this.modLoc("block/cook_stool/birch"));
-      this.withExistingParent("cook_stool_cherry", this.modLoc("block/cook_stool/cherry"));
-      this.withExistingParent("cook_stool_crimson", this.modLoc("block/cook_stool/crimson"));
-      this.withExistingParent("cook_stool_dark_oak", this.modLoc("block/cook_stool/dark_oak"));
-      this.withExistingParent("cook_stool_jungle", this.modLoc("block/cook_stool/jungle"));
-      this.withExistingParent("cook_stool_mangrove", this.modLoc("block/cook_stool/mangrove"));
-      this.withExistingParent("cook_stool_warped", this.modLoc("block/cook_stool/warped"));
-      this.withExistingParent("chair_oak", this.modLoc("block/chair/oak"));
-      this.withExistingParent("chair_spruce", this.modLoc("block/chair/spruce"));
-      this.withExistingParent("chair_acacia", this.modLoc("block/chair/acacia"));
-      this.withExistingParent("chair_bamboo", this.modLoc("block/chair/bamboo"));
-      this.withExistingParent("chair_birch", this.modLoc("block/chair/birch"));
-      this.withExistingParent("chair_cherry", this.modLoc("block/chair/cherry"));
-      this.withExistingParent("chair_crimson", this.modLoc("block/chair/crimson"));
-      this.withExistingParent("chair_dark_oak", this.modLoc("block/chair/dark_oak"));
-      this.withExistingParent("chair_jungle", this.modLoc("block/chair/jungle"));
-      this.withExistingParent("chair_mangrove", this.modLoc("block/chair/mangrove"));
-      this.withExistingParent("chair_warped", this.modLoc("block/chair/warped"));
-      this.withExistingParent("table_oak", this.modLoc("block/table/oak_single"));
-      this.withExistingParent("table_spruce", this.modLoc("block/table/spruce_single"));
-      this.withExistingParent("table_acacia", this.modLoc("block/table/acacia_single"));
-      this.withExistingParent("table_bamboo", this.modLoc("block/table/bamboo_single"));
-      this.withExistingParent("table_birch", this.modLoc("block/table/birch_single"));
-      this.withExistingParent("table_cherry", this.modLoc("block/table/cherry_single"));
-      this.withExistingParent("table_crimson", this.modLoc("block/table/crimson_single"));
-      this.withExistingParent("table_dark_oak", this.modLoc("block/table/dark_oak_single"));
-      this.withExistingParent("table_jungle", this.modLoc("block/table/jungle_single"));
-      this.withExistingParent("table_mangrove", this.modLoc("block/table/mangrove_single"));
-      this.withExistingParent("table_warped", this.modLoc("block/table/warped_single"));
-      this.withExistingParent("chopping_board", this.modLoc("block/chopping_board"));
-      this.withExistingParent("oil_block", this.modLoc("block/oil_block"));
-      this.withExistingParent("straw_block", this.modLoc("block/straw_block"));
-      ItemModelBuilder fruitBasketFull = (ItemModelBuilder)new ItemModelBuilder(this.modLoc("fruit_basket"), this.existingFileHelper)
-         .parent(new UncheckedModelFile(this.modLoc("item/fruit_basket_full")));
-      ItemModelBuilder fruitBasketItem = (ItemModelBuilder)((ItemModelBuilder)new ItemModelBuilder(this.modLoc("fruit_basket"), this.existingFileHelper)
-            .parent(new UncheckedModelFile("item/generated")))
-         .texture("layer0", this.modLoc("item/fruit_basket"));
-      ItemModelBuilder fruitBasketBlock = (ItemModelBuilder)new ItemModelBuilder(this.modLoc("fruit_basket"), this.existingFileHelper)
-         .parent(new UncheckedModelFile(this.modLoc("block/fruit_basket")));
-      ((SeparateTransformsModelBuilder)((ItemModelBuilder)((ItemModelBuilder)this.getBuilder("fruit_basket")).guiLight(GuiLight.FRONT))
-            .customLoader(SeparateTransformsModelBuilder::begin))
-         .base(fruitBasketFull)
-         .perspective(ItemDisplayContext.GROUND, fruitBasketBlock)
-         .perspective(ItemDisplayContext.GUI, fruitBasketItem)
-         .perspective(ItemDisplayContext.FIXED, fruitBasketItem)
-         .perspective(ItemDisplayContext.GROUND, fruitBasketItem);
-      ItemModelBuilder flatColdCutHamSlices = (ItemModelBuilder)((ItemModelBuilder)new ItemModelBuilder(
-               this.modLoc("cold_cut_ham_slices"), this.existingFileHelper
-            )
-            .parent(new UncheckedModelFile("item/generated")))
-         .texture("layer0", this.modLoc("item/cold_cut_ham_slices_gui"));
-      ItemModelBuilder blockColdCutHamSlices = (ItemModelBuilder)new ItemModelBuilder(this.modLoc("cold_cut_ham_slices"), this.existingFileHelper)
-         .parent(new UncheckedModelFile(this.modLoc("item/cold_cut_ham_slices_block")));
-      ((SeparateTransformsModelBuilder)((ItemModelBuilder)((ItemModelBuilder)this.getBuilder("cold_cut_ham_slices")).guiLight(GuiLight.FRONT))
-            .customLoader(SeparateTransformsModelBuilder::begin))
-         .base(blockColdCutHamSlices)
-         .perspective(ItemDisplayContext.GUI, flatColdCutHamSlices)
-         .perspective(ItemDisplayContext.FIXED, flatColdCutHamSlices);
-      ItemModelBuilder teapotItem = (ItemModelBuilder)((ItemModelBuilder)new ItemModelBuilder(this.modLoc("teapot"), this.existingFileHelper)
-            .parent(new UncheckedModelFile("item/generated")))
-         .texture("layer0", this.modLoc("item/teapot"));
-      ItemModelBuilder teapotBlock = (ItemModelBuilder)new ItemModelBuilder(this.modLoc("teapot"), this.existingFileHelper)
-         .parent(new UncheckedModelFile(this.modLoc("item/teapot_3d")));
-      ((SeparateTransformsModelBuilder)((ItemModelBuilder)((ItemModelBuilder)this.getBuilder("teapot")).guiLight(GuiLight.FRONT))
-            .customLoader(SeparateTransformsModelBuilder::begin))
-         .base(teapotBlock)
-         .perspective(ItemDisplayContext.GUI, teapotItem)
-         .perspective(ItemDisplayContext.FIXED, teapotItem)
-         .perspective(ItemDisplayContext.GROUND, teapotItem);
-   }
+        skewerItem(ModItems.GLOW_BERRY_SKEWER.get(), "glow_berry_skewer");
+        skewerItem(ModItems.SWEET_BERRY_SKEWER.get(), "sweet_berry_skewer");
+        skewerItem(ModItems.CHORUS_FRUIT_SKEWER.get(), "chorus_fruit_skewer");
+        skewerItem(ModItems.APPLE_SKEWER.get(), "apple_skewer");
+        skewerItem(ModItems.CATERPILLAR_SKEWER.get(), "caterpillar_skewer");
+        skewerItem(ModItems.CANDIED_GLOW_BERRY_SKEWER.get(), "candied_glow_berry_skewer");
+        skewerItem(ModItems.CANDIED_SWEET_BERRY_SKEWER.get(), "candied_sweet_berry_skewer");
+        skewerItem(ModItems.CANDIED_CHORUS_FRUIT_SKEWER.get(), "candied_chorus_fruit_skewer");
+        skewerItem(ModItems.CANDIED_APPLE_SKEWER.get(), "candied_apple_skewer");
+        skewerItem(ModItems.CANDIED_CATERPILLAR_SKEWER.get(), "candied_caterpillar_skewer");
 
-   public ItemModelBuilder handheldItem(Item item) {
-      return this.handheldItem(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
-   }
+        basicItem(modLoc("honey"));
+        basicItem(modLoc("egg"));
+        basicItem(modLoc("oil_in_millstone"));
 
-   public ItemModelBuilder handheldItem(Identifier item) {
-      return (ItemModelBuilder)((ItemModelBuilder)((ItemModelBuilder)this.getBuilder(item.toString())).parent(new UncheckedModelFile("item/handheld")))
-         .texture("layer0", Identifier.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
-   }
+        withExistingParent("bamboo_tray", modLoc("block/bamboo_tray/base"));
+
+        ResourceLocation chileRistra = BuiltInRegistries.ITEM.getKey(ModItems.CHILI_RISTRA.get());
+        getBuilder(chileRistra.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "block/chili_ristra/head"));
+
+        ResourceLocation strungMushrooms = BuiltInRegistries.ITEM.getKey(ModItems.STRUNG_MUSHROOMS.get());
+        getBuilder(strungMushrooms.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "block/strung_mushrooms/head"));
+
+        ResourceLocation shovel = BuiltInRegistries.ITEM.getKey(ModItems.KITCHEN_SHOVEL.get());
+        ItemModelBuilder shovelNoOil = handheldItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "kitchen_shovel_no_oil"));
+        ItemModelBuilder shovelHasOil = handheldItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "kitchen_shovel_has_oil"));
+        getBuilder(shovel.toString())
+                .override().model(shovelNoOil).predicate(KitchenShovelItem.HAS_OIL_PROPERTY, 0).end()
+                .override().model(shovelHasOil).predicate(KitchenShovelItem.HAS_OIL_PROPERTY, 1).end();
+
+        ResourceLocation stockpotLid = BuiltInRegistries.ITEM.getKey(ModItems.STOCKPOT_LID.get());
+        ModelFile normal = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/stockpot_lid_normal"));
+        ModelFile using = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/stockpot_lid_using"));
+        getBuilder(stockpotLid.toString())
+                .override().model(normal).predicate(StockpotLidItem.USING_PROPERTY, 0).end()
+                .override().model(using).predicate(StockpotLidItem.USING_PROPERTY, 1).end();
+
+        ResourceLocation oilPot = BuiltInRegistries.ITEM.getKey(ModItems.OIL_POT.get());
+        if (oilPot != null) {
+            ItemModelBuilder potNoOil = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "pot_no_oil"));
+            ItemModelBuilder potHasOil = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "pot_has_oil"));
+            getBuilder(oilPot.toString())
+                    .override().model(potNoOil).predicate(OilPotItem.HAS_OIL_PROPERTY, 0).end()
+                    .override().model(potHasOil).predicate(OilPotItem.HAS_OIL_PROPERTY, 1).end();
+        }
+
+        ResourceLocation recipeItem = BuiltInRegistries.ITEM.getKey(ModItems.RECIPE_ITEM.get());
+        if (recipeItem != null) {
+            ItemModelBuilder noRecipe = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "recipe_item_no_recipe"));
+            ItemModelBuilder hasRecipe = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "recipe_item_has_recipe"));
+            getBuilder(recipeItem.toString())
+                    .override().model(noRecipe).predicate(RecipeItem.HAS_RECIPE_PROPERTY, 0).end()
+                    .override().model(hasRecipe).predicate(RecipeItem.HAS_RECIPE_PROPERTY, 1).end();
+        }
+
+        ResourceLocation bagItem = BuiltInRegistries.ITEM.getKey(ModItems.TRANSMUTATION_LUNCH_BAG.get());
+        if (bagItem != null) {
+            ItemModelBuilder noItems = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "transmutation_lunch_bag_no_items"));
+            ItemModelBuilder hasItems = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "transmutation_lunch_bag_has_items"));
+            getBuilder(bagItem.toString())
+                    .override().model(noItems).predicate(TransmutationLunchBagItem.HAS_ITEMS_PROPERTY, 0).end()
+                    .override().model(hasItems).predicate(TransmutationLunchBagItem.HAS_ITEMS_PROPERTY, 1).end();
+        }
+
+        ResourceLocation rawDough = BuiltInRegistries.ITEM.getKey(ModItems.RAW_DOUGH.get());
+        if (rawDough != null) {
+            ItemModelBuilder builder = getBuilder(rawDough.toString());
+            ModelFile.UncheckedModelFile file0 = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_0"));
+            ModelFile.UncheckedModelFile file1 = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_1"));
+            ModelFile.UncheckedModelFile file2 = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_2"));
+            ModelFile.UncheckedModelFile file3 = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_3"));
+            ModelFile.UncheckedModelFile file4 = new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/raw_dough_4"));
+
+            builder.override().model(file0).predicate(RawDoughItem.PULL_PROPERTY, 0).end();
+            builder.override().model(file1).predicate(RawDoughItem.PULL_PROPERTY, 0.1f).end();
+            builder.override().model(file2).predicate(RawDoughItem.PULL_PROPERTY, 1).end();
+            builder.override().model(file3).predicate(RawDoughItem.PULL_PROPERTY, 2).end();
+            builder.override().model(file4).predicate(RawDoughItem.PULL_PROPERTY, 3).end();
+        }
+
+        ResourceLocation steamerItem = BuiltInRegistries.ITEM.getKey(ModItems.STEAMER.get());
+        if (steamerItem != null) {
+            ItemModelBuilder noItems = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "steamer_no_items"));
+            ItemModelBuilder hasItems = basicItem(ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "steamer_has_items"));
+            getBuilder(steamerItem.toString())
+                    .override().model(noItems).predicate(SteamerItem.HAS_ITEMS, 0).end()
+                    .override().model(hasItems).predicate(SteamerItem.HAS_ITEMS, 1).end();
+        }
+
+        FoodBiteRegistry.FOOD_DATA_MAP.forEach((key, value) -> {
+            Item item = BuiltInRegistries.ITEM.get(key);
+            basicItem(item);
+        });
+
+        PlateRegistry.PLATE_DATA_MAP.forEach((key, value) -> {
+            Item item = BuiltInRegistries.ITEM.get(key);
+            basicItem(item);
+        });
+
+        basicItem(ModItems.EMPTY_CUP.get());
+        TeacupRegistry.TEACUP_DATA_MAP.forEach((key, value) -> {
+            Item item = BuiltInRegistries.ITEM.get(key);
+            basicItem(item);
+        });
+
+        withExistingParent("cook_stool_oak", modLoc("block/cook_stool/oak"));
+        withExistingParent("cook_stool_spruce", modLoc("block/cook_stool/spruce"));
+        withExistingParent("cook_stool_acacia", modLoc("block/cook_stool/acacia"));
+        withExistingParent("cook_stool_bamboo", modLoc("block/cook_stool/bamboo"));
+        withExistingParent("cook_stool_birch", modLoc("block/cook_stool/birch"));
+        withExistingParent("cook_stool_cherry", modLoc("block/cook_stool/cherry"));
+        withExistingParent("cook_stool_crimson", modLoc("block/cook_stool/crimson"));
+        withExistingParent("cook_stool_dark_oak", modLoc("block/cook_stool/dark_oak"));
+        withExistingParent("cook_stool_jungle", modLoc("block/cook_stool/jungle"));
+        withExistingParent("cook_stool_mangrove", modLoc("block/cook_stool/mangrove"));
+        withExistingParent("cook_stool_warped", modLoc("block/cook_stool/warped"));
+
+        withExistingParent("chair_oak", modLoc("block/chair/oak"));
+        withExistingParent("chair_spruce", modLoc("block/chair/spruce"));
+        withExistingParent("chair_acacia", modLoc("block/chair/acacia"));
+        withExistingParent("chair_bamboo", modLoc("block/chair/bamboo"));
+        withExistingParent("chair_birch", modLoc("block/chair/birch"));
+        withExistingParent("chair_cherry", modLoc("block/chair/cherry"));
+        withExistingParent("chair_crimson", modLoc("block/chair/crimson"));
+        withExistingParent("chair_dark_oak", modLoc("block/chair/dark_oak"));
+        withExistingParent("chair_jungle", modLoc("block/chair/jungle"));
+        withExistingParent("chair_mangrove", modLoc("block/chair/mangrove"));
+        withExistingParent("chair_warped", modLoc("block/chair/warped"));
+
+        withExistingParent("long_bench", modLoc("block/long_bench/single"));
+        withExistingParent("red_lantern", modLoc("block/red_lantern"));
+
+        withExistingParent("table_oak", modLoc("block/table/oak_single"));
+        withExistingParent("table_spruce", modLoc("block/table/spruce_single"));
+        withExistingParent("table_acacia", modLoc("block/table/acacia_single"));
+        withExistingParent("table_bamboo", modLoc("block/table/bamboo_single"));
+        withExistingParent("table_birch", modLoc("block/table/birch_single"));
+        withExistingParent("table_cherry", modLoc("block/table/cherry_single"));
+        withExistingParent("table_crimson", modLoc("block/table/crimson_single"));
+        withExistingParent("table_dark_oak", modLoc("block/table/dark_oak_single"));
+        withExistingParent("table_jungle", modLoc("block/table/jungle_single"));
+        withExistingParent("table_mangrove", modLoc("block/table/mangrove_single"));
+        withExistingParent("table_warped", modLoc("block/table/warped_single"));
+
+        withExistingParent("chopping_board", modLoc("block/chopping_board"));
+        withExistingParent("oil_block", modLoc("block/oil_block"));
+        withExistingParent("straw_block", modLoc("block/straw_block"));
+
+        ItemModelBuilder fruitBasketFull = new ItemModelBuilder(modLoc("fruit_basket"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile(modLoc("item/fruit_basket_full")));
+        ItemModelBuilder fruitBasketItem = new ItemModelBuilder(modLoc("fruit_basket"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", modLoc("item/fruit_basket"));
+        ItemModelBuilder fruitBasketBlock = new ItemModelBuilder(modLoc("fruit_basket"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile(modLoc("block/fruit_basket")));
+        getBuilder("fruit_basket")
+                .guiLight(BlockModel.GuiLight.FRONT)
+                .customLoader(SeparateTransformsModelBuilder::begin).base(fruitBasketFull)
+                .perspective(ItemDisplayContext.GROUND, fruitBasketBlock)
+                .perspective(ItemDisplayContext.GUI, fruitBasketItem)
+                .perspective(ItemDisplayContext.FIXED, fruitBasketItem)
+                .perspective(ItemDisplayContext.GROUND, fruitBasketItem);
+
+        ItemModelBuilder flatColdCutHamSlices = new ItemModelBuilder(modLoc("cold_cut_ham_slices"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", modLoc("item/cold_cut_ham_slices_gui"));
+        ItemModelBuilder blockColdCutHamSlices = new ItemModelBuilder(modLoc("cold_cut_ham_slices"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile(modLoc("item/cold_cut_ham_slices_block")));
+        getBuilder("cold_cut_ham_slices")
+                .guiLight(BlockModel.GuiLight.FRONT)
+                .customLoader(SeparateTransformsModelBuilder::begin).base(blockColdCutHamSlices)
+                .perspective(ItemDisplayContext.GUI, flatColdCutHamSlices)
+                .perspective(ItemDisplayContext.FIXED, flatColdCutHamSlices);
+
+        ItemModelBuilder teapotItem = new ItemModelBuilder(modLoc("teapot"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", modLoc("item/teapot"));
+        ItemModelBuilder teapotBlock = new ItemModelBuilder(modLoc("teapot"), this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile(modLoc("item/teapot_3d")));
+        getBuilder("teapot")
+                .guiLight(BlockModel.GuiLight.FRONT)
+                .customLoader(SeparateTransformsModelBuilder::begin).base(teapotBlock)
+                .perspective(ItemDisplayContext.GUI, teapotItem)
+                .perspective(ItemDisplayContext.FIXED, teapotItem)
+                .perspective(ItemDisplayContext.GROUND, teapotItem);
+    }
+
+    @Override
+    public ItemModelBuilder handheldItem(Item item) {
+        return handheldItem(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
+    }
+
+    @Override
+    public ItemModelBuilder handheldItem(ResourceLocation item) {
+        return getBuilder(item.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
+    }
+
+    private void skewerItem(Item item, String texture) {
+        getBuilder(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)).toString())
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "item/" + texture));
+    }
 }

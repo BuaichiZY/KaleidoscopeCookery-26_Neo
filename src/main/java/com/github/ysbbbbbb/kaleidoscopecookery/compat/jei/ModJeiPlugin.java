@@ -1,6 +1,7 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.jei;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.category.ChoppingBoardRecipeCategory;
+import com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.category.BambooTrayRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.category.FlexPotRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.category.FlexStockpotRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.category.MillstoneRecipeCategory;
@@ -29,6 +30,7 @@ public class ModJeiPlugin implements IModPlugin {
       registration.addRecipeCategories(new IRecipeCategory[]{new PotRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
       registration.addRecipeCategories(new IRecipeCategory[]{new FlexPotRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
       registration.addRecipeCategories(new IRecipeCategory[]{new ChoppingBoardRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
+      registration.addRecipeCategories(new IRecipeCategory[]{new BambooTrayRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
       registration.addRecipeCategories(new IRecipeCategory[]{new StockpotRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
       registration.addRecipeCategories(new IRecipeCategory[]{new FlexStockpotRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
       registration.addRecipeCategories(new IRecipeCategory[]{new MillstoneRecipeCategory(registration.getJeiHelpers().getGuiHelper())});
@@ -40,6 +42,7 @@ public class ModJeiPlugin implements IModPlugin {
       registration.addRecipes(PotRecipeCategory.TYPE, PotRecipeCategory.getRecipes());
       registration.addRecipes(FlexPotRecipeCategory.TYPE, FlexPotRecipeCategory.getRecipes());
       registration.addRecipes(ChoppingBoardRecipeCategory.TYPE, ChoppingBoardRecipeCategory.getRecipes());
+      registration.addRecipes(BambooTrayRecipeCategory.TYPE, BambooTrayRecipeCategory.getRecipes());
       registration.addRecipes(StockpotRecipeCategory.TYPE, StockpotRecipeCategory.getRecipes());
       registration.addRecipes(FlexStockpotRecipeCategory.TYPE, FlexStockpotRecipeCategory.getRecipes());
       registration.addRecipes(MillstoneRecipeCategory.TYPE, MillstoneRecipeCategory.getRecipes());
@@ -52,6 +55,7 @@ public class ModJeiPlugin implements IModPlugin {
       registration.addRecipeCatalyst((ItemLike)ModItems.POT.get(), new RecipeType[]{PotRecipeCategory.TYPE});
       registration.addRecipeCatalyst((ItemLike)ModItems.POT.get(), new RecipeType[]{FlexPotRecipeCategory.TYPE});
       registration.addRecipeCatalyst((ItemLike)ModItems.CHOPPING_BOARD.get(), new RecipeType[]{ChoppingBoardRecipeCategory.TYPE});
+      registration.addRecipeCatalyst((ItemLike)ModItems.BAMBOO_TRAY.get(), new RecipeType[]{BambooTrayRecipeCategory.TYPE});
       registration.addRecipeCatalyst((ItemLike)ModItems.STOCKPOT.get(), new RecipeType[]{StockpotRecipeCategory.TYPE});
       registration.addRecipeCatalyst((ItemLike)ModItems.STOCKPOT.get(), new RecipeType[]{FlexStockpotRecipeCategory.TYPE});
       registration.addRecipeCatalyst((ItemLike)ModItems.MILLSTONE.get(), new RecipeType[]{MillstoneRecipeCategory.TYPE});

@@ -37,15 +37,16 @@ public final class RuntimeScarecrowHandLayer
          poseStack.popPose();
       }
 
-      if (!state.lanternBlock.isEmpty()) {
+      if (!state.leftHandItemState.isEmpty()) {
          poseStack.pushPose();
          this.getParentModel().translateToHand(state, HumanoidArm.LEFT, poseStack);
          poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
          poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-         poseStack.translate(-0.375F, 0.375F, -2.0F);
-         poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+         poseStack.translate(-0.125F, 0.0F, -1.375F);
+         poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+         poseStack.mulPose(Axis.XP.rotationDegrees(85.0F));
          poseStack.scale(0.75F, 0.75F, 0.75F);
-         state.lanternBlock.submit(poseStack, collector, 15728880, OverlayTexture.NO_OVERLAY, 0);
+         state.leftHandItemState.submit(poseStack, collector, packedLight, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();
       }
    }

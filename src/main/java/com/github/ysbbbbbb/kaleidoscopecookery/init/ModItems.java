@@ -1,8 +1,13 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.init;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.item.FruitSkewerItem;
+
+import com.github.ysbbbbbb.kaleidoscopecookery.item.CandiedSkewerItem;
+
 import com.github.ysbbbbbb.kaleidoscopecookery.item.BambooTubeRiceBlockItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.BowlFoodOnlyItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.ChiliItem;
+import com.github.ysbbbbbb.kaleidoscopecookery.item.ClayPotMilkTeaItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.EmptyCupItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.FlourItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.FoodWithEffectsItem;
@@ -21,6 +26,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.item.SteamerItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.StockpotLidItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.StrawHatItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TeapotItem;
+import com.github.ysbbbbbb.kaleidoscopecookery.item.TeaBannerItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TransmutationLunchBagItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.WithTooltipsBlockItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.WithTooltipsItem;
@@ -37,34 +43,47 @@ import net.neoforged.neoforge.registries.DeferredRegister.Items;
 
 public final class ModItems {
    public static final Items ITEMS = DeferredRegister.createItems("kaleidoscope_cookery");
-   public static DeferredItem<Item> STOVE = registerItem("stove", () -> new BlockItem((Block)ModBlocks.STOVE.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> POT = registerItem("pot", () -> new BlockItem((Block)ModBlocks.POT.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> STOCKPOT = registerItem("stockpot", () -> new BlockItem((Block)ModBlocks.STOCKPOT.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> STOVE = registerItem("stove", () -> new BlockItem((Block)ModBlocks.STOVE.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> POT = registerItem("pot", () -> new BlockItem((Block)ModBlocks.POT.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> STOCKPOT = registerItem("stockpot", () -> new BlockItem((Block)ModBlocks.STOCKPOT.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> STOCKPOT_LID = registerItem("stockpot_lid", StockpotLidItem::new);
    public static DeferredItem<Item> CHOPPING_BOARD = registerItem(
-      "chopping_board", () -> new BlockItem((Block)ModBlocks.CHOPPING_BOARD.get(), ModRegistrationProperties.itemProperties())
+      "chopping_board", () -> new BlockItem((Block)ModBlocks.CHOPPING_BOARD.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> KITCHENWARE_RACKS = registerItem(
       "kitchenware_racks", () -> new WithTooltipsBlockItem((Block)ModBlocks.KITCHENWARE_RACKS.get(), "kitchenware_racks")
    );
-   public static DeferredItem<Item> SHAWARMA_SPIT = registerItem("shawarma_spit", () -> new BlockItem((Block)ModBlocks.SHAWARMA_SPIT.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> MILLSTONE = registerItem("millstone", () -> new BlockItem((Block)ModBlocks.MILLSTONE.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> BAMBOO_TRAY = registerItem(
+      "bamboo_tray", () -> new BlockItem((Block)ModBlocks.BAMBOO_TRAY.get(), ModRegistrationProperties.blockItemProperties())
+   );
+   public static DeferredItem<Item> SHAWARMA_SPIT = registerItem("shawarma_spit", () -> new BlockItem((Block)ModBlocks.SHAWARMA_SPIT.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> MILLSTONE = registerItem("millstone", () -> new BlockItem((Block)ModBlocks.MILLSTONE.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> STEAMER = registerItem("steamer", SteamerItem::new);
    public static DeferredItem<Item> TEAPOT = registerItem("teapot", TeapotItem::new);
    public static DeferredItem<Item> EMPTY_CUP = registerItem("empty_cup", EmptyCupItem::new);
-   public static DeferredItem<Item> TRASH_CAN = registerItem("trash_can", () -> new BlockItem((Block)ModBlocks.TRASH_CAN.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> TIEGUANYIN_TEA_BAG = registerItem("tieguanyin_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> BILUOCHUN_TEA_BAG = registerItem("biluochun_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> OOLONG_TEA_BAG = registerItem("oolong_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> SAKURA_FUBUKI_TEA_BAG = registerItem("sakura_fubuki_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> BARLEY_TEA_BAG = registerItem("barley_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> BUTTER_TEA_BAG = registerItem("butter_tea_bag", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> CLAY_POT_MILK_TEA = registerItem(
+      "clay_pot_milk_tea", () -> new ClayPotMilkTeaItem((Block)ModBlocks.CLAY_POT_MILK_TEA.get())
+   );
+   public static DeferredItem<Item> TRASH_CAN = registerItem("trash_can", () -> new BlockItem((Block)ModBlocks.TRASH_CAN.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> OIL = registerItem("oil", OilItem::new);
    public static DeferredItem<Item> OIL_POT = registerItem("oil_pot", OilPotItem::new);
-   public static DeferredItem<Item> OIL_BLOCK = registerItem("oil_block", () -> new BlockItem((Block)ModBlocks.OIL_BLOCK.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> ENAMEL_BASIN = registerItem("enamel_basin", () -> new BlockItem((Block)ModBlocks.ENAMEL_BASIN.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHILI_RISTRA = registerItem("chili_ristra", () -> new BlockItem((Block)ModBlocks.CHILI_RISTRA.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> OIL_BLOCK = registerItem("oil_block", () -> new BlockItem((Block)ModBlocks.OIL_BLOCK.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> ENAMEL_BASIN = registerItem("enamel_basin", () -> new BlockItem((Block)ModBlocks.ENAMEL_BASIN.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHILI_RISTRA = registerItem("chili_ristra", () -> new BlockItem((Block)ModBlocks.CHILI_RISTRA.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> STRUNG_MUSHROOMS = registerItem(
-      "strung_mushrooms", () -> new BlockItem((Block)ModBlocks.STRUNG_MUSHROOMS.get(), ModRegistrationProperties.itemProperties())
+      "strung_mushrooms", () -> new BlockItem((Block)ModBlocks.STRUNG_MUSHROOMS.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> STRAW_BLOCK = registerItem("straw_block", () -> new BlockItem((Block)ModBlocks.STRAW_BLOCK.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> STRAW_BLOCK = registerItem("straw_block", () -> new BlockItem((Block)ModBlocks.STRAW_BLOCK.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> FRUIT_BASKET = registerItem("fruit_basket", FruitBasketItem::new);
    public static DeferredItem<Item> SCARECROW = registerItem("scarecrow", ScarecrowItem::new);
    public static DeferredItem<Item> RECIPE_ITEM = registerItem("recipe_item", RecipeItem::new);
+   public static DeferredItem<Item> TEA_BANNER = registerItem("tea_banner", TeaBannerItem::new);
    public static DeferredItem<Item> TRANSMUTATION_LUNCH_BAG = registerItem("transmutation_lunch_bag", TransmutationLunchBagItem::new);
    public static DeferredItem<Item> IRON_KITCHEN_KNIFE = registerItem("iron_kitchen_knife", () -> new KitchenKnifeItem(ToolMaterial.IRON));
    public static DeferredItem<Item> GOLD_KITCHEN_KNIFE = registerItem("gold_kitchen_knife", () -> new KitchenKnifeItem(ToolMaterial.GOLD));
@@ -93,80 +112,102 @@ public final class ModItems {
       "lettuce_seed", () -> new BlockItem((Block)ModBlocks.LETTUCE_CROP.get(), ModRegistrationProperties.itemProperties())
    );
    public static DeferredItem<Item> RICE_SEED = registerItem("rice", RiceItem::new);
+   public static DeferredItem<Item> TEA_SEED = registerItem(
+      "tea_seed", () -> new BlockItem((Block)ModBlocks.TEA_TREE.get(), ModRegistrationProperties.itemProperties())
+   );
    public static DeferredItem<Item> WILD_RICE_SEED = registerItem(
       "wild_rice", () -> new BlockItem((Block)ModBlocks.RICE_CROP.get(), ModRegistrationProperties.itemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_OAK = registerItem(
-      "cook_stool_oak", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_OAK.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_oak", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_OAK.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_SPRUCE = registerItem(
-      "cook_stool_spruce", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_SPRUCE.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_spruce", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_SPRUCE.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_ACACIA = registerItem(
-      "cook_stool_acacia", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_ACACIA.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_acacia", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_ACACIA.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_BAMBOO = registerItem(
-      "cook_stool_bamboo", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_BAMBOO.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_bamboo", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_BAMBOO.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_BIRCH = registerItem(
-      "cook_stool_birch", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_BIRCH.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_birch", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_BIRCH.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_CHERRY = registerItem(
-      "cook_stool_cherry", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_CHERRY.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_cherry", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_CHERRY.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_CRIMSON = registerItem(
-      "cook_stool_crimson", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_CRIMSON.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_crimson", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_CRIMSON.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_DARK_OAK = registerItem(
-      "cook_stool_dark_oak", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_DARK_OAK.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_dark_oak", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_DARK_OAK.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_JUNGLE = registerItem(
-      "cook_stool_jungle", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_JUNGLE.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_jungle", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_JUNGLE.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_MANGROVE = registerItem(
-      "cook_stool_mangrove", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_MANGROVE.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_mangrove", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_MANGROVE.get(), ModRegistrationProperties.blockItemProperties())
    );
    public static DeferredItem<Item> COOK_STOOL_WARPED = registerItem(
-      "cook_stool_warped", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_WARPED.get(), ModRegistrationProperties.itemProperties())
+      "cook_stool_warped", () -> new BlockItem((Block)ModBlocks.COOK_STOOL_WARPED.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> CHAIR_OAK = registerItem("chair_oak", () -> new BlockItem((Block)ModBlocks.CHAIR_OAK.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_SPRUCE = registerItem("chair_spruce", () -> new BlockItem((Block)ModBlocks.CHAIR_SPRUCE.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_ACACIA = registerItem("chair_acacia", () -> new BlockItem((Block)ModBlocks.CHAIR_ACACIA.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_BAMBOO = registerItem("chair_bamboo", () -> new BlockItem((Block)ModBlocks.CHAIR_BAMBOO.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_BIRCH = registerItem("chair_birch", () -> new BlockItem((Block)ModBlocks.CHAIR_BIRCH.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_CHERRY = registerItem("chair_cherry", () -> new BlockItem((Block)ModBlocks.CHAIR_CHERRY.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> CHAIR_CRIMSON = registerItem("chair_crimson", () -> new BlockItem((Block)ModBlocks.CHAIR_CRIMSON.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> CHAIR_OAK = registerItem("chair_oak", () -> new BlockItem((Block)ModBlocks.CHAIR_OAK.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_SPRUCE = registerItem("chair_spruce", () -> new BlockItem((Block)ModBlocks.CHAIR_SPRUCE.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_ACACIA = registerItem("chair_acacia", () -> new BlockItem((Block)ModBlocks.CHAIR_ACACIA.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_BAMBOO = registerItem("chair_bamboo", () -> new BlockItem((Block)ModBlocks.CHAIR_BAMBOO.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_BIRCH = registerItem("chair_birch", () -> new BlockItem((Block)ModBlocks.CHAIR_BIRCH.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_CHERRY = registerItem("chair_cherry", () -> new BlockItem((Block)ModBlocks.CHAIR_CHERRY.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> CHAIR_CRIMSON = registerItem("chair_crimson", () -> new BlockItem((Block)ModBlocks.CHAIR_CRIMSON.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> CHAIR_DARK_OAK = registerItem(
-      "chair_dark_oak", () -> new BlockItem((Block)ModBlocks.CHAIR_DARK_OAK.get(), ModRegistrationProperties.itemProperties())
+      "chair_dark_oak", () -> new BlockItem((Block)ModBlocks.CHAIR_DARK_OAK.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> CHAIR_JUNGLE = registerItem("chair_jungle", () -> new BlockItem((Block)ModBlocks.CHAIR_JUNGLE.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> CHAIR_JUNGLE = registerItem("chair_jungle", () -> new BlockItem((Block)ModBlocks.CHAIR_JUNGLE.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> CHAIR_MANGROVE = registerItem(
-      "chair_mangrove", () -> new BlockItem((Block)ModBlocks.CHAIR_MANGROVE.get(), ModRegistrationProperties.itemProperties())
+      "chair_mangrove", () -> new BlockItem((Block)ModBlocks.CHAIR_MANGROVE.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> CHAIR_WARPED = registerItem("chair_warped", () -> new BlockItem((Block)ModBlocks.CHAIR_WARPED.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_OAK = registerItem("table_oak", () -> new BlockItem((Block)ModBlocks.TABLE_OAK.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_SPRUCE = registerItem("table_spruce", () -> new BlockItem((Block)ModBlocks.TABLE_SPRUCE.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_ACACIA = registerItem("table_acacia", () -> new BlockItem((Block)ModBlocks.TABLE_ACACIA.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_BAMBOO = registerItem("table_bamboo", () -> new BlockItem((Block)ModBlocks.TABLE_BAMBOO.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_BIRCH = registerItem("table_birch", () -> new BlockItem((Block)ModBlocks.TABLE_BIRCH.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_CHERRY = registerItem("table_cherry", () -> new BlockItem((Block)ModBlocks.TABLE_CHERRY.get(), ModRegistrationProperties.itemProperties()));
-   public static DeferredItem<Item> TABLE_CRIMSON = registerItem("table_crimson", () -> new BlockItem((Block)ModBlocks.TABLE_CRIMSON.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> CHAIR_WARPED = registerItem("chair_warped", () -> new BlockItem((Block)ModBlocks.CHAIR_WARPED.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_OAK = registerItem("table_oak", () -> new BlockItem((Block)ModBlocks.TABLE_OAK.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_SPRUCE = registerItem("table_spruce", () -> new BlockItem((Block)ModBlocks.TABLE_SPRUCE.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_ACACIA = registerItem("table_acacia", () -> new BlockItem((Block)ModBlocks.TABLE_ACACIA.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_BAMBOO = registerItem("table_bamboo", () -> new BlockItem((Block)ModBlocks.TABLE_BAMBOO.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_BIRCH = registerItem("table_birch", () -> new BlockItem((Block)ModBlocks.TABLE_BIRCH.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_CHERRY = registerItem("table_cherry", () -> new BlockItem((Block)ModBlocks.TABLE_CHERRY.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> TABLE_CRIMSON = registerItem("table_crimson", () -> new BlockItem((Block)ModBlocks.TABLE_CRIMSON.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> TABLE_DARK_OAK = registerItem(
-      "table_dark_oak", () -> new BlockItem((Block)ModBlocks.TABLE_DARK_OAK.get(), ModRegistrationProperties.itemProperties())
+      "table_dark_oak", () -> new BlockItem((Block)ModBlocks.TABLE_DARK_OAK.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> TABLE_JUNGLE = registerItem("table_jungle", () -> new BlockItem((Block)ModBlocks.TABLE_JUNGLE.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> TABLE_JUNGLE = registerItem("table_jungle", () -> new BlockItem((Block)ModBlocks.TABLE_JUNGLE.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> TABLE_MANGROVE = registerItem(
-      "table_mangrove", () -> new BlockItem((Block)ModBlocks.TABLE_MANGROVE.get(), ModRegistrationProperties.itemProperties())
+      "table_mangrove", () -> new BlockItem((Block)ModBlocks.TABLE_MANGROVE.get(), ModRegistrationProperties.blockItemProperties())
    );
-   public static DeferredItem<Item> TABLE_WARPED = registerItem("table_warped", () -> new BlockItem((Block)ModBlocks.TABLE_WARPED.get(), ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> TABLE_WARPED = registerItem("table_warped", () -> new BlockItem((Block)ModBlocks.TABLE_WARPED.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> LONG_BENCH = registerItem("long_bench", () -> new BlockItem((Block)ModBlocks.LONG_BENCH.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> RED_LANTERN = registerItem("red_lantern", () -> new BlockItem((Block)ModBlocks.RED_LANTERN.get(), ModRegistrationProperties.blockItemProperties()));
+   public static DeferredItem<Item> EIGHT_IMMORTALS_TABLE = registerItem("eight_immortals_table", () -> new BlockItem((Block)ModBlocks.EIGHT_IMMORTALS_TABLE.get(), ModRegistrationProperties.blockItemProperties()));
    public static DeferredItem<Item> TOMATO = registerItem("tomato", () -> new Item(ModRegistrationProperties.itemProperties().food(ModFoods.TOMATO, ModFoods.consumableFor(ModFoods.TOMATO))));
    public static DeferredItem<Item> RED_CHILI = registerItem("red_chili", () -> new ChiliItem(2));
    public static DeferredItem<Item> GREEN_CHILI = registerItem("green_chili", () -> new ChiliItem(1));
    public static DeferredItem<Item> LETTUCE = registerItem("lettuce", () -> new Item(ModRegistrationProperties.itemProperties().food(ModFoods.LETTUCE, ModFoods.consumableFor(ModFoods.LETTUCE))));
    public static DeferredItem<Item> RICE_PANICLE = registerItem("rice_panicle", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> FRESH_TEA_LEAVES = registerItem("fresh_tea_leaves", () -> new Item(ModRegistrationProperties.itemProperties()));
+   public static DeferredItem<Item> DRIED_TEA_LEAVES = registerItem("dried_tea_leaves", () -> new Item(ModRegistrationProperties.itemProperties()));
    public static DeferredItem<Item> CATERPILLAR = registerItem(
       "caterpillar", () -> new WithTooltipsItem(ModRegistrationProperties.itemProperties().food(ModFoods.CATERPILLAR, ModFoods.consumableFor(ModFoods.CATERPILLAR)), "caterpillar")
    );
+   public static final DeferredItem<Item> KITCHEN_SHELF = registerItem("kitchen_shelf", () -> new BlockItem(ModBlocks.KITCHEN_SHELF.get(), com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties.blockItemProperties()));
+    public static DeferredItem<Item> GLOW_BERRY_SKEWER = registerItem("glow_berry_skewer", () -> new FruitSkewerItem(ModFoods.BERRY_SKEWER));
+    public static DeferredItem<Item> SWEET_BERRY_SKEWER = registerItem("sweet_berry_skewer", () -> new FruitSkewerItem(ModFoods.BERRY_SKEWER));
+    public static DeferredItem<Item> CHORUS_FRUIT_SKEWER = registerItem("chorus_fruit_skewer", () -> new FruitSkewerItem(ModFoods.FRUIT_SKEWER));
+    public static DeferredItem<Item> APPLE_SKEWER = registerItem("apple_skewer", () -> new FruitSkewerItem(ModFoods.FRUIT_SKEWER));
+    public static DeferredItem<Item> CATERPILLAR_SKEWER = registerItem("caterpillar_skewer", () -> new FruitSkewerItem(ModFoods.CATERPILLAR_SKEWER));
+
+    // 裹糖果串
+    public static DeferredItem<Item> CANDIED_GLOW_BERRY_SKEWER = registerItem("candied_glow_berry_skewer", () -> new CandiedSkewerItem(ModBlocks.CANDIED_GLOW_BERRY_SKEWER_UPRIGHT, ModBlocks.CANDIED_GLOW_BERRY_SKEWER_SIDE, ModFoods.CANDIED_GLOW_BERRY_SKEWER, net.minecraft.world.effect.MobEffects.GLOWING, 5 * 20));
+    public static DeferredItem<Item> CANDIED_SWEET_BERRY_SKEWER = registerItem("candied_sweet_berry_skewer", () -> new CandiedSkewerItem(ModBlocks.CANDIED_SWEET_BERRY_SKEWER_UPRIGHT, ModBlocks.CANDIED_SWEET_BERRY_SKEWER_SIDE, ModFoods.CANDIED_SWEET_BERRY_SKEWER));
+    public static DeferredItem<Item> CANDIED_CHORUS_FRUIT_SKEWER = registerItem("candied_chorus_fruit_skewer", () -> new CandiedSkewerItem(ModBlocks.CANDIED_CHORUS_FRUIT_SKEWER_UPRIGHT, ModBlocks.CANDIED_CHORUS_FRUIT_SKEWER_SIDE, ModFoods.CANDIED_FRUIT_SKEWER));
+    public static DeferredItem<Item> CANDIED_APPLE_SKEWER = registerItem("candied_apple_skewer", () -> new CandiedSkewerItem(ModBlocks.CANDIED_APPLE_SKEWER_UPRIGHT, ModBlocks.CANDIED_APPLE_SKEWER_SIDE, ModFoods.CANDIED_FRUIT_SKEWER));
+    public static DeferredItem<Item> CANDIED_CATERPILLAR_SKEWER = registerItem("candied_caterpillar_skewer", () -> new CandiedSkewerItem(ModBlocks.CANDIED_CATERPILLAR_SKEWER_UPRIGHT, ModBlocks.CANDIED_CATERPILLAR_SKEWER_SIDE, ModFoods.CANDIED_CATERPILLAR_SKEWER, net.minecraft.world.effect.MobEffects.NAUSEA, 15 * 20));
+
    public static DeferredItem<Item> FLOUR = registerItem("flour", FlourItem::new);
    public static DeferredItem<Item> RAW_DOUGH = registerItem("raw_dough", RawDoughItem::new);
    public static DeferredItem<Item> RAW_NOODLES = registerItem("raw_noodles", () -> new Item(ModRegistrationProperties.itemProperties()));
@@ -174,6 +215,7 @@ public final class ModItems {
    public static DeferredItem<Item> RAW_ZONGZI = registerItem("raw_zongzi", () -> new Item(ModRegistrationProperties.itemProperties()));
    public static DeferredItem<Item> RAW_BAMBOO_TUBE_RICE = registerItem("raw_bamboo_tube_rice", () -> new Item(ModRegistrationProperties.itemProperties()));
    public static DeferredItem<Item> FRIED_EGG = registerItem("fried_egg", () -> new Item(ModRegistrationProperties.itemProperties().food(ModFoods.FRIED_EGG, ModFoods.consumableFor(ModFoods.FRIED_EGG))));
+   public static DeferredItem<Item> TEA_EGG = registerItem("tea_egg", () -> new FoodWithEffectsItem(ModFoods.TEA_EGG));
    public static DeferredItem<Item> DONKEY_BURGER = registerItem("donkey_burger", () -> new FoodWithEffectsItem(ModFoods.DONKEY_BURGER));
    public static DeferredItem<Item> BAOZI = registerItem("baozi", () -> new FoodWithEffectsItem(ModFoods.BAOZI));
    public static DeferredItem<Item> SHENGJIAN_MANTOU = registerItem("shengjian_mantou", () -> new FoodWithEffectsItem(ModFoods.SHENGJIAN_MANTOU_ITEM));

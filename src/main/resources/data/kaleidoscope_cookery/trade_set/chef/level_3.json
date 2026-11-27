@@ -1,0 +1,10 @@
+{
+  "trades": [
+    "kaleidoscope_cookery:chef/level_3/trade_01",
+    "kaleidoscope_cookery:chef/level_3/trade_02",
+    "kaleidoscope_cookery:chef/level_3/trade_03",
+    "kaleidoscope_cookery:chef/level_3/trade_04"
+  ],
+  "amount": 2,
+  "allow_duplicates": false
+}

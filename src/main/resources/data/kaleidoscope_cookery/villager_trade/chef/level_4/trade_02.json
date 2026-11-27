@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "kaleidoscope_cookery:pufferfish_soup",
+    "count": 1
+  },
+  "gives": {
+    "id": "minecraft:emerald",
+    "count": 4
+  },
+  "max_uses": 16,
+  "xp": 10,
+  "reputation_discount": 0.1
+}

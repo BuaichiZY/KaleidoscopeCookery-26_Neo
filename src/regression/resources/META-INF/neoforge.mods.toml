@@ -1,0 +1,7 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+[[mods]]
+modId="cookery_regression"
+version="1.0"
+displayName="Cookery regression validation"

@@ -43,8 +43,6 @@ import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult.Type;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
@@ -52,7 +50,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class TeapotItem extends BlockItem {
    public TeapotItem() {
-      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    private static CompoundTag getBlockData(ItemStack stack) {
@@ -250,7 +248,6 @@ public class TeapotItem extends BlockItem {
       }
    }
 
-   @OnlyIn(Dist.CLIENT)
    public int getBarColor(ItemStack stack) {
       CompoundTag tag = getBlockData(stack);
       if (tag == null) {
@@ -289,7 +286,6 @@ public class TeapotItem extends BlockItem {
       }
    }
 
-   @OnlyIn(Dist.CLIENT)
    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag pFlag) {
       CompoundTag tag = getBlockData(stack);
       if (tag != null) {

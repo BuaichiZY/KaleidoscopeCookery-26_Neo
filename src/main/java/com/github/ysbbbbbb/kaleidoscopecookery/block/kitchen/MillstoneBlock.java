@@ -144,7 +144,7 @@ public class MillstoneBlock extends HorizontalDirectionalBlock implements Entity
    }
 
    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-      if (pEntity instanceof Mob mob && !pLevel.isClientSide() && pLevel.getGameTime() % 5L == 4L) {
+      if (pEntity instanceof LivingEntity mob && !pLevel.isClientSide() && pLevel.getGameTime() % 5L == 4L) {
          NinePart part = (NinePart)pState.getValue(PART);
          BlockPos centerPos = pPos.subtract(new Vec3i(part.getPosX(), 0, part.getPosY()));
          if (pLevel.getBlockEntity(centerPos) instanceof MillstoneBlockEntity millstone && !millstone.hasEntity() && millstone.canBindEntity(mob)) {

@@ -1,0 +1,16 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "ingredients": [
+    "kaleidoscope_cookery:dried_tea_leaves",
+    "kaleidoscope_cookery:dried_tea_leaves",
+    "kaleidoscope_cookery:dried_tea_leaves",
+    "minecraft:egg",
+    "minecraft:egg",
+    "minecraft:egg"
+  ],
+  "result": {
+    "count": 3,
+    "id": "kaleidoscope_cookery:tea_egg"
+  },
+  "carrier": "minecraft:barrier"
+}

@@ -1,14 +1,11 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.ReiUtil;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.FlexPotRecipe;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -28,124 +25,132 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class ReiFlexPotRecipeCategory implements DisplayCategory<ReiFlexPotRecipeCategory.FlexPotRecipeDisplay> {
-   public static final CategoryIdentifier<ReiFlexPotRecipeCategory.FlexPotRecipeDisplay> ID = CategoryIdentifier.of("kaleidoscope_cookery", "plugin/flex_pot");
-   private static final Identifier BG = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "textures/gui/jei/pot.png");
-   private static final Component TITLE = ComponentUtils.formatList(
-      List.of(Component.translatable("jei.kaleidoscope_cookery.flex_recipe"), Component.translatable("block.kaleidoscope_cookery.pot")), CommonComponents.SPACE
-   );
-   public static final int WIDTH = 176;
-   public static final int HEIGHT = 102;
+    public static final CategoryIdentifier<FlexPotRecipeDisplay> ID = CategoryIdentifier.of(KaleidoscopeCookery.MOD_ID, "plugin/flex_pot");
+    private static final ResourceLocation BG = ResourceLocation.fromNamespaceAndPath(KaleidoscopeCookery.MOD_ID, "textures/gui/jei/pot.png");
+    private static final Component TITLE = ComponentUtils.formatList(List.of(
+            Component.translatable("jei.kaleidoscope_cookery.flex_recipe"),
+            Component.translatable("block.kaleidoscope_cookery.pot")
+    ), CommonComponents.SPACE);
+    public static final int WIDTH = 176;
+    public static final int HEIGHT = 102;
 
-   public CategoryIdentifier<ReiFlexPotRecipeCategory.FlexPotRecipeDisplay> getCategoryIdentifier() {
-      return ID;
-   }
+    @Override
+    public CategoryIdentifier<FlexPotRecipeDisplay> getCategoryIdentifier() {
+        return ID;
+    }
 
-   public List<Widget> setupDisplay(ReiFlexPotRecipeCategory.FlexPotRecipeDisplay display, Rectangle bounds) {
-      List<Widget> widgets = new ArrayList<>();
-      int startX = bounds.x;
-      int startY = bounds.y;
-      Component stirFryCount = Component.translatable("jei.kaleidoscope_cookery.pot.stir_fry_count", new Object[]{display.stirFryCount});
-      widgets.add(Widgets.createRecipeBase(bounds));
-      widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 102));
-      widgets.add(Widgets.withTranslate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
-         this.drawCenteredString(guiGraphics, Component.translatable("jei.kaleidoscope_cookery.flex_recipe"), 88, 5);
-         this.drawCenteredString(guiGraphics, stirFryCount, 88, 85);
-      }), startX, startY, 0.0));
-      List<EntryIngredient> inputs = display.getInputEntries();
+    @Override
+    public List<Widget> setupDisplay(FlexPotRecipeDisplay display, Rectangle bounds) {
+        List<Widget> widgets = new ArrayList<>();
+        int startX = bounds.x;
+        int startY = bounds.y;
+        Component stirFryCount = Component.translatable("jei.kaleidoscope_cookery.pot.stir_fry_count", display.stirFryCount);
 
-      for (int i = 0; i < inputs.size(); i++) {
-         int xOffset = i % 3 * 18 + 15;
-         int yOffset = i / 3 * 18 + 24;
-         widgets.add(Widgets.createSlot(new Point(startX + xOffset, startY + yOffset)).entries((Collection)inputs.get(i)).disableBackground().markInput());
-         if (!inputs.get(i).isEmpty()) {
-            widgets.add(
-               Widgets.withTranslate(
-                  Widgets.createDrawableWidget(
-                     (guiGraphics, mouseX, mouseY, v) -> guiGraphics.drawString(
-                        Minecraft.getInstance().font, Component.literal("*"), xOffset, yOffset, 16777215, true
-                     )
-                  ),
-                  startX,
-                  startY,
-                  0.0
-               )
-            );
-         }
-      }
+        widgets.add(Widgets.createRecipeBase(bounds));
+        widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0, 0, WIDTH, HEIGHT));
+        widgets.add(Widgets.withTranslate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
+            drawCenteredString(guiGraphics, Component.translatable("jei.kaleidoscope_cookery.flex_recipe"), WIDTH / 2, 5);
+            drawCenteredString(guiGraphics, stirFryCount, WIDTH / 2, 85);
+        }), startX, startY, 0));
 
-      if (!display.carrier.isEmpty()) {
-         widgets.add(Widgets.createSlot(new Point(startX + 133, startY + 18)).entries(display.carrier).disableBackground().markInput());
-      }
+        List<EntryIngredient> inputs = display.getInputEntries();
+        for (int i = 0; i < inputs.size(); i++) {
+            int xOffset = (i % 3) * 18 + 15;
+            int yOffset = (i / 3) * 18 + 24;
+            widgets.add(Widgets.createSlot(new Point(startX + xOffset, startY + yOffset))
+                    .entries(inputs.get(i))
+                    .disableBackground()
+                    .markInput());
+            if (!inputs.get(i).isEmpty()) {
+                widgets.add(Widgets.withTranslate(Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> {
+                    guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("*"), xOffset, yOffset, 0xFFFFFF, true);
+                }), startX, startY, 0));
+            }
+        }
+        if (!display.carrier.isEmpty()) {
+            widgets.add(Widgets.createSlot(new Point(startX + 133, startY + 18))
+                    .entries(display.carrier)
+                    .disableBackground()
+                    .markInput());
+        }
+        widgets.add(Widgets.createSlot(new Point(startX + 143, startY + 60))
+                .entries(display.getOutputEntries().get(0))
+                .disableBackground()
+                .markOutput());
 
-      widgets.add(
-         Widgets.createSlot(new Point(startX + 143, startY + 60)).entries((Collection)display.getOutputEntries().get(0)).disableBackground().markOutput()
-      );
-      return widgets;
-   }
+        return widgets;
+    }
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
-      Font font = Minecraft.getInstance().font;
-      FormattedCharSequence sequence = text.getVisualOrderText();
-      guiGraphics.drawString(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
-   }
+    private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+        Font font = Minecraft.getInstance().font;
+        FormattedCharSequence sequence = text.getVisualOrderText();
+        guiGraphics.drawString(font, sequence, centerX - font.width(sequence) / 2, y, 0x555555, false);
+    }
 
-   public int getDisplayWidth(ReiFlexPotRecipeCategory.FlexPotRecipeDisplay display) {
-      return 176;
-   }
+    @Override
+    public int getDisplayWidth(FlexPotRecipeDisplay display) {
+        return WIDTH;
+    }
 
-   public int getDisplayHeight() {
-      return 102;
-   }
+    @Override
+    public int getDisplayHeight() {
+        return HEIGHT;
+    }
 
-   public Component getTitle() {
-      return TITLE;
-   }
+    @Override
+    public Component getTitle() {
+        return TITLE;
+    }
 
-   public Renderer getIcon() {
-      return EntryStacks.of((ItemLike)ModItems.POT.get());
-   }
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(ModItems.POT.get());
+    }
 
-   public static void registerCategories(CategoryRegistry registry) {
-      registry.add(new ReiFlexPotRecipeCategory());
-      registry.addWorkstations(
-         ID,
-         new EntryIngredient[]{
-            ReiUtil.ofItem((Item)ModItems.POT.get()), ReiUtil.ofIngredient(Ingredient.of(TagMod.KITCHEN_SHOVEL)), ReiUtil.ofItem((Item)ModItems.OIL.get())
-         }
-      );
-   }
+    public static void registerCategories(CategoryRegistry registry) {
+        registry.add(new ReiFlexPotRecipeCategory());
+        registry.addWorkstations(ReiFlexPotRecipeCategory.ID,
+                ReiUtil.ofItem(ModItems.POT.get()),
+                ReiUtil.ofIngredient(Ingredient.of(TagMod.KITCHEN_SHOVEL)),
+                ReiUtil.ofItem(ModItems.OIL.get())
+        );
+    }
 
-   public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.FLEX_POT_RECIPE).forEach(holder -> {
-         FlexPotRecipe r = (FlexPotRecipe)holder.value();
-         List<EntryIngredient> inputs = ReiUtil.ofIngredients(r.getIngredients());
-         List<EntryIngredient> output = ReiUtil.ofItemStacks(r.getResultItem(RegistryAccess.EMPTY));
-         EntryIngredient carrier = r.carrier().isEmpty() ? EntryIngredient.empty() : ReiUtil.ofIngredient(r.carrier());
-         registry.add(new ReiFlexPotRecipeCategory.FlexPotRecipeDisplay(holder.id(), inputs, output, carrier, r.stirFryCount()));
-      });
-   }
+    public static void registerDisplays(DisplayRegistry registry) {
+        registry.getRecipeManager().getAllRecipesFor(ModRecipes.FLEX_POT_RECIPE)
+                .forEach(holder -> {
+                    FlexPotRecipe r = holder.value();
 
-   public static class FlexPotRecipeDisplay extends BasicDisplay {
-      public final EntryIngredient carrier;
-      public final int stirFryCount;
+                    List<EntryIngredient> inputs = ReiUtil.ofIngredients(r.getIngredients());
+                    List<EntryIngredient> output = ReiUtil.ofItemStacks(r.getResultItem(RegistryAccess.EMPTY));
+                    EntryIngredient carrier = r.carrier().isEmpty() ? EntryIngredient.empty() : ReiUtil.ofIngredient(r.carrier());
 
-      public FlexPotRecipeDisplay(
-         Identifier location, List<EntryIngredient> inputs, List<EntryIngredient> outputs, EntryIngredient carrier, int stirFryCount
-      ) {
-         super(inputs, outputs, Optional.of(location));
-         this.carrier = carrier;
-         this.stirFryCount = stirFryCount;
-      }
+                    registry.add(new FlexPotRecipeDisplay(holder.id(), inputs, output, carrier, r.stirFryCount()));
+                });
+    }
 
-      public CategoryIdentifier<?> getCategoryIdentifier() {
-         return ReiFlexPotRecipeCategory.ID;
-      }
-   }
+    public static class FlexPotRecipeDisplay extends BasicDisplay {
+        public final EntryIngredient carrier;
+        public final int stirFryCount;
+
+        public FlexPotRecipeDisplay(ResourceLocation location, List<EntryIngredient> inputs, List<EntryIngredient> outputs, EntryIngredient carrier, int stirFryCount) {
+            super(inputs, outputs, Optional.of(location));
+            this.carrier = carrier;
+            this.stirFryCount = stirFryCount;
+        }
+
+        @Override
+        public CategoryIdentifier<?> getCategoryIdentifier() {
+            return ID;
+        }
+    }
 }

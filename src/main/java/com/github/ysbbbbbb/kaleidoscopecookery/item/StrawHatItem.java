@@ -23,7 +23,7 @@ public class StrawHatItem extends Item {
    private final boolean hasFlower;
 
    public StrawHatItem(boolean hasFlower) {
-      super(ModRegistrationProperties.itemProperties().stacksTo(1).humanoidArmor(ArmorMaterials.LEATHER, ArmorType.HELMET));
+      super(ModRegistrationProperties.itemProperties().stacksTo(1).humanoidArmor(com.github.ysbbbbbb.kaleidoscopecookery.init.ModArmorMaterials.FARMER, ArmorType.HELMET));
       this.hasFlower = hasFlower;
    }
 

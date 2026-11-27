@@ -38,3 +38,10 @@ run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+# Local dependencies and build artifacts
+/build-local/
+/.gradle-user-home/
+/outputs/
+/work/
+/libs/*.jar

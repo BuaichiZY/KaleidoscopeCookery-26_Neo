@@ -2,270 +2,364 @@ package com.github.ysbbbbbb.kaleidoscopecookery.datagen.recipe;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
-import java.util.concurrent.CompletableFuture;
-import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.Tags.Items;
+import net.neoforged.neoforge.common.Tags;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ShapedRecipeProvider extends ModRecipeProvider {
-   public ShapedRecipeProvider(PackOutput output, CompletableFuture<Provider> registries) {
-      super(output, registries);
-   }
+    public ShapedRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
+    }
 
-   @Override
-   public void buildRecipes(RecipeOutput consumer) {
-      ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, (ItemLike)ModItems.STOVE.get())
-         .pattern("###")
-         .pattern("#F#")
-         .pattern("###")
-         .define('#', Items.COBBLESTONES)
-         .define('F', net.minecraft.world.item.Items.CAMPFIRE)
-         .unlockedBy("has_campfire", has(net.minecraft.world.item.Items.CAMPFIRE))
-         .save(consumer, "kaleidoscope_cookery:stove_campfire");
-      ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, (ItemLike)ModItems.STOVE.get())
-         .pattern("###")
-         .pattern("#F#")
-         .pattern("###")
-         .define('#', Items.COBBLESTONES)
-         .define('F', net.minecraft.world.item.Items.SOUL_CAMPFIRE)
-         .unlockedBy("has_soul_campfire", has(net.minecraft.world.item.Items.SOUL_CAMPFIRE))
-         .save(consumer, "kaleidoscope_cookery:stove_soul_campfire");
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.FRUIT_BASKET.get())
-         .pattern(" S ")
-         .pattern("#C#")
-         .pattern("###")
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .define('#', ItemTags.PLANKS)
-         .define('C', net.minecraft.world.item.Items.CHEST)
-         .unlockedBy("has_chest", has(net.minecraft.world.item.Items.CHEST))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.SCARECROW.get())
-         .pattern(" H ")
-         .pattern("SPS")
-         .pattern(" # ")
-         .define('H', TagMod.STRAW_HAT)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .define('P', net.minecraft.world.item.Items.PUMPKIN)
-         .define('#', TagMod.STRAW_BALE)
-         .unlockedBy("has_pumpkin", has(net.minecraft.world.item.Items.PUMPKIN))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, (ItemLike)ModItems.POT.get())
-         .pattern("###")
-         .pattern("###")
-         .pattern(" # ")
-         .define('#', Items.INGOTS_IRON)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.IRON_KITCHEN_KNIFE.get())
-         .pattern("##")
-         .pattern("#S")
-         .define('#', Items.INGOTS_IRON)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.GOLD_KITCHEN_KNIFE.get())
-         .pattern("##")
-         .pattern("#S")
-         .define('#', Items.INGOTS_GOLD)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.DIAMOND_KITCHEN_KNIFE.get())
-         .pattern("##")
-         .pattern("#S")
-         .define('#', Items.GEMS_DIAMOND)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.KITCHEN_SHOVEL.get())
-         .pattern("I  ")
-         .pattern(" N ")
-         .pattern("  S")
-         .define('I', Items.INGOTS_IRON)
-         .define('N', Items.NUGGETS_IRON)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.STRAW_HAT.get())
-         .pattern(" W ")
-         .pattern(" S ")
-         .pattern("WWW")
-         .define('W', net.minecraft.world.item.Items.WHEAT)
-         .define('S', net.minecraft.world.item.Items.STRING)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.STRAW_HAT_FLOWER.get())
-         .pattern("FFF")
-         .pattern("FHF")
-         .pattern("FFF")
-         .define('F', ItemTags.FLOWERS)
-         .define('H', (ItemLike)ModItems.STRAW_HAT.get())
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.OIL_BLOCK.get())
-         .pattern("OOO")
-         .pattern("OOO")
-         .pattern("OOO")
-         .define('O', (ItemLike)ModItems.OIL.get())
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.CHOPPING_BOARD.get())
-         .pattern("PPP")
-         .pattern("PPP")
-         .define('P', ItemTags.WOODEN_PRESSURE_PLATES)
-         .unlockedBy("has_wood", has(net.minecraft.world.item.Items.OAK_PLANKS))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.STOCKPOT.get())
-         .pattern("B B")
-         .pattern("I I")
-         .pattern("III")
-         .define('B', net.minecraft.world.item.Items.BRICK)
-         .define('I', Items.INGOTS_IRON)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.STOCKPOT_LID.get())
-         .pattern(" B ")
-         .pattern("III")
-         .define('B', net.minecraft.world.item.Items.BRICK)
-         .define('I', Items.INGOTS_IRON)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.ENAMEL_BASIN.get())
-         .pattern("O")
-         .pattern("I")
-         .pattern("B")
-         .define('B', net.minecraft.world.item.Items.BUCKET)
-         .define('I', net.minecraft.world.item.Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-         .define('O', net.minecraft.world.item.Items.STONE_BUTTON)
-         .unlockedBy("has_bucket", has(net.minecraft.world.item.Items.BUCKET))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.KITCHENWARE_RACKS.get())
-         .pattern("SSS")
-         .pattern("INI")
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .define('I', Items.INGOTS_IRON)
-         .define('N', Items.NUGGETS_IRON)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.CHILI_RISTRA.get())
-         .pattern("CC")
-         .pattern("CC")
-         .pattern("CC")
-         .define('C', (ItemLike)ModItems.RED_CHILI.get())
-         .unlockedBy("has_red_chili", has((ItemLike)ModItems.RED_CHILI.get()))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.STRUNG_MUSHROOMS.get())
-         .pattern("MM")
-         .pattern("MM")
-         .pattern("MM")
-         .define('M', net.minecraft.world.item.Items.BROWN_MUSHROOM)
-         .unlockedBy("has_brown_mushroom", has(net.minecraft.world.item.Items.BROWN_MUSHROOM))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.STRAW_BLOCK.get())
-         .pattern("RRR")
-         .pattern("RRR")
-         .pattern("RRR")
-         .define('R', (ItemLike)ModItems.RICE_PANICLE.get())
-         .unlockedBy("has_rice_panicle", has((ItemLike)ModItems.RICE_PANICLE.get()))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.FARMER_CHEST_PLATE.get())
-         .pattern("I I")
-         .pattern("LLL")
-         .pattern("LLL")
-         .define('I', Items.INGOTS_IRON)
-         .define('L', net.minecraft.world.item.Items.LEATHER)
-         .unlockedBy("has_leather", has(net.minecraft.world.item.Items.LEATHER))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.FARMER_LEGGINGS.get())
-         .pattern("LIL")
-         .pattern("L L")
-         .pattern("L L")
-         .define('I', Items.INGOTS_IRON)
-         .define('L', net.minecraft.world.item.Items.LEATHER)
-         .unlockedBy("has_leather", has(net.minecraft.world.item.Items.LEATHER))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.FARMER_BOOTS.get())
-         .pattern("I I")
-         .pattern("L L")
-         .define('I', Items.INGOTS_IRON)
-         .define('L', net.minecraft.world.item.Items.LEATHER)
-         .unlockedBy("has_leather", has(net.minecraft.world.item.Items.LEATHER))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.SHAWARMA_SPIT.get())
-         .pattern("ICI")
-         .pattern("ICI")
-         .define('I', net.minecraft.world.item.Items.CHAIN)
-         .define('C', net.minecraft.world.item.Items.CAMPFIRE)
-         .unlockedBy("has_campfire", has(net.minecraft.world.item.Items.CAMPFIRE))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.MILLSTONE.get())
-         .pattern(" F ")
-         .pattern("SG ")
-         .pattern("TTT")
-         .define('F', Items.FENCES_WOODEN)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .define('G', net.minecraft.world.item.Items.GRINDSTONE)
-         .define('T', net.minecraft.world.item.Items.SMOOTH_STONE)
-         .unlockedBy("has_smooth_stone", has(net.minecraft.world.item.Items.SMOOTH_STONE))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, (ItemLike)ModItems.RECIPE_ITEM.get())
-         .pattern("PP")
-         .pattern("PP")
-         .define('P', net.minecraft.world.item.Items.PAPER)
-         .unlockedBy("has_paper", has(net.minecraft.world.item.Items.PAPER))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.STEAMER.get())
-         .pattern("TTT")
-         .pattern("BBB")
-         .define('T', net.minecraft.world.item.Items.BAMBOO_TRAPDOOR)
-         .define('B', net.minecraft.world.item.Items.BAMBOO_BLOCK)
-         .unlockedBy("has_bamboo", has(net.minecraft.world.item.Items.BAMBOO))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.TRANSMUTATION_LUNCH_BAG.get())
-         .pattern(" L ")
-         .pattern("LSL")
-         .pattern("LLL")
-         .define('L', net.minecraft.world.item.Items.LEATHER)
-         .define('S', net.minecraft.world.item.Items.NETHER_STAR)
-         .unlockedBy("has_nether_star", has(net.minecraft.world.item.Items.NETHER_STAR))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.OIL_POT.get())
-         .pattern("P ")
-         .pattern("BS")
-         .define('P', net.minecraft.world.item.Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
-         .define('B', net.minecraft.world.item.Items.BUCKET)
-         .define('S', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_bucket", has(net.minecraft.world.item.Items.BUCKET))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, (ItemLike)ModItems.SICKLE.get())
-         .pattern("AAB")
-         .pattern(" CA")
-         .pattern("C  ")
-         .define('A', net.minecraft.world.item.Items.FLINT)
-         .define('B', net.minecraft.world.item.Items.STRING)
-         .define('C', net.minecraft.world.item.Items.STICK)
-         .unlockedBy("has_flint", has(net.minecraft.world.item.Items.FLINT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, (ItemLike)ModItems.TEAPOT.get())
-         .pattern(" I ")
-         .pattern("IBI")
-         .pattern("III")
-         .define('I', Items.INGOTS_COPPER)
-         .define('B', net.minecraft.world.item.Items.BUCKET)
-         .unlockedBy("has_ingot_copper", has(net.minecraft.world.item.Items.COPPER_INGOT))
-         .save(consumer);
-      ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (ItemLike)ModItems.TRASH_CAN.get())
-         .pattern("III")
-         .pattern("ICI")
-         .pattern("III")
-         .define('I', Items.INGOTS_IRON)
-         .define('C', net.minecraft.world.item.Items.COMPOSTER)
-         .unlockedBy("has_ingot_iron", has(net.minecraft.world.item.Items.IRON_INGOT))
-         .save(consumer);
-   }
+    @Override
+    public void buildRecipes(RecipeOutput consumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModItems.STOVE.get())
+                .pattern("###")
+                .pattern("#F#")
+                .pattern("###")
+                .define('#', Tags.Items.COBBLESTONES)
+                .define('F', Items.CAMPFIRE)
+                .unlockedBy("has_campfire", has(Items.CAMPFIRE))
+                .save(consumer, "kaleidoscope_cookery:stove_campfire");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModItems.STOVE.get())
+                .pattern("###")
+                .pattern("#F#")
+                .pattern("###")
+                .define('#', Tags.Items.COBBLESTONES)
+                .define('F', Items.SOUL_CAMPFIRE)
+                .unlockedBy("has_soul_campfire", has(Items.SOUL_CAMPFIRE))
+                .save(consumer, "kaleidoscope_cookery:stove_soul_campfire");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.FRUIT_BASKET.get())
+                .pattern(" S ")
+                .pattern("#C#")
+                .pattern("###")
+                .define('S', Items.STICK)
+                .define('#', ItemTags.PLANKS)
+                .define('C', Items.CHEST)
+                .unlockedBy("has_chest", has(Items.CHEST))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.TEA_BANNER.get())
+                .pattern("WWW")
+                .pattern("WWW")
+                .pattern("S  ")
+                .define('W', Items.RED_WOOL)
+                .define('S', Items.STICK)
+                .unlockedBy("has_red_wool", has(Items.RED_WOOL))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SCARECROW.get())
+                .pattern(" H ")
+                .pattern("SPS")
+                .pattern(" # ")
+                .define('H', TagMod.STRAW_HAT)
+                .define('S', Items.STICK)
+                .define('P', Items.PUMPKIN)
+                .define('#', TagMod.STRAW_BALE)
+                .unlockedBy("has_pumpkin", has(Items.PUMPKIN))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModItems.POT.get())
+                .pattern("###")
+                .pattern("###")
+                .pattern(" # ")
+                .define('#', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.IRON_KITCHEN_KNIFE.get())
+                .pattern("##")
+                .pattern("#S")
+                .define('#', Tags.Items.INGOTS_IRON)
+                .define('S', Items.STICK)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLD_KITCHEN_KNIFE.get())
+                .pattern("##")
+                .pattern("#S")
+                .define('#', Tags.Items.INGOTS_GOLD)
+                .define('S', Items.STICK)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.DIAMOND_KITCHEN_KNIFE.get())
+                .pattern("##")
+                .pattern("#S")
+                .define('#', Tags.Items.GEMS_DIAMOND)
+                .define('S', Items.STICK)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.KITCHEN_SHOVEL.get())
+                .pattern("I  ")
+                .pattern(" N ")
+                .pattern("  S")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('N', Tags.Items.NUGGETS_IRON)
+                .define('S', Items.STICK)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STRAW_HAT.get())
+                .pattern(" W ")
+                .pattern(" S ")
+                .pattern("WWW")
+                .define('W', Items.WHEAT)
+                .define('S', Items.STRING)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STRAW_HAT_FLOWER.get())
+                .pattern("FFF")
+                .pattern("FHF")
+                .pattern("FFF")
+                .define('F', ItemTags.FLOWERS)
+                .define('H', ModItems.STRAW_HAT.get())
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.OIL_BLOCK.get())
+                .pattern("OOO")
+                .pattern("OOO")
+                .pattern("OOO")
+                .define('O', ModItems.OIL.get())
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.CHOPPING_BOARD.get())
+                .pattern("PPP")
+                .pattern("PPP")
+                .define('P', ItemTags.WOODEN_PRESSURE_PLATES)
+                .unlockedBy("has_wood", has(Items.OAK_PLANKS))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.STOCKPOT.get())
+                .pattern("B B")
+                .pattern("I I")
+                .pattern("III")
+                .define('B', Items.BRICK)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.STOCKPOT_LID.get())
+                .pattern(" B ")
+                .pattern("III")
+                .define('B', Items.BRICK)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.ENAMEL_BASIN.get())
+                .pattern("O")
+                .pattern("I")
+                .pattern("B")
+                .define('B', Items.BUCKET)
+                .define('I', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
+                .define('O', Items.STONE_BUTTON)
+                .unlockedBy("has_bucket", has(Items.BUCKET))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.BAMBOO_TRAY.get())
+                .pattern(" S ")
+                .pattern("STS")
+                .pattern(" S ")
+                .define('S', Items.STRING)
+                .define('T', Items.BAMBOO_TRAPDOOR)
+                .unlockedBy("has_bamboo_trapdoor", has(Items.BAMBOO_TRAPDOOR))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.KITCHENWARE_RACKS.get())
+                .pattern("SSS")
+                .pattern("INI")
+                .define('S', Items.STICK)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('N', Tags.Items.NUGGETS_IRON)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.CHILI_RISTRA.get())
+                .pattern("CC")
+                .pattern("CC")
+                .pattern("CC")
+                .define('C', ModItems.RED_CHILI.get())
+                .unlockedBy("has_red_chili", has(ModItems.RED_CHILI.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.STRUNG_MUSHROOMS.get())
+                .pattern("MM")
+                .pattern("MM")
+                .pattern("MM")
+                .define('M', Items.BROWN_MUSHROOM)
+                .unlockedBy("has_brown_mushroom", has(Items.BROWN_MUSHROOM))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.STRAW_BLOCK.get())
+                .pattern("RRR")
+                .pattern("RRR")
+                .pattern("RRR")
+                .define('R', ModItems.RICE_PANICLE.get())
+                .unlockedBy("has_rice_panicle", has(ModItems.RICE_PANICLE.get()))
+                .save(consumer);
+
+        addTeaBagRecipe(ModItems.TIEGUANYIN_TEA_BAG.get(), Items.IRON_NUGGET).save(consumer);
+        addTeaBagRecipe(ModItems.BILUOCHUN_TEA_BAG.get(), Items.NAUTILUS_SHELL).save(consumer);
+        addTeaBagRecipe(ModItems.OOLONG_TEA_BAG.get(), Items.DRAGON_BREATH).save(consumer);
+        addTeaBagRecipe(ModItems.SAKURA_FUBUKI_TEA_BAG.get(), Items.PINK_PETALS).save(consumer);
+        addTeaBagRecipe(ModItems.BARLEY_TEA_BAG.get(), Items.WHEAT_SEEDS).save(consumer);
+        addTeaBagRecipe(ModItems.BUTTER_TEA_BAG.get(), ModItems.OIL.get()).save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.FARMER_CHEST_PLATE.get())
+                .pattern("I I")
+                .pattern("LLL")
+                .pattern("LLL")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('L', Items.LEATHER)
+                .unlockedBy("has_leather", has(Items.LEATHER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.FARMER_LEGGINGS.get())
+                .pattern("LIL")
+                .pattern("L L")
+                .pattern("L L")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('L', Items.LEATHER)
+                .unlockedBy("has_leather", has(Items.LEATHER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.FARMER_BOOTS.get())
+                .pattern("I I")
+                .pattern("L L")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('L', Items.LEATHER)
+                .unlockedBy("has_leather", has(Items.LEATHER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SHAWARMA_SPIT.get())
+                .pattern("ICI")
+                .pattern("ICI")
+                .define('I', Items.CHAIN)
+                .define('C', Items.CAMPFIRE)
+                .unlockedBy("has_campfire", has(Items.CAMPFIRE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.MILLSTONE.get())
+                .pattern(" F ")
+                .pattern("SG ")
+                .pattern("TTT")
+                .define('F', Tags.Items.FENCES_WOODEN)
+                .define('S', Items.STICK)
+                .define('G', Items.GRINDSTONE)
+                .define('T', Items.SMOOTH_STONE)
+                .unlockedBy("has_smooth_stone", has(Items.SMOOTH_STONE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.RECIPE_ITEM.get())
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', Items.PAPER)
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STEAMER.get())
+                .pattern("TTT")
+                .pattern("BBB")
+                .define('T', Items.BAMBOO_TRAPDOOR)
+                .define('B', Items.BAMBOO_BLOCK)
+                .unlockedBy("has_bamboo", has(Items.BAMBOO))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.TRANSMUTATION_LUNCH_BAG.get())
+                .pattern(" L ")
+                .pattern("LSL")
+                .pattern("LLL")
+                .define('L', Items.LEATHER)
+                .define('S', Items.AMETHYST_SHARD)
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.OIL_POT.get())
+                .pattern("P ")
+                .pattern("BS")
+                .define('P', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
+                .define('B', Items.BUCKET)
+                .define('S', Items.STICK)
+                .unlockedBy("has_bucket", has(Items.BUCKET))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SICKLE.get())
+                .pattern("AAB")
+                .pattern(" CA")
+                .pattern("C  ")
+                .define('A', Items.FLINT)
+                .define('B', Items.STRING)
+                .define('C', Items.STICK)
+                .unlockedBy("has_flint", has(Items.FLINT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.TEAPOT.get())
+                .pattern(" I ")
+                .pattern("IBI")
+                .pattern("III")
+                .define('I', Tags.Items.INGOTS_COPPER)
+                .define('B', Items.BUCKET)
+                .unlockedBy("has_ingot_copper", has(Items.COPPER_INGOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TRASH_CAN.get())
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("III")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('C', Items.COMPOSTER)
+                .unlockedBy("has_ingot_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+
+        // 果串
+
+        addFruitSkewerRecipe(consumer, ModItems.GLOW_BERRY_SKEWER.get(), Items.GLOW_BERRIES);
+        addFruitSkewerRecipe(consumer, ModItems.SWEET_BERRY_SKEWER.get(), Items.SWEET_BERRIES);
+        addFruitSkewerRecipe(consumer, ModItems.CHORUS_FRUIT_SKEWER.get(), Items.CHORUS_FRUIT);
+        addFruitSkewerRecipe(consumer, ModItems.APPLE_SKEWER.get(), Items.APPLE);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CATERPILLAR_SKEWER.get())
+                .pattern("C")
+                .pattern("S")
+                .define('C', ModItems.CATERPILLAR.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_caterpillar", has(ModItems.CATERPILLAR.get()))
+                .save(consumer);
+    }
+
+    private ShapedRecipeBuilder addTeaBagRecipe(ItemLike result, ItemLike center) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, result)
+                .pattern("LLL")
+                .pattern("LCL")
+                .pattern("LLL")
+                .define('L', ModItems.DRIED_TEA_LEAVES.get())
+                .define('C', center)
+                .unlockedBy("has_dried_tea_leaves", has(ModItems.DRIED_TEA_LEAVES.get()));
+    }
+
+    private void addFruitSkewerRecipe(RecipeOutput consumer, ItemLike result, ItemLike fruit) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, result)
+                .pattern("F")
+                .pattern("F")
+                .pattern("S")
+                .define('F', fruit)
+                .define('S', Items.STICK)
+                .unlockedBy("has_fruit", has(fruit))
+                .save(consumer);
+    }
 }

@@ -5,8 +5,8 @@
     "#c:crops/lettuce",
     "#c:crops/lettuce",
     "#c:crops/lettuce",
-    "#c:flour",
-    "#c:flour"
+    "#c:flours/wheat",
+    "#c:flours/wheat"
   ],
   "result": {
     "count": 1,

@@ -22,7 +22,16 @@ public class ModVillager {
          ImmutableSet.of(),
          ImmutableSet.of(),
          SoundEvents.VILLAGER_WORK_BUTCHER,
-         Int2ObjectMap.ofEntries()
+         chefTrades()
       )
    );
+   private static it.unimi.dsi.fastutil.ints.Int2ObjectMap<net.minecraft.resources.ResourceKey<net.minecraft.world.item.trading.TradeSet>> chefTrades() {
+      var trades = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<net.minecraft.resources.ResourceKey<net.minecraft.world.item.trading.TradeSet>>();
+      for (int level = 1; level <= 5; level++) {
+         trades.put(level, net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.TRADE_SET,
+            net.minecraft.resources.Identifier.parse("kaleidoscope_cookery:chef/level_" + level)));
+      }
+      return trades;
+   }
 }
+
