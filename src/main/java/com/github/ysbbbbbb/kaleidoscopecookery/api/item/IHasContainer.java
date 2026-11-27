@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
 
 public interface IHasContainer {
    Item getContainerItem();

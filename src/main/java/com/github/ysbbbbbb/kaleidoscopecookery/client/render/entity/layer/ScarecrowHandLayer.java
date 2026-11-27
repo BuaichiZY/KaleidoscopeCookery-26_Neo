@@ -34,13 +34,13 @@ public class ScarecrowHandLayer extends ItemInHandLayer<ScarecrowEntity, Scarecr
       if (!stack.isEmpty()) {
          poseStack.pushPose();
          ((ScarecrowModel)this.getParentModel()).translateToHand(arm, poseStack);
-         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+         poseStack.rotateDegrees(Axis.XP, -90.0F);
+         poseStack.rotateDegrees(Axis.YP, 180.0F);
          boolean isLeft = arm == HumanoidArm.LEFT;
          if (isLeft) {
             if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof LanternBlock lanternBlock) {
                poseStack.translate(-0.375, 0.375, -2.0);
-               poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+               poseStack.rotateDegrees(Axis.XP, 90.0F);
                BlockState blockState = lanternBlock.defaultBlockState();
                poseStack.scale(0.75F, 0.75F, 0.75F);
                this.blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
@@ -48,8 +48,8 @@ public class ScarecrowHandLayer extends ItemInHandLayer<ScarecrowEntity, Scarecr
             }
          } else {
             poseStack.translate(0.125, 0.0, -1.375);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-            poseStack.mulPose(Axis.XP.rotationDegrees(85.0F));
+            poseStack.rotateDegrees(Axis.ZP, -90.0F);
+            poseStack.rotateDegrees(Axis.XP, 85.0F);
             poseStack.scale(0.75F, 0.75F, 0.75F);
             this.itemRenderer.renderItem(entity, stack, context, isLeft, poseStack, bufferSource, packedLight);
             poseStack.popPose();

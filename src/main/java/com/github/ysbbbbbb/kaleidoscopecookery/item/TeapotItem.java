@@ -2,6 +2,7 @@ package com.github.ysbbbbbb.kaleidoscopecookery.item;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.crafting.serializer.TeapotRecipeSerializer;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
+import com.github.ysbbbbbb.kaleidoscopecookery.util.FluidUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -44,13 +45,12 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.neoforged.neoforge.common.SoundActions;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.apache.commons.lang3.StringUtils;
 
 public class TeapotItem extends BlockItem {
    public TeapotItem() {
-      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.TEAPOT.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    private static CompoundTag getBlockData(ItemStack stack) {
@@ -213,11 +213,11 @@ public class TeapotItem extends BlockItem {
                if (pickup.isEmpty()) {
                   return InteractionResult.FAIL;
                } else {
-                  IFluidHandlerItem capability = FluidUtil.getFluidHandler(pickup).orElse(null);
-                  if (capability == null) {
+                  FluidStack containedFluid = FluidUtils.getFirstFluid(pickup);
+                  if (containedFluid.isEmpty()) {
                      return InteractionResult.FAIL;
                   } else {
-                     Fluid fluid = capability.getFluidInTank(0).getFluid();
+                     Fluid fluid = containedFluid.getFluid();
                      boolean result = fillFluid(itemInHand, fluid, player);
                      return result
                         ? (level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER)

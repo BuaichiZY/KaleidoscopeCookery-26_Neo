@@ -25,7 +25,7 @@ public class KitchenwareRacksBlockEntityRender implements BlockEntityRenderer<Ki
       ItemStack itemRight = blockEntity.getItemRight();
       int rotation = ((Direction)blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)).get2DDataValue() * 90;
       poseStack.translate(0.5, 0.0, 0.5);
-      poseStack.mulPose(Axis.YN.rotationDegrees(rotation));
+      poseStack.rotateDegrees(Axis.YN, rotation);
       if (!itemLeft.isEmpty()) {
          poseStack.pushPose();
          poseStack.translate(-0.2, 0.4375, -0.3);
@@ -45,9 +45,9 @@ public class KitchenwareRacksBlockEntityRender implements BlockEntityRenderer<Ki
       KitchenwareRacksBlockEntity blockEntity, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, ItemStack itemStack
    ) {
       poseStack.scale(0.75F, 0.75F, 0.75F);
-      poseStack.mulPose(Axis.XN.rotationDegrees(180.0F));
-      poseStack.mulPose(Axis.YN.rotationDegrees(-25.0F));
-      poseStack.mulPose(Axis.ZN.rotationDegrees(45.0F));
+      poseStack.rotateDegrees(Axis.XN, 180.0F);
+      poseStack.rotateDegrees(Axis.YN, -25.0F);
+      poseStack.rotateDegrees(Axis.ZN, 45.0F);
       this.context
          .getItemRenderer()
          .renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);

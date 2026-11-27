@@ -59,7 +59,7 @@ public class MobSoupBaseRender extends FluidSoupBaseRender {
             float entityY = (float)(Math.sin(random + System.currentTimeMillis() * 5.0E-4) * 0.25);
             poseStack.pushPose();
             poseStack.translate(0.5, 0.5, 0.5);
-            poseStack.mulPose(Axis.YP.rotationDegrees(random % 360));
+            poseStack.rotateDegrees(Axis.YP, random % 360);
             poseStack.translate(-0.5, -0.5, -0.5);
             poseStack.scale(0.5F, 0.5F, 0.5F);
             Minecraft.getInstance()

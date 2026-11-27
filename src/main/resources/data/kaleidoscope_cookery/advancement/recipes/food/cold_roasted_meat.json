@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:cold_roasted_meat"
+        "recipes": [
+          "kaleidoscope_cookery:cold_roasted_meat"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -52,7 +52,7 @@ public class SteamerBlockEntityRender implements BlockEntityRenderer<SteamerBloc
             poseStack.pushPose();
             poseStack.translate(x, y, z);
             if (!hasCustom) {
-               poseStack.mulPose(Axis.XN.rotationDegrees(90.0F));
+               poseStack.rotateDegrees(Axis.XN, 90.0F);
             } else {
                poseStack.translate(0.0, 0.4375, 0.4375);
             }

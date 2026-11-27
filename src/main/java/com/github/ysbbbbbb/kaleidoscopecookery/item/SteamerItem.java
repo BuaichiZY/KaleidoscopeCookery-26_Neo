@@ -26,7 +26,7 @@ public class SteamerItem extends BlockItem {
    private static final int HAS = 1;
 
    public SteamerItem() {
-      super((Block)ModBlocks.STEAMER.get(), ModRegistrationProperties.itemProperties());
+      super((Block)ModBlocks.STEAMER.get(), ModRegistrationProperties.blockItemProperties());
    }
 
    protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
@@ -49,6 +49,19 @@ public class SteamerItem extends BlockItem {
 
    public int getMaxStackSize(ItemStack stack) {
       return stack.has(DataComponents.BLOCK_ENTITY_DATA) ? 1 : super.getMaxStackSize(stack);
+   }
+
+   @Override
+   public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(ItemStack stack) {
+      var data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+      var level = net.minecraft.client.Minecraft.getInstance().level;
+      if (data == null || level == null) return java.util.Optional.empty();
+      var tag = data.copyTagWithoutId();
+      if (!tag.contains(SteamerBlockEntity.ITEMS_TAG)) return java.util.Optional.empty();
+      var items = net.minecraft.core.NonNullList.withSize(4, ItemStack.EMPTY);
+      net.minecraft.world.ContainerHelper.loadAllItems(net.minecraft.world.level.storage.TagValueInput.create(
+         net.minecraft.util.ProblemReporter.DISCARDING, level.registryAccess(), tag), items);
+      return java.util.Optional.of(new com.github.ysbbbbbb.kaleidoscopecookery.inventory.tooltip.ItemContainerTooltip(new com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler(items)));
    }
 
    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {

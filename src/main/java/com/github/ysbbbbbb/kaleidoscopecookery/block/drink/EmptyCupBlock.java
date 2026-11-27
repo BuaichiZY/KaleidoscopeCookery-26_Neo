@@ -5,7 +5,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModParticles;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.TeapotItem;
 import com.github.ysbbbbbb.kaleidoscopecookery.util.ItemUtils;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,18 +39,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class EmptyCupBlock extends HorizontalDirectionalBlock {
-   public static final MapCodec<EmptyCupBlock> CODEC = simpleCodec(p -> new EmptyCupBlock());
    public static final VoxelShape AABB = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
    public static final int MAX_COUNT = 4;
    public static final IntegerProperty CUP_COUNT = IntegerProperty.create("cup_count", 1, 4);
 
    public EmptyCupBlock() {
-      super(ModRegistrationProperties.blockProperties().forceSolidOn().instabreak().mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion());
+      super(ModRegistrationProperties.blockProperties().forceSolidOn().instabreak().mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.POPPED).noOcclusion());
       this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(CUP_COUNT, 1)).setValue(FACING, Direction.SOUTH));
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return CODEC;
    }
 
    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
@@ -84,6 +78,19 @@ public class EmptyCupBlock extends HorizontalDirectionalBlock {
             } else {
                return InteractionResult.CONSUME;
             }
+         } else if (itemInHand.getItem() instanceof TeacupItem teacupItem
+                    && teacupItem.getBlock() instanceof TeacupBlock teacupBlock) {
+            int currentCount = state.getValue(CUP_COUNT);
+            if (currentCount < teacupBlock.getMaxCount()) {
+               level.setBlockAndUpdate(pos, teacupBlock.defaultBlockState()
+                  .setValue(teacupBlock.getCupCountProperty(), currentCount + 1)
+                  .setValue(teacupBlock.getTeaCountProperty(), 1)
+                  .setValue(FACING, state.getValue(FACING)));
+               level.playSound(player, pos, this.soundType.getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+               itemInHand.shrink(1);
+               return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.CONSUME;
          } else if (itemInHand.is((Item)ModItems.EMPTY_CUP.get())) {
             int count = (Integer)state.getValue(CUP_COUNT);
             if (count < 4) {

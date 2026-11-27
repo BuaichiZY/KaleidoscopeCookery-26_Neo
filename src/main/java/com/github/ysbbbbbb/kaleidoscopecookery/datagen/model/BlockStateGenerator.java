@@ -1,390 +1,511 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.datagen.model;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.KaleidoscopeCookery;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.RiceCropBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.PlateBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.StackableFoodBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.TableBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.TeaTreeBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.*;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.drink.EmptyCupBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.drink.TeacupBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.food.FoodBiteBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.food.FoodBiteOneByTwoBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.EnamelBasinBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.OilPotBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.PotBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.ShawarmaSpitBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.SteamerBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.StockpotBlock;
-import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.StoveBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.*;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.misc.ChiliRistraBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.misc.StrungMushroomsBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.FoodBiteRegistry;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.PlateRegistry;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.TeacupRegistry;
-import java.util.function.Function;
-import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.util.function.Function;
+
 public class BlockStateGenerator extends BlockStateProvider {
-   public BlockStateGenerator(PackOutput output, ExistingFileHelper exFileHelper) {
-      super(output, "kaleidoscope_cookery", exFileHelper);
-   }
+    public BlockStateGenerator(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, KaleidoscopeCookery.MOD_ID, exFileHelper);
+    }
 
-   protected void registerStatesAndModels() {
-      this.horizontalBlock(
-         (Block)ModBlocks.STOVE.get(),
-         blockState -> blockState.getValue(StoveBlock.LIT)
-            ? new UncheckedModelFile(this.modLoc("block/stove_lit"))
-            : new UncheckedModelFile(this.modLoc("block/stove"))
-      );
-      this.horizontalBlock(
-         (Block)ModBlocks.POT.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(PotBlock.HAS_OIL) && (Boolean)blockState.getValue(PotBlock.SHOW_OIL)) {
-               return blockState.getValue(PotBlock.HAS_BASE)
-                  ? new UncheckedModelFile(this.modLoc("block/pot_base_has_oil"))
-                  : new UncheckedModelFile(this.modLoc("block/pot_has_oil"));
+    @Override
+    protected void registerStatesAndModels() {
+        horizontalBlock(ModBlocks.STOVE.get(), blockState -> {
+            if (blockState.getValue(StoveBlock.LIT)) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/stove_lit"));
             } else {
-               return blockState.getValue(PotBlock.HAS_BASE)
-                  ? new UncheckedModelFile(this.modLoc("block/pot_base"))
-                  : new UncheckedModelFile(this.modLoc("block/pot"));
+                return new ModelFile.UncheckedModelFile(modLoc("block/stove"));
             }
-         }
-      );
-      this.horizontalBlock(
-         (Block)ModBlocks.STOCKPOT.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(StockpotBlock.HAS_LID)) {
-               if ((Boolean)blockState.getValue(StockpotBlock.HAS_BASE)) {
-                  return new UncheckedModelFile(this.modLoc("block/stockpot_base_has_lid"));
-               } else {
-                  return blockState.getValue(StockpotBlock.HAS_CHAINS)
-                     ? new UncheckedModelFile(this.modLoc("block/stockpot_chains_has_lid"))
-                     : new UncheckedModelFile(this.modLoc("block/stockpot_has_lid"));
-               }
-            } else if ((Boolean)blockState.getValue(StockpotBlock.HAS_BASE)) {
-               return new UncheckedModelFile(this.modLoc("block/stockpot_base"));
+        });
+
+        horizontalBlock(ModBlocks.POT.get(), blockState -> {
+            if (blockState.getValue(PotBlock.HAS_OIL) && blockState.getValue(PotBlock.SHOW_OIL)) {
+                if (blockState.getValue(PotBlock.HAS_BASE)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/pot_base_has_oil"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/pot_has_oil"));
             } else {
-               return blockState.getValue(StockpotBlock.HAS_CHAINS)
-                  ? new UncheckedModelFile(this.modLoc("block/stockpot_chains"))
-                  : new UncheckedModelFile(this.modLoc("block/stockpot"));
+                if (blockState.getValue(PotBlock.HAS_BASE)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/pot_base"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/pot"));
             }
-         }
-      );
-      this.horizontalBlock(
-         (Block)ModBlocks.SHAWARMA_SPIT.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(ShawarmaSpitBlock.POWERED)) {
-               return blockState.getValue(ShawarmaSpitBlock.HALF) == DoubleBlockHalf.LOWER
-                  ? new UncheckedModelFile(this.modLoc("block/shawarma_spit_powered_lower"))
-                  : new UncheckedModelFile(this.modLoc("block/shawarma_spit_powered_upper"));
+        });
+
+        horizontalBlock(ModBlocks.STOCKPOT.get(), blockState -> {
+            if (blockState.getValue(StockpotBlock.HAS_LID)) {
+                if (blockState.getValue(StockpotBlock.HAS_BASE)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_base_has_lid"));
+                }
+                if (blockState.getValue(StockpotBlock.HAS_CHAINS)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_chains_has_lid"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_has_lid"));
             } else {
-               return blockState.getValue(ShawarmaSpitBlock.HALF) == DoubleBlockHalf.LOWER
-                  ? new UncheckedModelFile(this.modLoc("block/shawarma_spit_lower"))
-                  : new UncheckedModelFile(this.modLoc("block/shawarma_spit_upper"));
+                if (blockState.getValue(StockpotBlock.HAS_BASE)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_base"));
+                }
+                if (blockState.getValue(StockpotBlock.HAS_CHAINS)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/stockpot_chains"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/stockpot"));
             }
-         }
-      );
-      this.horizontalBlock(
-         (Block)ModBlocks.OIL_POT.get(),
-         blockState -> blockState.getValue(OilPotBlock.HAS_OIL)
-            ? new UncheckedModelFile(this.modLoc("block/oil_pot_with_oil"))
-            : new UncheckedModelFile(this.modLoc("block/oil_pot"))
-      );
-      this.horizontalBlock((Block)ModBlocks.STEAMER.get(), blockState -> {
-         boolean hasLid = (Boolean)blockState.getValue(SteamerBlock.HAS_LID);
-         boolean hasBase = (Boolean)blockState.getValue(SteamerBlock.HAS_BASE);
-         boolean half = (Boolean)blockState.getValue(SteamerBlock.HALF);
-         if (hasLid && hasBase && half) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_half_lid_base"));
-         } else if (hasLid && hasBase) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_full_lid_base"));
-         } else if (hasLid && half) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_half_lid"));
-         } else if (hasLid) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_full_lid"));
-         } else if (hasBase && half) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_half_base"));
-         } else if (hasBase) {
-            return new UncheckedModelFile(this.modLoc("block/steamer_full_base"));
-         } else {
-            return half ? new UncheckedModelFile(this.modLoc("block/steamer_half")) : new UncheckedModelFile(this.modLoc("block/steamer_full"));
-         }
-      });
-      FoodBiteRegistry.FOOD_DATA_MAP.forEach((key, value) -> {
-         Block block = (Block)BuiltInRegistries.BLOCK.getValue(key);
-         if (value.blockType() == FoodBiteRegistry.BlockType.ONE_BY_TWO) {
-            this.addOneByTwoFoodBiteBlock(block, key);
-         } else {
-            this.addFoodBiteBlock(block, key);
-         }
-      });
-      PlateRegistry.PLATE_DATA_MAP.forEach((key, value) -> {
-         Block block = (Block)BuiltInRegistries.BLOCK.getValue(key);
-         this.addPlateBlock(block, key);
-      });
-      this.horizontalBlock((Block)ModBlocks.EMPTY_CUP.get(), blockState -> {
-         int count = (Integer)blockState.getValue(EmptyCupBlock.CUP_COUNT);
-         Identifier model = this.modLoc("block/teacup/empty_cup/count%d".formatted(count));
-         return new UncheckedModelFile(model);
-      });
-      TeacupRegistry.TEACUP_DATA_MAP.forEach((key, value) -> {
-         Block block = (Block)BuiltInRegistries.BLOCK.getValue(key);
-         this.addTeacupBlock(block, key);
-      });
-      this.addStackableFoodBlock((Block)ModBlocks.BAMBOO_TUBE_RICE.get(), this.modLoc("bamboo_tube_rice"));
-      this.horizontalBlock((Block)ModBlocks.FRUIT_BASKET.get(), new UncheckedModelFile(this.modLoc("block/fruit_basket")));
-      this.horizontalBlock((Block)ModBlocks.CHOPPING_BOARD.get(), new UncheckedModelFile(this.modLoc("block/chopping_board")));
-      this.horizontalBlock((Block)ModBlocks.KITCHENWARE_RACKS.get(), new UncheckedModelFile(this.modLoc("block/kitchenware_racks")));
-      this.cookStool(ModBlocks.COOK_STOOL_OAK, "oak");
-      this.cookStool(ModBlocks.COOK_STOOL_SPRUCE, "spruce");
-      this.cookStool(ModBlocks.COOK_STOOL_ACACIA, "acacia");
-      this.cookStool(ModBlocks.COOK_STOOL_BAMBOO, "bamboo");
-      this.cookStool(ModBlocks.COOK_STOOL_BIRCH, "birch");
-      this.cookStool(ModBlocks.COOK_STOOL_CHERRY, "cherry");
-      this.cookStool(ModBlocks.COOK_STOOL_CRIMSON, "crimson");
-      this.cookStool(ModBlocks.COOK_STOOL_DARK_OAK, "dark_oak");
-      this.cookStool(ModBlocks.COOK_STOOL_JUNGLE, "jungle");
-      this.cookStool(ModBlocks.COOK_STOOL_MANGROVE, "mangrove");
-      this.cookStool(ModBlocks.COOK_STOOL_WARPED, "warped");
-      this.chair(ModBlocks.CHAIR_OAK, "oak");
-      this.chair(ModBlocks.CHAIR_SPRUCE, "spruce");
-      this.chair(ModBlocks.CHAIR_ACACIA, "acacia");
-      this.chair(ModBlocks.CHAIR_BAMBOO, "bamboo");
-      this.chair(ModBlocks.CHAIR_BIRCH, "birch");
-      this.chair(ModBlocks.CHAIR_CHERRY, "cherry");
-      this.chair(ModBlocks.CHAIR_CRIMSON, "crimson");
-      this.chair(ModBlocks.CHAIR_DARK_OAK, "dark_oak");
-      this.chair(ModBlocks.CHAIR_JUNGLE, "jungle");
-      this.chair(ModBlocks.CHAIR_MANGROVE, "mangrove");
-      this.chair(ModBlocks.CHAIR_WARPED, "warped");
-      this.table(ModBlocks.TABLE_OAK, "oak");
-      this.table(ModBlocks.TABLE_SPRUCE, "spruce");
-      this.table(ModBlocks.TABLE_ACACIA, "acacia");
-      this.table(ModBlocks.TABLE_BAMBOO, "bamboo");
-      this.table(ModBlocks.TABLE_BIRCH, "birch");
-      this.table(ModBlocks.TABLE_CHERRY, "cherry");
-      this.table(ModBlocks.TABLE_CRIMSON, "crimson");
-      this.table(ModBlocks.TABLE_DARK_OAK, "dark_oak");
-      this.table(ModBlocks.TABLE_JUNGLE, "jungle");
-      this.table(ModBlocks.TABLE_MANGROVE, "mangrove");
-      this.table(ModBlocks.TABLE_WARPED, "warped");
-      this.simpleBlock((Block)ModBlocks.OIL_BLOCK.get());
-      this.crop(ModBlocks.TOMATO_CROP, "tomato");
-      this.crop(ModBlocks.CHILI_CROP, "chili");
-      this.crop(ModBlocks.LETTUCE_CROP, "lettuce");
-      this.axisBlock((RotatedPillarBlock)ModBlocks.STRAW_BLOCK.get());
-      this.horizontalFaceBlock((Block)ModBlocks.RECIPE_BLOCK.get(), new UncheckedModelFile(this.modLoc("block/recipe_block")));
-      this.riceCrop();
-      this.variantBlock(
-         (Block)ModBlocks.ENAMEL_BASIN.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(EnamelBasinBlock.HAS_LID)) {
-               return new UncheckedModelFile(this.modLoc("block/enamel_basin/base"));
+        });
+
+        horizontalBlock(ModBlocks.SHAWARMA_SPIT.get(), blockState -> {
+            if (blockState.getValue(ShawarmaSpitBlock.POWERED)) {
+                if (blockState.getValue(ShawarmaSpitBlock.HALF) == DoubleBlockHalf.LOWER) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_powered_lower"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_powered_upper"));
             } else {
-               int oilCount = (Integer)blockState.getValue(EnamelBasinBlock.OIL_COUNT);
-               if (oilCount <= 0) {
-                  return new UncheckedModelFile(this.modLoc("block/enamel_basin/empty"));
-               } else if (oilCount <= 10) {
-                  return new UncheckedModelFile(this.modLoc("block/enamel_basin/low"));
-               } else {
-                  return oilCount <= 20
-                     ? new UncheckedModelFile(this.modLoc("block/enamel_basin/middle"))
-                     : new UncheckedModelFile(this.modLoc("block/enamel_basin/high"));
-               }
+                if (blockState.getValue(ShawarmaSpitBlock.HALF) == DoubleBlockHalf.LOWER) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_lower"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/shawarma_spit_upper"));
             }
-         }
-      );
-      this.variantBlock(
-         (Block)ModBlocks.CHILI_RISTRA.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(ChiliRistraBlock.IS_HEAD)) {
-               return blockState.getValue(ChiliRistraBlock.SHEARED)
-                  ? new UncheckedModelFile(this.modLoc("block/chili_ristra/head_sheared"))
-                  : new UncheckedModelFile(this.modLoc("block/chili_ristra/head"));
+        });
+
+        horizontalBlock(ModBlocks.OIL_POT.get(), blockState -> {
+            if (blockState.getValue(OilPotBlock.HAS_OIL)) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/oil_pot_with_oil"));
             } else {
-               return blockState.getValue(ChiliRistraBlock.SHEARED)
-                  ? new UncheckedModelFile(this.modLoc("block/chili_ristra/body_sheared"))
-                  : new UncheckedModelFile(this.modLoc("block/chili_ristra/body"));
+                return new ModelFile.UncheckedModelFile(modLoc("block/oil_pot"));
             }
-         }
-      );
-      this.variantBlock(
-         (Block)ModBlocks.STRUNG_MUSHROOMS.get(),
-         blockState -> {
-            if ((Boolean)blockState.getValue(StrungMushroomsBlock.IS_HEAD)) {
-               return blockState.getValue(StrungMushroomsBlock.SHEARED)
-                  ? new UncheckedModelFile(this.modLoc("block/strung_mushrooms/head_sheared"))
-                  : new UncheckedModelFile(this.modLoc("block/strung_mushrooms/head"));
+        });
+
+        horizontalBlock(ModBlocks.STEAMER.get(), blockState -> {
+            boolean hasLid = blockState.getValue(SteamerBlock.HAS_LID);
+            boolean hasBase = blockState.getValue(SteamerBlock.HAS_BASE);
+            boolean half = blockState.getValue(SteamerBlock.HALF);
+
+            if (hasLid && hasBase && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_lid_base"));
+            } else if (hasLid && hasBase) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_lid_base"));
+            } else if (hasLid && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_lid"));
+            } else if (hasLid) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_lid"));
+            } else if (hasBase && half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half_base"));
+            } else if (hasBase) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full_base"));
+            } else if (half) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_half"));
             } else {
-               return blockState.getValue(StrungMushroomsBlock.SHEARED)
-                  ? new UncheckedModelFile(this.modLoc("block/strung_mushrooms/body_sheared"))
-                  : new UncheckedModelFile(this.modLoc("block/strung_mushrooms/body"));
+                return new ModelFile.UncheckedModelFile(modLoc("block/steamer_full"));
             }
-         }
-      );
-   }
+        });
 
-   public void variantBlock(Block block, Function<BlockState, ModelFile> modelFunc) {
-      this.getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(modelFunc.apply(state)).build());
-   }
-
-   public void crop(DeferredBlock<Block> block, String name) {
-      this.getVariantBuilder((Block)block.get()).forAllStates(state -> {
-         int age = (Integer)state.getValue(CropBlock.AGE);
-         Identifier file = this.modLoc("block/crop/%s/stage%d".formatted(name, age));
-         return ConfiguredModel.builder().modelFile(new UncheckedModelFile(file)).build();
-      });
-   }
-
-   public void riceCrop() {
-      this.getVariantBuilder((Block)ModBlocks.RICE_CROP.get()).forAllStates(state -> {
-         int age = (Integer)state.getValue(CropBlock.AGE);
-         int location = (Integer)state.getValue(RiceCropBlock.LOCATION);
-         Identifier file;
-         if (location == 0) {
-            file = this.modLoc("block/crop/rice/stage%d_down".formatted(age));
-         } else if (location == 1) {
-            file = this.modLoc("block/crop/rice/stage%d_middle".formatted(age));
-         } else {
-            file = this.modLoc("block/crop/rice/stage%d_up".formatted(age));
-         }
-
-         return ConfiguredModel.builder().modelFile(new UncheckedModelFile(file)).build();
-      });
-   }
-
-   public void cookStool(DeferredBlock<Block> block, String name) {
-      this.horizontalBlock((Block)block.get(), new UncheckedModelFile(this.modLoc("block/cook_stool/" + name)));
-   }
-
-   public void chair(DeferredBlock<Block> block, String name) {
-      this.horizontalBlock((Block)block.get(), new UncheckedModelFile(this.modLoc("block/chair/" + name)));
-   }
-
-   private void table(DeferredBlock<Block> block, String name) {
-      UncheckedModelFile leftModel = new UncheckedModelFile(this.modLoc("block/table/%s_left".formatted(name)));
-      UncheckedModelFile rightModel = new UncheckedModelFile(this.modLoc("block/table/%s_right".formatted(name)));
-      UncheckedModelFile middleModel = new UncheckedModelFile(this.modLoc("block/table/%s_middle".formatted(name)));
-      UncheckedModelFile leftModelRot = new UncheckedModelFile(this.modLoc("block/table/%s_left_rot".formatted(name)));
-      UncheckedModelFile rightModelRot = new UncheckedModelFile(this.modLoc("block/table/%s_right_rot".formatted(name)));
-      UncheckedModelFile middleModelRot = new UncheckedModelFile(this.modLoc("block/table/%s_middle_rot".formatted(name)));
-      this.getVariantBuilder((Block)block.get()).forAllStates(blockState -> {
-         int position = (Integer)blockState.getValue(TableBlock.POSITION);
-         if (position == 0) {
-            return ConfiguredModel.builder().modelFile(new UncheckedModelFile(this.modLoc("block/table/%s_single".formatted(name)))).build();
-         } else {
-            boolean isRotation = blockState.getValue(TableBlock.AXIS) == Axis.Z;
-            if (position == 1) {
-               return isRotation ? ConfiguredModel.builder().modelFile(rightModelRot).build() : ConfiguredModel.builder().modelFile(rightModel).build();
-            } else if (position == 3) {
-               return isRotation ? ConfiguredModel.builder().modelFile(leftModelRot).build() : ConfiguredModel.builder().modelFile(leftModel).build();
+        FoodBiteRegistry.FOOD_DATA_MAP.forEach((key, value) -> {
+            Block block = BuiltInRegistries.BLOCK.get(key);
+            if (value.blockType() == FoodBiteRegistry.BlockType.ONE_BY_TWO) {
+                addOneByTwoFoodBiteBlock(block, key);
             } else {
-               return isRotation ? ConfiguredModel.builder().modelFile(middleModelRot).build() : ConfiguredModel.builder().modelFile(middleModel).build();
+                addFoodBiteBlock(block, key);
             }
-         }
-      });
-   }
+        });
 
-   public void addTeacupBlock(Block block, Identifier id) {
-      this.horizontalBlock(block, blockState -> {
-         if (blockState.getBlock() instanceof TeacupBlock teacupBlock) {
-            int var8 = (Integer)blockState.getValue(teacupBlock.getCupCountProperty());
-            int teaCount = (Integer)blockState.getValue(teacupBlock.getTeaCountProperty());
-            if (teaCount > var8) {
-               teaCount = var8;
+        PlateRegistry.PLATE_DATA_MAP.forEach((key, value) -> {
+            Block block = BuiltInRegistries.BLOCK.get(key);
+            addPlateBlock(block, key);
+        });
+
+        horizontalBlock(ModBlocks.EMPTY_CUP.get(), blockState -> {
+            int count = blockState.getValue(EmptyCupBlock.CUP_COUNT);
+            ResourceLocation model = modLoc("block/teacup/empty_cup/count%d".formatted(count));
+            return new ModelFile.UncheckedModelFile(model);
+        });
+
+        horizontalBlock(ModBlocks.CLAY_POT_MILK_TEA.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/clay_pot_milk_tea")));
+
+        TeacupRegistry.TEACUP_DATA_MAP.forEach((key, value) -> {
+            Block block = BuiltInRegistries.BLOCK.get(key);
+            addTeacupBlock(block, key);
+        });
+
+        addStackableFoodBlock(ModBlocks.BAMBOO_TUBE_RICE.get(), modLoc("bamboo_tube_rice"));
+
+        horizontalBlock(ModBlocks.FRUIT_BASKET.get(), new ModelFile.UncheckedModelFile(modLoc("block/fruit_basket")));
+        horizontalBlock(ModBlocks.CHOPPING_BOARD.get(), new ModelFile.UncheckedModelFile(modLoc("block/chopping_board")));
+        horizontalBlock(ModBlocks.KITCHENWARE_RACKS.get(), new ModelFile.UncheckedModelFile(modLoc("block/kitchenware_racks")));
+
+        // 果串
+        candiedSkewer(ModBlocks.CANDIED_GLOW_BERRY_SKEWER_UPRIGHT.get(), "candied_glow_berry_skewer", true);
+        candiedSkewer(ModBlocks.CANDIED_GLOW_BERRY_SKEWER_SIDE.get(), "candied_glow_berry_skewer", false);
+        candiedSkewer(ModBlocks.CANDIED_SWEET_BERRY_SKEWER_UPRIGHT.get(), "candied_sweet_berry_skewer", true);
+        candiedSkewer(ModBlocks.CANDIED_SWEET_BERRY_SKEWER_SIDE.get(), "candied_sweet_berry_skewer", false);
+        candiedSkewer(ModBlocks.CANDIED_CHORUS_FRUIT_SKEWER_UPRIGHT.get(), "candied_chorus_fruit_skewer", true);
+        candiedSkewer(ModBlocks.CANDIED_CHORUS_FRUIT_SKEWER_SIDE.get(), "candied_chorus_fruit_skewer", false);
+        candiedSkewer(ModBlocks.CANDIED_APPLE_SKEWER_UPRIGHT.get(), "candied_apple_skewer", true);
+        candiedSkewer(ModBlocks.CANDIED_APPLE_SKEWER_SIDE.get(), "candied_apple_skewer", false);
+        candiedSkewer(ModBlocks.CANDIED_CATERPILLAR_SKEWER_UPRIGHT.get(), "candied_caterpillar_skewer", true);
+        candiedSkewer(ModBlocks.CANDIED_CATERPILLAR_SKEWER_SIDE.get(), "candied_caterpillar_skewer", false);
+
+        getVariantBuilder(ModBlocks.KITCHEN_SHELF.get()).forAllStates(state -> {
+            String part = state.getValue(KitchenShelfBlock.PART).getSerializedName();
+            int rotation = 180 + (int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot();
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/kitchen_shelf/" + part)))
+                    .rotationY(rotation % 360)
+                    .build();
+        });
+
+        getVariantBuilder(ModBlocks.BAMBOO_TRAY.get()).forAllStates(state -> ConfiguredModel.builder()
+                .modelFile(new ModelFile.UncheckedModelFile(
+                        modLoc(state.getValue(BambooTrayBlock.STAND)
+                                ? "block/bamboo_tray/stand"
+                                : "block/bamboo_tray/base"
+                        )
+                )).build());
+
+        cookStool(ModBlocks.COOK_STOOL_OAK, "oak");
+        cookStool(ModBlocks.COOK_STOOL_SPRUCE, "spruce");
+        cookStool(ModBlocks.COOK_STOOL_ACACIA, "acacia");
+        cookStool(ModBlocks.COOK_STOOL_BAMBOO, "bamboo");
+        cookStool(ModBlocks.COOK_STOOL_BIRCH, "birch");
+        cookStool(ModBlocks.COOK_STOOL_CHERRY, "cherry");
+        cookStool(ModBlocks.COOK_STOOL_CRIMSON, "crimson");
+        cookStool(ModBlocks.COOK_STOOL_DARK_OAK, "dark_oak");
+        cookStool(ModBlocks.COOK_STOOL_JUNGLE, "jungle");
+        cookStool(ModBlocks.COOK_STOOL_MANGROVE, "mangrove");
+        cookStool(ModBlocks.COOK_STOOL_WARPED, "warped");
+
+        chair(ModBlocks.CHAIR_OAK, "oak");
+        chair(ModBlocks.CHAIR_SPRUCE, "spruce");
+        chair(ModBlocks.CHAIR_ACACIA, "acacia");
+        chair(ModBlocks.CHAIR_BAMBOO, "bamboo");
+        chair(ModBlocks.CHAIR_BIRCH, "birch");
+        chair(ModBlocks.CHAIR_CHERRY, "cherry");
+        chair(ModBlocks.CHAIR_CRIMSON, "crimson");
+        chair(ModBlocks.CHAIR_DARK_OAK, "dark_oak");
+        chair(ModBlocks.CHAIR_JUNGLE, "jungle");
+        chair(ModBlocks.CHAIR_MANGROVE, "mangrove");
+        chair(ModBlocks.CHAIR_WARPED, "warped");
+
+        longBench(ModBlocks.LONG_BENCH);
+        simpleBlock(ModBlocks.RED_LANTERN.get(), new ModelFile.UncheckedModelFile(modLoc("block/red_lantern")));
+
+        table(ModBlocks.TABLE_OAK, "oak");
+        table(ModBlocks.TABLE_SPRUCE, "spruce");
+        table(ModBlocks.TABLE_ACACIA, "acacia");
+        table(ModBlocks.TABLE_BAMBOO, "bamboo");
+        table(ModBlocks.TABLE_BIRCH, "birch");
+        table(ModBlocks.TABLE_CHERRY, "cherry");
+        table(ModBlocks.TABLE_CRIMSON, "crimson");
+        table(ModBlocks.TABLE_DARK_OAK, "dark_oak");
+        table(ModBlocks.TABLE_JUNGLE, "jungle");
+        table(ModBlocks.TABLE_MANGROVE, "mangrove");
+        table(ModBlocks.TABLE_WARPED, "warped");
+
+        eightImmortalsTable(ModBlocks.EIGHT_IMMORTALS_TABLE);
+
+        simpleBlock(ModBlocks.OIL_BLOCK.get());
+
+        crop(ModBlocks.TOMATO_CROP, "tomato");
+        crop(ModBlocks.CHILI_CROP, "chili");
+        crop(ModBlocks.LETTUCE_CROP, "lettuce");
+
+        teaTree();
+
+        axisBlock((RotatedPillarBlock) ModBlocks.STRAW_BLOCK.get());
+
+        horizontalFaceBlock(ModBlocks.RECIPE_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/recipe_block")));
+
+        simpleBlock(ModBlocks.TEA_BANNER.get(), models().getBuilder("tea_banner")
+                .texture("particle", modLoc("item/tea_banner")));
+
+        riceCrop();
+
+        variantBlock(ModBlocks.ENAMEL_BASIN.get(), blockState -> {
+            if (blockState.getValue(EnamelBasinBlock.HAS_LID)) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/enamel_basin/base"));
+            }
+            int oilCount = blockState.getValue(EnamelBasinBlock.OIL_COUNT);
+            if (oilCount <= 0) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/enamel_basin/empty"));
+            }
+            if (oilCount <= EnamelBasinBlock.MAX_OIL_COUNT / 3) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/enamel_basin/low"));
+            }
+            if (oilCount <= EnamelBasinBlock.MAX_OIL_COUNT / 3 * 2) {
+                return new ModelFile.UncheckedModelFile(modLoc("block/enamel_basin/middle"));
+            }
+            return new ModelFile.UncheckedModelFile(modLoc("block/enamel_basin/high"));
+        });
+
+        variantBlock(ModBlocks.CHILI_RISTRA.get(), blockState -> {
+            if (blockState.getValue(ChiliRistraBlock.IS_HEAD)) {
+                if (blockState.getValue(ChiliRistraBlock.SHEARED)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/chili_ristra/head_sheared"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/chili_ristra/head"));
+            } else {
+                if (blockState.getValue(ChiliRistraBlock.SHEARED)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/chili_ristra/body_sheared"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/chili_ristra/body"));
+            }
+        });
+
+        variantBlock(ModBlocks.STRUNG_MUSHROOMS.get(), blockState -> {
+            if (blockState.getValue(StrungMushroomsBlock.IS_HEAD)) {
+                if (blockState.getValue(StrungMushroomsBlock.SHEARED)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/strung_mushrooms/head_sheared"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/strung_mushrooms/head"));
+            } else {
+                if (blockState.getValue(StrungMushroomsBlock.SHEARED)) {
+                    return new ModelFile.UncheckedModelFile(modLoc("block/strung_mushrooms/body_sheared"));
+                }
+                return new ModelFile.UncheckedModelFile(modLoc("block/strung_mushrooms/body"));
+            }
+        });
+    }
+
+    public void variantBlock(Block block, Function<BlockState, ModelFile> modelFunc) {
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
+                .modelFile(modelFunc.apply(state)).build());
+    }
+
+    public void crop(DeferredBlock<Block> block, String name) {
+        getVariantBuilder(block.get()).forAllStates(state -> {
+            int age = state.getValue(CropBlock.AGE);
+            ResourceLocation file = modLoc("block/crop/%s/stage%d".formatted(name, age));
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(file))
+                    .build();
+        });
+    }
+
+    public void teaTree() {
+        getVariantBuilder(ModBlocks.TEA_TREE.get()).forAllStates(state -> {
+            int age = state.getValue(TeaTreeBlock.AGE);
+            ResourceLocation file = modLoc("block/crop/tea_tree/stage%d".formatted(age));
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(file))
+                    .build();
+        });
+    }
+
+    public void riceCrop() {
+        getVariantBuilder(ModBlocks.RICE_CROP.get()).forAllStates(state -> {
+            int age = state.getValue(CropBlock.AGE);
+            int location = state.getValue(RiceCropBlock.LOCATION);
+            ResourceLocation file;
+            if (location == RiceCropBlock.DOWN) {
+                file = modLoc("block/crop/rice/stage%d_down".formatted(age));
+            } else if (location == RiceCropBlock.MIDDLE) {
+                file = modLoc("block/crop/rice/stage%d_middle".formatted(age));
+            } else {
+                file = modLoc("block/crop/rice/stage%d_up".formatted(age));
+            }
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(file))
+                    .build();
+        });
+    }
+
+    public void cookStool(DeferredBlock<Block> block, String name) {
+        horizontalBlock(block.get(), new ModelFile.UncheckedModelFile(modLoc("block/cook_stool/" + name)));
+    }
+
+    public void chair(DeferredBlock<Block> block, String name) {
+        horizontalBlock(block.get(), new ModelFile.UncheckedModelFile(modLoc("block/chair/" + name)));
+    }
+
+    private void longBench(DeferredBlock<Block> block) {
+        getVariantBuilder(block.get()).forAllStates(state -> {
+            String modelName = switch (state.getValue(LongBenchBlock.POSITION)) {
+                case LongBenchBlock.LEFT -> "left";
+                case LongBenchBlock.MIDDLE -> "middle";
+                case LongBenchBlock.RIGHT -> "right";
+                default -> "single";
+            };
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/long_bench/" + modelName)))
+                    .rotationY(state.getValue(LongBenchBlock.AXIS) == Direction.Axis.Z ? 90 : 0)
+                    .build();
+        });
+    }
+
+    private void table(DeferredBlock<Block> block, String name) {
+        ModelFile.UncheckedModelFile leftModel = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_left".formatted(name)));
+        ModelFile.UncheckedModelFile rightModel = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_right".formatted(name)));
+        ModelFile.UncheckedModelFile middleModel = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_middle".formatted(name)));
+
+        ModelFile.UncheckedModelFile leftModelRot = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_left_rot".formatted(name)));
+        ModelFile.UncheckedModelFile rightModelRot = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_right_rot".formatted(name)));
+        ModelFile.UncheckedModelFile middleModelRot = new ModelFile.UncheckedModelFile(modLoc("block/table/%s_middle_rot".formatted(name)));
+
+
+        getVariantBuilder(block.get()).forAllStates(blockState -> {
+            int position = blockState.getValue(TableBlock.POSITION);
+            if (position == TableBlock.SINGLE) {
+                return ConfiguredModel.builder()
+                        .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/table/%s_single".formatted(name))))
+                        .build();
+            }
+            boolean isRotation = blockState.getValue(TableBlock.AXIS) == Direction.Axis.Z;
+            if (position == TableBlock.LEFT) {
+                if (isRotation) {
+                    return ConfiguredModel.builder().modelFile(rightModelRot).build();
+                } else {
+                    return ConfiguredModel.builder().modelFile(rightModel).build();
+                }
+            }
+            if (position == TableBlock.RIGHT) {
+                if (isRotation) {
+                    return ConfiguredModel.builder().modelFile(leftModelRot).build();
+                } else {
+                    return ConfiguredModel.builder().modelFile(leftModel).build();
+                }
+            }
+            if (isRotation) {
+                return ConfiguredModel.builder().modelFile(middleModelRot).build();
+            } else {
+                return ConfiguredModel.builder().modelFile(middleModel).build();
+            }
+        });
+    }
+
+    private void eightImmortalsTable(DeferredBlock<Block> block) {
+        getVariantBuilder(block.get()).forAllStates(state -> {
+            Direction facing = state.getValue(EightImmortalsTableBlock.FACING);
+            String part = state.getValue(EightImmortalsTableBlock.PART).getSerializedName();
+            int rotation = (int) facing.toYRot();
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/eight_immortals_table/%s".formatted(part))))
+                    .rotationY(rotation)
+                    .build();
+        });
+    }
+
+    public void addTeacupBlock(Block block, ResourceLocation id) {
+        horizontalBlock(block, blockState -> {
+            if (!(blockState.getBlock() instanceof TeacupBlock teacupBlock)) {
+                throw new IllegalArgumentException("Block must be an instance of TeacupBlock");
             }
 
-            String modelName = "count%d_%d".formatted(var8, teaCount);
+            int cupCount = blockState.getValue(teacupBlock.getCupCountProperty());
+            int teaCount = blockState.getValue(teacupBlock.getTeaCountProperty());
+            if (teaCount > cupCount) {
+                teaCount = cupCount;
+            }
+
+            String modelName = "count%d_%d".formatted(cupCount, teaCount);
             String modelPath = "block/teacup/%s/%s".formatted(id.getPath(), modelName);
-            Identifier modelLoc = Identifier.fromNamespaceAndPath(id.getNamespace(), modelPath);
-            return new UncheckedModelFile(modelLoc);
-         } else {
-            throw new IllegalArgumentException("Block must be an instance of TeacupBlock");
-         }
-      });
-   }
+            ResourceLocation modelLoc = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), modelPath);
+            return new ModelFile.UncheckedModelFile(modelLoc);
+        });
+    }
 
-   public void addFoodBiteBlock(Block block, Identifier id) {
-      this.horizontalBlock(
-         block,
-         blockState -> {
-            if (blockState.getBlock() instanceof FoodBiteBlock foodBiteBlock) {
-               int var5 = (Integer)blockState.getValue(foodBiteBlock.getBites());
-               Identifier model = Identifier.fromNamespaceAndPath(
-                  id.getNamespace(), "block/food/%s/%s_%d".formatted(id.getPath(), id.getPath(), var5)
-               );
-               return new UncheckedModelFile(model);
-            } else {
-               throw new IllegalArgumentException("Block must be an instance of FoodBiteBlock");
+    public void addFoodBiteBlock(Block block, ResourceLocation id) {
+        horizontalBlock(block, blockState -> {
+            if (!(blockState.getBlock() instanceof FoodBiteBlock foodBiteBlock)) {
+                throw new IllegalArgumentException("Block must be an instance of FoodBiteBlock");
             }
-         }
-      );
-   }
+            int bites = blockState.getValue(foodBiteBlock.getBites());
+            ResourceLocation model = ResourceLocation.fromNamespaceAndPath(
+                    id.getNamespace(),
+                    "block/food/%s/%s_%d".formatted(id.getPath(), id.getPath(), bites)
+            );
+            return new ModelFile.UncheckedModelFile(model);
+        });
+    }
 
-   public void addOneByTwoFoodBiteBlock(Block block, Identifier id) {
-      this.horizontalBlock(block, blockState -> {
-         if (blockState.getBlock() instanceof FoodBiteOneByTwoBlock foodBiteBlock) {
-            int var6 = (Integer)blockState.getValue(foodBiteBlock.getBites());
-            int position = (Integer)blockState.getValue(FoodBiteOneByTwoBlock.POSITION);
-            Identifier model;
-            if (position == 0) {
-               model = Identifier.fromNamespaceAndPath(id.getNamespace(), "block/food/%s/%s_left_%d".formatted(id.getPath(), id.getPath(), var6));
-            } else {
-               model = Identifier.fromNamespaceAndPath(id.getNamespace(), "block/food/%s/%s_right_%d".formatted(id.getPath(), id.getPath(), var6));
+    public void addOneByTwoFoodBiteBlock(Block block, ResourceLocation id) {
+        horizontalBlock(block, blockState -> {
+            if (!(blockState.getBlock() instanceof FoodBiteOneByTwoBlock foodBiteBlock)) {
+                throw new IllegalArgumentException("Block must be an instance of OneByTwoFoodBiteBlock");
             }
-
-            return new UncheckedModelFile(model);
-         } else {
-            throw new IllegalArgumentException("Block must be an instance of OneByTwoFoodBiteBlock");
-         }
-      });
-   }
-
-   public void addStackableFoodBlock(Block block, Identifier id) {
-      this.horizontalBlock(
-         block,
-         blockState -> {
-            if (blockState.getBlock() instanceof StackableFoodBlock stackableFoodBlock) {
-               int var5 = (Integer)blockState.getValue(stackableFoodBlock.getCountProperty());
-               Identifier model = Identifier.fromNamespaceAndPath(
-                  id.getNamespace(), "block/food/%s/%s_%d".formatted(id.getPath(), id.getPath(), var5)
-               );
-               return new UncheckedModelFile(model);
+            int bites = blockState.getValue(foodBiteBlock.getBites());
+            int position = blockState.getValue(FoodBiteOneByTwoBlock.POSITION);
+            ResourceLocation model;
+            if (position == FoodBiteOneByTwoBlock.LEFT) {
+                model = ResourceLocation.fromNamespaceAndPath(
+                        id.getNamespace(),
+                        "block/food/%s/%s_left_%d".formatted(id.getPath(), id.getPath(), bites)
+                );
             } else {
-               throw new IllegalArgumentException("Block must be an instance of StackableFoodBlock");
+                model = ResourceLocation.fromNamespaceAndPath(
+                        id.getNamespace(),
+                        "block/food/%s/%s_right_%d".formatted(id.getPath(), id.getPath(), bites)
+                );
             }
-         }
-      );
-   }
+            return new ModelFile.UncheckedModelFile(model);
+        });
+    }
 
-   public void addPlateBlock(Block block, Identifier id) {
-      this.horizontalBlock(
-         block,
-         blockState -> {
-            if (blockState.getBlock() instanceof PlateBlock plateBlock) {
-               int var5 = (Integer)blockState.getValue(plateBlock.getServingsProperty());
-               Identifier model = Identifier.fromNamespaceAndPath(
-                  id.getNamespace(), "block/plate/%s/%s_%d".formatted(id.getPath(), id.getPath(), var5)
-               );
-               return new UncheckedModelFile(model);
-            } else {
-               throw new IllegalArgumentException("Block must be an instance of PlateBlock");
+    public void addStackableFoodBlock(Block block, ResourceLocation id) {
+        horizontalBlock(block, blockState -> {
+            if (!(blockState.getBlock() instanceof StackableFoodBlock stackableFoodBlock)) {
+                throw new IllegalArgumentException("Block must be an instance of StackableFoodBlock");
             }
-         }
-      );
-   }
+            int count = blockState.getValue(stackableFoodBlock.getCountProperty());
+            ResourceLocation model = ResourceLocation.fromNamespaceAndPath(
+                    id.getNamespace(), "block/food/%s/%s_%d".formatted(id.getPath(), id.getPath(), count)
+            );
+            return new ModelFile.UncheckedModelFile(model);
+        });
+    }
+
+    public void addPlateBlock(Block block, ResourceLocation id) {
+        horizontalBlock(block, blockState -> {
+            if (!(blockState.getBlock() instanceof PlateBlock plateBlock)) {
+                throw new IllegalArgumentException("Block must be an instance of PlateBlock");
+            }
+            int count = blockState.getValue(plateBlock.getServingsProperty());
+            ResourceLocation model = ResourceLocation.fromNamespaceAndPath(
+                    id.getNamespace(), "block/plate/%s/%s_%d".formatted(id.getPath(), id.getPath(), count)
+            );
+            return new ModelFile.UncheckedModelFile(model);
+        });
+    }
+
+    private void candiedSkewer(Block block, String name, boolean upright) {
+        if (!(block instanceof CandiedSkewerBlock skewerBlock)) {
+            return;
+        }
+        getVariantBuilder(block).forAllStates(state -> {
+            int count = state.getValue(skewerBlock.getCountProperty());
+            String shape = upright ? "upright" : "side";
+            return ConfiguredModel.builder()
+                    .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/candied_skewers/%s/%s_%d".formatted(name, shape, count))))
+                    .rotationY((180 + (int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot()) % 360)
+                    .build();
+        });
+    }
 }

@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "kaleidoscope_cookery:rice",
+    "count": 20
+  },
+  "gives": {
+    "id": "minecraft:emerald",
+    "count": 1
+  },
+  "max_uses": 16,
+  "xp": 2,
+  "reputation_discount": 0.05
+}

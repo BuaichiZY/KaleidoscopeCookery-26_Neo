@@ -48,7 +48,7 @@ import net.minecraft.world.level.storage.loot.LootParams.Builder;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
 
 public class BowlFoodBlockItem extends BlockItem implements IHasContainer {
    private final List<MobEffectInstance> effectInstances = Lists.newArrayList();
@@ -69,7 +69,7 @@ public class BowlFoodBlockItem extends BlockItem implements IHasContainer {
    }
 
    private static Properties createProperties(FoodProperties properties, @Nullable ItemLike usingConvertsTo) {
-      Properties result = ModRegistrationProperties.itemProperties().stacksTo(16).food(properties, ModFoods.consumableFor(properties));
+      Properties result = ModRegistrationProperties.blockItemProperties().stacksTo(16).food(properties, ModFoods.consumableFor(properties));
       if (usingConvertsTo != null) {
          result.usingConvertsTo(usingConvertsTo.asItem());
       }

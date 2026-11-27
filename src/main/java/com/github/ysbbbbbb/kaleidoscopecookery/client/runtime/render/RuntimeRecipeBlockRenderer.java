@@ -72,8 +72,8 @@ public final class RuntimeRecipeBlockRenderer
       int rotationY = state.facing.get2DDataValue() + (state.attachFace == AttachFace.CEILING ? 2 : 0);
       poseStack.pushPose();
       poseStack.translate(0.5F, 0.5F, 0.5F);
-      poseStack.mulPose(Axis.YP.rotationDegrees(-rotationY * 90.0F));
-      poseStack.mulPose(Axis.XP.rotationDegrees(90.0F - rotationX * 90.0F));
+      poseStack.rotateDegrees(Axis.YP, -rotationY * 90.0F);
+      poseStack.rotateDegrees(Axis.XP, 90.0F - rotationX * 90.0F);
       poseStack.translate(-0.5F, -0.5F, -0.5F);
       poseStack.scale(0.5F, 0.5F, 0.5F);
       if (state.attachFace == AttachFace.WALL) {

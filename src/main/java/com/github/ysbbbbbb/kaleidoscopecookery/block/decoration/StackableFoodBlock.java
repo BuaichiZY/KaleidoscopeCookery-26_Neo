@@ -2,7 +2,6 @@ package com.github.ysbbbbbb.kaleidoscopecookery.block.decoration;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.util.VoxelShapeUtils;
 import com.google.common.collect.Lists;
-import com.mojang.serialization.MapCodec;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Supplier;
@@ -31,10 +30,9 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
 
 public class StackableFoodBlock extends HorizontalDirectionalBlock {
-   protected static final MapCodec<StackableFoodBlock> STACKABLE_FOOD_CODEC = simpleCodec(p -> new StackableFoodBlock(p, 1, () -> Items.AIR));
    // Bamboo tube rice is the only registered stackable food and caps at four.
    private static final IntegerProperty COUNT = IntegerProperty.create("count", 1, 4);
    protected final IntegerProperty countProperty;
@@ -133,10 +131,6 @@ public class StackableFoodBlock extends HorizontalDirectionalBlock {
       }
    }
 
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return STACKABLE_FOOD_CODEC;
-   }
-
    public static StackableFoodBlock.Builder create() {
       return new StackableFoodBlock.Builder();
    }
@@ -150,7 +144,7 @@ public class StackableFoodBlock extends HorizontalDirectionalBlock {
          .instabreak()
          .mapColor(MapColor.WOOD)
          .sound(SoundType.WOOD)
-         .pushReaction(PushReaction.DESTROY)
+         .pushReaction(PushReaction.POPPED)
          .noOcclusion();
 
       private Builder() {

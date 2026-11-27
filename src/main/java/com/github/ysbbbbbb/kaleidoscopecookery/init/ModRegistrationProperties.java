@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 /**
  * Bridges the legacy no-argument block and item constructors to the registry-id
@@ -54,7 +55,33 @@ public final class ModRegistrationProperties {
       if (id == null) {
          throw new IllegalStateException("Item properties requested outside an item registration");
       }
-      return new Item.Properties().setId(id);
+      Item.Properties properties = new Item.Properties().setId(id);
+      // Minecraft 26.3 reads the default compostable component for player and hopper insertion.
+      return switch (id.identifier().getPath()) {
+         case "tomato_seed", "chili_seed", "lettuce_seed", "wild_rice", "rice", "tea_seed",
+              "fresh_tea_leaves", "dried_tea_leaves" -> properties.compostable(ContextIntProviders.COMPOSTABLE_LOW);
+         case "tomato", "red_chili", "green_chili", "lettuce",
+              "rice_panicle" -> properties.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM);
+         case "caterpillar" -> properties.compostable(ContextIntProviders.COMPOSTABLE_ALWAYS_ADD_ONE);
+         default -> properties;
+      };
+   }
+
+   /**
+    * Minecraft 26 no longer makes {@link net.minecraft.world.item.BlockItem}
+    * inherit its block's translation key automatically. Use this for block
+    * items whose item and block registry paths are identical.
+    */
+   public static Item.Properties blockItemProperties() {
+      return itemProperties().useBlockDescriptionPrefix();
+   }
+
+   /**
+    * Uses the translation key of a block whose registry path differs from the
+    * item path, such as {@code recipe_item -> recipe_block}.
+    */
+   public static Item.Properties blockItemProperties(String blockPath) {
+      return itemProperties().overrideDescription("block.kaleidoscope_cookery." + blockPath);
    }
 
    private static <T> void restore(ThreadLocal<T> local, T previous) {

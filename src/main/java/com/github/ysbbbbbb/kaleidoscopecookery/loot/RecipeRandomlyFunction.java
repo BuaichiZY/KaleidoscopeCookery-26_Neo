@@ -1,10 +1,6 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.loot;
 
-import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.PotRecipe;
-import com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.StockpotRecipe;
-import com.github.ysbbbbbb.kaleidoscopecookery.init.ModLootModifier;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes;
-import com.github.ysbbbbbb.kaleidoscopecookery.init.registry.FoodBiteRegistry;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.RecipeItem;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -12,17 +8,14 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.core.RegistryAccess;
+import java.util.Optional;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 public class RecipeRandomlyFunction extends LootItemConditionalFunction {
@@ -34,55 +27,45 @@ public class RecipeRandomlyFunction extends LootItemConditionalFunction {
    );
    private final List<RecipeItem.RecipeRecord> possibleRecipes;
 
-   protected RecipeRandomlyFunction(List<LootItemCondition> predicates, List<RecipeItem.RecipeRecord> possibleRecipes) {
-      super(predicates);
+   protected RecipeRandomlyFunction(Optional<Holder<LootItemCondition>> condition, List<RecipeItem.RecipeRecord> possibleRecipes) {
+      super(condition);
       this.possibleRecipes = ImmutableList.copyOf(possibleRecipes);
    }
 
-   public LootItemFunctionType<RecipeRandomlyFunction> getType() {
-      return ModLootModifier.RECIPE_RANDOMLY;
+   public MapCodec<RecipeRandomlyFunction> codec() {
+      return CODEC;
    }
 
    protected ItemStack run(ItemStack stack, LootContext context) {
-      RandomSource randomsource = context.getRandom();
-      if (!this.possibleRecipes.isEmpty()) {
-         RecipeItem.RecipeRecord record = this.possibleRecipes.get(randomsource.nextInt(this.possibleRecipes.size()));
-         RecipeItem.setRecipe(stack, record);
-         return stack;
-      } else {
-         List<Identifier> keys = FoodBiteRegistry.FOOD_DATA_MAP.keySet().stream().toList();
-         if (keys.isEmpty()) {
-            return stack;
-         } else {
-            Identifier randomKey = keys.get(randomsource.nextInt(keys.size()));
-            Item result = FoodBiteRegistry.getItem(randomKey);
-            RegistryAccess registryAccess = context.getLevel().registryAccess();
-
-            for (RecipeHolder<PotRecipe> recipeHolder : context.getLevel().recipeAccess().getAllRecipesFor(ModRecipes.POT_RECIPE)) {
-               PotRecipe recipe = (PotRecipe)recipeHolder.value();
-               ItemStack resultItem = recipe.getResultItem(registryAccess);
-               if (resultItem.is(result)) {
-                  List<ItemStack> inputs = recipe.getIngredients().stream().filter(i -> !i.isEmpty()).map(i -> i.getItems()[0]).toList();
-                  RecipeItem.RecipeRecord record = new RecipeItem.RecipeRecord(inputs, resultItem, RecipeItem.POT, false);
-                  RecipeItem.setRecipe(stack, record);
-                  return stack;
-               }
+      List<RecipeItem.RecipeRecord> candidates = this.possibleRecipes;
+      if (candidates.isEmpty()) {
+         // Choose from recipes that exist, rather than food items that may have no recipe.
+         candidates = new java.util.ArrayList<>();
+         var access = context.getLevel().registryAccess();
+         var manager = context.getLevel().recipeAccess();
+         for (var holder : com.github.ysbbbbbb.kaleidoscopecookery.util.RecipeLookup.byType(manager, ModRecipes.POT_RECIPE)) {
+            var recipe = holder.value();
+            var output = recipe.getResultItem(access);
+            if (!output.isEmpty()) {
+               var inputs = recipe.getIngredients().stream().filter(i -> !ModRecipes.isEmptyIngredient(i))
+                  .map(com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.BaseRecipe::displayStack).toList();
+               candidates.add(new RecipeItem.RecipeRecord(inputs, output, RecipeItem.POT, false));
             }
-
-            for (RecipeHolder<StockpotRecipe> recipeHolderx : context.getLevel().recipeAccess().getAllRecipesFor(ModRecipes.STOCKPOT_RECIPE)) {
-               StockpotRecipe recipe = (StockpotRecipe)recipeHolderx.value();
-               ItemStack resultItem = recipe.getResultItem(registryAccess);
-               if (resultItem.is(result)) {
-                  List<ItemStack> inputs = recipe.getIngredients().stream().filter(i -> !i.isEmpty()).map(i -> i.getItems()[0]).toList();
-                  RecipeItem.RecipeRecord record = new RecipeItem.RecipeRecord(inputs, resultItem, RecipeItem.STOCKPOT, false);
-                  RecipeItem.setRecipe(stack, record);
-                  return stack;
-               }
+         }
+         for (var holder : com.github.ysbbbbbb.kaleidoscopecookery.util.RecipeLookup.byType(manager, ModRecipes.STOCKPOT_RECIPE)) {
+            var recipe = holder.value();
+            var output = recipe.getResultItem(access);
+            if (!output.isEmpty()) {
+               var inputs = recipe.getIngredients().stream().filter(i -> !ModRecipes.isEmptyIngredient(i))
+                  .map(com.github.ysbbbbbb.kaleidoscopecookery.crafting.recipe.BaseRecipe::displayStack).toList();
+               candidates.add(new RecipeItem.RecipeRecord(inputs, output, RecipeItem.STOCKPOT, false));
             }
-
-            return stack;
          }
       }
+      if (!candidates.isEmpty()) {
+         RecipeItem.setRecipe(stack, candidates.get(context.getRandom().nextInt(candidates.size())));
+      }
+      return stack;
    }
 
    public static RecipeRandomlyFunction.Builder randomRecipe() {
@@ -114,7 +97,7 @@ public class RecipeRandomlyFunction extends LootItemConditionalFunction {
       }
 
       public LootItemFunction build() {
-         return new RecipeRandomlyFunction(this.getConditions(), this.recipes);
+         return new RecipeRandomlyFunction(this.getCondition(), this.recipes);
       }
    }
 }

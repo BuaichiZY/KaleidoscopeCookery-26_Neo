@@ -71,7 +71,7 @@ public class ProjectileDodgeEvent {
 
             Vec3 previousPos = living.position();
             level.gameEvent(GameEvent.TELEPORT, previousPos, Context.of(living));
-            if (living.randomTeleport(targetX, targetY, targetZ, true)) {
+            if (living.randomTeleport(targetX, targetY, targetZ, true, state -> false)) {
                SoundEvent soundEvent = SoundEvents.ENDERMAN_TELEPORT;
                level.playSound(null, x, y, z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
                living.playSound(soundEvent, 1.0F, 1.0F);

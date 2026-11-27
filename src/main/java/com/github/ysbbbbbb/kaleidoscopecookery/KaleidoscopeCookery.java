@@ -33,12 +33,14 @@ public class KaleidoscopeCookery {
    public static final Logger LOGGER = LogUtils.getLogger();
 
    public KaleidoscopeCookery(IEventBus modEventBus, ModContainer modContainer) {
-      modContainer.registerConfig(Type.COMMON, GeneralConfig.init());
+      modContainer.registerConfig(Type.LOCAL, GeneralConfig.init(), "kaleidoscope_cookery-common.toml");
       modContainer.registerConfig(Type.CLIENT, ClientConfig.init());
       modEventBus.addListener(NetworkHandler::registerPacket);
       FoodBiteRegistry.init();
       TeacupRegistry.init();
       PlateRegistry.init();
+      com.github.ysbbbbbb.kaleidoscopecookery.init.ModLootModifier.FUNCTIONS.register(modEventBus);
+      modEventBus.addListener(this::commonSetup);
       ModTrigger.TRIGGERS.register(modEventBus);
       ModBlocks.BLOCKS.register(modEventBus);
       ModBlocks.BLOCK_ENTITIES.register(modEventBus);
@@ -55,4 +57,8 @@ public class KaleidoscopeCookery {
       ModDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
       ModAttachmentType.ATTACHMENT_TYPES.register(modEventBus);
    }
+   private void commonSetup(net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) {
+      event.enqueueWork(com.github.ysbbbbbb.kaleidoscopecookery.compat.farmersdelight.FarmersDelightCompat::init);
+   }
 }
+

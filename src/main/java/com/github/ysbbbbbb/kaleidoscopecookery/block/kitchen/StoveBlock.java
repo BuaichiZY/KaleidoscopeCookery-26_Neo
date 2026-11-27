@@ -5,7 +5,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.KitchenShovelItem;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -47,7 +46,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class StoveBlock extends HorizontalDirectionalBlock {
-   public static final MapCodec<StoveBlock> CODEC = simpleCodec(p -> new StoveBlock());
    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
    public StoveBlock() {
@@ -60,11 +58,7 @@ public class StoveBlock extends HorizontalDirectionalBlock {
             .randomTicks()
             .strength(1.5F, 6.0F)
       );
-      this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.SOUTH)).setValue(LIT, false));
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return CODEC;
+      this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.SOUTH)).setValue(LIT, true));
    }
 
    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
@@ -130,7 +124,7 @@ public class StoveBlock extends HorizontalDirectionalBlock {
          ((ModEventTrigger)ModTrigger.EVENT.get()).trigger(player, "lit_the_stove");
          return InteractionResult.SUCCESS;
       } else if ((Boolean)state.getValue(LIT) && itemInHand.is(TagMod.EXTINGUISH_STOVE)) {
-         if (itemInHand.is((Item)ModItems.KITCHEN_SHOVEL.get()) && KitchenShovelItem.hasOil(itemInHand)) {
+         if (itemInHand.is(com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod.KITCHEN_SHOVELS) && KitchenShovelItem.hasOil(itemInHand)) {
             KitchenShovelItem.setHasOil(itemInHand, false);
          }
 

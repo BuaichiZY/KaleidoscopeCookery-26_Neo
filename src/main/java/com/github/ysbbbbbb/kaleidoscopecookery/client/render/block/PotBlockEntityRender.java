@@ -50,8 +50,8 @@ public class PotBlockEntityRender implements BlockEntityRenderer<PotBlockEntity>
       int rotation = ((Direction)pot.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)).get2DDataValue() * 90;
       poseStack.pushPose();
       poseStack.translate(0.5, 0.1, 0.5);
-      poseStack.mulPose(Axis.YN.rotationDegrees(rotation));
-      poseStack.mulPose(Axis.XN.rotationDegrees(90.0F));
+      poseStack.rotateDegrees(Axis.YN, rotation);
+      poseStack.rotateDegrees(Axis.XN, 90.0F);
       poseStack.scale(0.5F, 0.5F, 0.5F);
       boolean showInputs = pot.getStatus() != 2 && pot.getStatus() != 3;
       if (!showInputs && !pot.hasCarrier()) {
@@ -86,10 +86,10 @@ public class PotBlockEntityRender implements BlockEntityRenderer<PotBlockEntity>
    ) {
       poseStack.pushPose();
       int count = 90 + source.nextInt(90);
-      poseStack.mulPose(Axis.ZN.rotationDegrees(index * count));
+      poseStack.rotateDegrees(Axis.ZN, index * count);
       if (time < 1000L) {
          poseStack.translate(0.0F, 0.0F, data.randomHeights[index] * Mth.sin((float) Math.PI * (float)time / 1000.0F));
-         poseStack.mulPose(Axis.XN.rotationDegrees(0.72F * (float)time));
+         poseStack.rotateDegrees(Axis.XN, 0.72F * (float)time);
       }
 
       if (pot.getStatus() == 3) {

@@ -43,6 +43,8 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Item.Properties;
@@ -56,8 +58,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.IItemHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.PlayerMainInvWrapper;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +72,7 @@ public class RecipeItem extends BlockItem {
    private static final int HAS_RECIPE = 1;
 
    public RecipeItem() {
-      super((Block)ModBlocks.RECIPE_BLOCK.get(), ModRegistrationProperties.itemProperties());
+      super((Block)ModBlocks.RECIPE_BLOCK.get(), ModRegistrationProperties.blockItemProperties("recipe_block"));
    }
 
    public static void setRecipe(ItemStack stack, RecipeItem.RecipeRecord record) {
@@ -115,6 +117,10 @@ public class RecipeItem extends BlockItem {
       ItemStack itemInHand = context.getItemInHand();
       BlockPos clickedPos = context.getClickedPos();
       BlockEntity blockEntity = context.getLevel().getBlockEntity(clickedPos);
+      if (blockEntity instanceof com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.KitchenShelfBlockEntity shelf && hasRecipe(itemInHand)) {
+         RecipeRecord record = getRecipe(itemInHand);
+         return record != null && shelf.dispenseMatching(record.input()) ? InteractionResult.SUCCESS_SERVER : InteractionResult.PASS;
+      }
       RecipeManager recipeManager = serverLevel.recipeAccess();
       if (blockEntity == null) {
          return super.useOn(context);
@@ -339,11 +345,35 @@ public class RecipeItem extends BlockItem {
       tooltip.add(Component.translatable("tooltip.kaleidoscope_cookery.recipe_item").withStyle(ChatFormatting.GRAY));
    }
 
-   public record RecipeRecord(List<ItemStack> input, ItemStack output, Identifier type, boolean flexRecipe) {
+   public record RecipeRecord(List<Optional<ItemStackTemplate>> inputTemplates,
+                              ItemStackTemplate outputTemplate, Identifier type, boolean flexRecipe) {
+      // Trade registries decode before item components are bound in 26.2.
+      // Keep templates until the recipe is used, retaining the existing JSON and wire format.
+      public RecipeRecord {
+         inputTemplates = List.copyOf(inputTemplates);
+      }
+
+      public RecipeRecord(List<ItemStack> input, ItemStack output, Identifier type, boolean flexRecipe) {
+         this(input.stream().map(stack -> stack.isEmpty()
+               ? Optional.<ItemStackTemplate>empty()
+               : Optional.of(ItemStackTemplate.fromNonEmptyStack(stack))).toList(),
+            ItemStackTemplate.fromNonEmptyStack(output), type, flexRecipe);
+      }
+
+      public List<ItemStack> input() {
+         return inputTemplates.stream().map(template -> template.map(ItemStackTemplate::create)
+            .orElse(ItemStack.EMPTY)).toList();
+      }
+
+      public ItemStack output() {
+         return outputTemplate.create();
+      }
+
       public static final Codec<RecipeItem.RecipeRecord> CODEC = RecordCodecBuilder.create(
          instance -> instance.group(
-               ItemStack.OPTIONAL_CODEC.listOf().fieldOf("input").forGetter(RecipeItem.RecipeRecord::input),
-               ItemStack.CODEC.fieldOf("output").forGetter(RecipeItem.RecipeRecord::output),
+               ExtraCodecs.optionalEmptyMap(ItemStackTemplate.CODEC)
+                  .listOf().fieldOf("input").forGetter(RecipeItem.RecipeRecord::inputTemplates),
+               ItemStackTemplate.CODEC.fieldOf("output").forGetter(RecipeItem.RecipeRecord::outputTemplate),
                Identifier.CODEC.fieldOf("type").forGetter(RecipeItem.RecipeRecord::type),
                Codec.BOOL.fieldOf("flex_recipe").forGetter(RecipeItem.RecipeRecord::flexRecipe)
             )

@@ -1,7 +1,6 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.block.decoration;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.entity.SitEntity;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +33,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CookStoolBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
-   public static final MapCodec<CookStoolBlock> CODEC = simpleCodec(p -> new CookStoolBlock());
    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
    private static final VoxelShape NORTH_SOUTH = Block.box(2.0, 0.0, 3.0, 14.0, 7.0, 13.0);
    private static final VoxelShape EAST_WEST = Block.box(3.0, 0.0, 2.0, 13.0, 7.0, 14.0);
@@ -44,10 +42,6 @@ public class CookStoolBlock extends HorizontalDirectionalBlock implements Simple
       this.registerDefaultState(
          (BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.SOUTH)).setValue(WATERLOGGED, false)
       );
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return CODEC;
    }
 
    public BlockState updateShape(

@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:berry_platter"
+        "recipes": [
+          "kaleidoscope_cookery:berry_platter"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

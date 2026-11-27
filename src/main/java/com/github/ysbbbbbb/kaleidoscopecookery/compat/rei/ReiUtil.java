@@ -9,8 +9,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class ReiUtil {
+   public static me.shedaniel.rei.api.client.gui.widgets.Widget translate(me.shedaniel.rei.api.client.gui.widgets.Widget widget, int x, int y, double ignoredZ) {
+      return me.shedaniel.rei.api.client.gui.widgets.Widgets.withTranslate(widget, unused -> new org.joml.Matrix3x2f().translation(x, y));
+   }
+
    public static EntryIngredient ofIngredient(Ingredient ingredient) {
-      return EntryIngredient.of(Arrays.stream(ingredient.getItems()).map(EntryStacks::of).toList());
+      if (com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes.isEmptyIngredient(ingredient)) {
+         return EntryIngredient.empty();
+      }
+      return EntryIngredient.of(ingredient.items().map(holder -> new ItemStack(holder.value())).map(EntryStacks::of).toList());
    }
 
    public static EntryIngredient ofItem(Item item) {

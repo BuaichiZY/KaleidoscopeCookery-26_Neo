@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": "minecraft:oak_fence",
+    "P": "minecraft:oak_planks",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "PPP",
+    "FSF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscope_cookery:long_bench"
+  }
+}

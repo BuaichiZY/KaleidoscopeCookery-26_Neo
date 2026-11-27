@@ -67,14 +67,14 @@ public final class RuntimeKitchenwareRacksRenderer
       }
       poseStack.pushPose();
       poseStack.translate(0.5F, 0.0F, 0.5F);
-      poseStack.mulPose(Axis.YN.rotationDegrees(state.facing.get2DDataValue() * 90.0F));
+      poseStack.rotateDegrees(Axis.YN, state.facing.get2DDataValue() * 90.0F);
       for (RackItem rackItem : state.items) {
          poseStack.pushPose();
          poseStack.translate(rackItem.x(), 0.4375F, -0.3F);
          poseStack.scale(0.75F, 0.75F, 0.75F);
-         poseStack.mulPose(Axis.XN.rotationDegrees(180.0F));
-         poseStack.mulPose(Axis.YN.rotationDegrees(-25.0F));
-         poseStack.mulPose(Axis.ZN.rotationDegrees(45.0F));
+         poseStack.rotateDegrees(Axis.XN, 180.0F);
+         poseStack.rotateDegrees(Axis.YN, -25.0F);
+         poseStack.rotateDegrees(Axis.ZN, 45.0F);
          rackItem.item().submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();
       }

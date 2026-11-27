@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:chorus_fruit_platter"
+        "recipes": [
+          "kaleidoscope_cookery:chorus_fruit_platter"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

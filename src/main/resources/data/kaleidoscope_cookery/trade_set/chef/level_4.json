@@ -1,0 +1,20 @@
+{
+  "trades": [
+    "kaleidoscope_cookery:chef/level_4/trade_01",
+    "kaleidoscope_cookery:chef/level_4/trade_02",
+    "kaleidoscope_cookery:chef/level_4/trade_03",
+    "kaleidoscope_cookery:chef/level_4/trade_04",
+    "kaleidoscope_cookery:chef/level_4/trade_05",
+    "kaleidoscope_cookery:chef/level_4/trade_06",
+    "kaleidoscope_cookery:chef/level_4/trade_07",
+    "kaleidoscope_cookery:chef/level_4/trade_08",
+    "kaleidoscope_cookery:chef/level_4/trade_09",
+    "kaleidoscope_cookery:chef/level_4/trade_10",
+    "kaleidoscope_cookery:chef/level_4/trade_11",
+    "kaleidoscope_cookery:chef/level_4/trade_12",
+    "kaleidoscope_cookery:chef/level_4/trade_13",
+    "kaleidoscope_cookery:chef/level_4/trade_14"
+  ],
+  "amount": 2,
+  "allow_duplicates": false
+}

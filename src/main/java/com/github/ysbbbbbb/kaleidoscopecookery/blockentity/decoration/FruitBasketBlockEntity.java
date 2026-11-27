@@ -14,8 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class FruitBasketBlockEntity extends BaseBlockEntity {
    public static final String ITEMS = "BasketItems";

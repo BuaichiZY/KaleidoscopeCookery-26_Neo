@@ -8,21 +8,19 @@
             "min": 100.0
           }
         },
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "position": {
-                  "y": {
-                    "max": 320.0
-                  }
+        "player": {
+          "entity": "this",
+          "predicate": {
+            "location": {
+              "position": {
+                "y": {
+                  "max": 320.0
                 }
               }
             }
-          }
-        ],
+          },
+          "type": "minecraft:entity_properties"
+        },
         "start_position": {
           "position": {
             "y": {
@@ -35,7 +33,6 @@
     }
   },
   "display": {
-    "background": "kaleidoscope_cookery:textures/advancement/background.png",
     "description": {
       "translate": "advancements.kaleidoscope_cookery.nitrogen_100.description"
     },

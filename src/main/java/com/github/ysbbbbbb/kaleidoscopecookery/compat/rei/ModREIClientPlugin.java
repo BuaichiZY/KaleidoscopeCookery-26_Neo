@@ -1,6 +1,7 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.compat.rei;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category.ReiChoppingBoardRecipeCategory;
+import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category.ReiBambooTrayRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category.ReiFlexPotRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category.ReiFlexStockpotRecipeCategory;
 import com.github.ysbbbbbb.kaleidoscopecookery.compat.rei.category.ReiMillstoneRecipeCategory;
@@ -28,6 +29,7 @@ public class ModREIClientPlugin implements REIClientPlugin {
       ReiFlexStockpotRecipeCategory.registerCategories(registry);
       ReiSteamerRecipeCategory.registerCategories(registry);
       ReiTeapotRecipeCategory.registerCategories(registry);
+      ReiBambooTrayRecipeCategory.registerCategories(registry);
    }
 
    public void registerDisplays(DisplayRegistry registry) {
@@ -39,9 +41,10 @@ public class ModREIClientPlugin implements REIClientPlugin {
       ReiFlexStockpotRecipeCategory.registerDisplays(registry);
       ReiSteamerRecipeCategory.registerDisplays(registry);
       ReiTeapotRecipeCategory.registerDisplays(registry);
+      ReiBambooTrayRecipeCategory.registerDisplays(registry);
 
       for (RecipeHolder<CraftingRecipe> recipe : RiceBowlRecipeMaker.createRecipes()) {
-         DefaultCraftingDisplay<?> display = DefaultCraftingDisplay.of(recipe);
+         me.shedaniel.rei.plugin.common.displays.crafting.CraftingDisplay display = DefaultCraftingDisplay.of(recipe);
          if (display != null) {
             registry.add(display);
          }

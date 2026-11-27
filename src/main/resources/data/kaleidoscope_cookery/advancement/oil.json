@@ -3,15 +3,13 @@
   "criteria": {
     "kill_pig": {
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "#kaleidoscope_cookery:pig_oil_source"
-            }
-          }
-        ],
+        "entity": {
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#kaleidoscope_cookery:pig_oil_source"
+          },
+          "type": "minecraft:entity_properties"
+        },
         "killing_blow": {
           "direct_entity": {
             "equipment": {
@@ -26,7 +24,6 @@
     }
   },
   "display": {
-    "background": "kaleidoscope_cookery:textures/advancement/background.png",
     "description": {
       "translate": "advancements.kaleidoscope_cookery.oil.description"
     },

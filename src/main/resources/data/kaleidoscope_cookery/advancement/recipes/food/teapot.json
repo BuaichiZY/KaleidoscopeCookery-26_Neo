@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:teapot"
+        "recipes": [
+          "kaleidoscope_cookery:teapot"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -68,8 +68,8 @@ public final class RuntimeSteamerRenderer implements BlockEntityRenderer<Steamer
          float z = ((slot / 2) % 2) * 0.3F + 0.35F;
          poseStack.pushPose();
          poseStack.translate(x, y, z);
-         poseStack.mulPose(Axis.XN.rotationDegrees(90.0F));
-         poseStack.mulPose(Axis.ZP.rotationDegrees(slot * 17.0F));
+         poseStack.rotateDegrees(Axis.XN, 90.0F);
+         poseStack.rotateDegrees(Axis.ZP, -35.0F);
          poseStack.scale(0.5F, 0.5F, 0.5F);
          steamerItem.item().submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();

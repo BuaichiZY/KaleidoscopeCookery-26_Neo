@@ -10,7 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.HoeItem;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +29,7 @@ public class HoeUseEvent {
       BlockPos pos = event.getPos();
       Player player = event.getEntity();
       ItemStack stack = event.getItemStack();
-      if (stack.getItem() instanceof HoeItem) {
+      if (stack.is(ItemTags.HOES)) {
          BlockState state = level.getBlockState(pos);
          Block block = state.getBlock();
          if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH) {
@@ -39,7 +39,7 @@ public class HoeUseEvent {
             if (isWater) {
                if (!level.isClientSide()) {
                   level.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
-                  level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                  level.playSound(null, pos, SoundEvents.HOE_TILL.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
                   stack.hurtAndBreak(
                      1,
                      player,

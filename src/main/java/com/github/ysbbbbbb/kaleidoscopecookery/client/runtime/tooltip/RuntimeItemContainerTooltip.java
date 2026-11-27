@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.IItemHandler;
 
 /** Prevents the same unknown-component crash for item-backed containers. */
 public final class RuntimeItemContainerTooltip implements ClientTooltipComponent {

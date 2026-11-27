@@ -9,20 +9,25 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.world.level.Level;
+import java.util.List;
 
 public class ChoppingBoardRecipe implements BaseRecipe<SingleRecipeInput> {
    private final Ingredient ingredient;
-   private final ItemStackTemplate resultTemplate;
+   private final List<ItemStackTemplate> resultTemplates;
    private final int cutCount;
    private final Identifier modelId;
 
    public ChoppingBoardRecipe(Ingredient ingredient, ItemStack result, int cutCount, Identifier modelId) {
-      this(ingredient, ItemStackTemplate.fromNonEmptyStack(result), cutCount, modelId);
+      this(ingredient, List.of(ItemStackTemplate.fromNonEmptyStack(result)), cutCount, modelId);
    }
 
    public ChoppingBoardRecipe(Ingredient ingredient, ItemStackTemplate resultTemplate, int cutCount, Identifier modelId) {
+      this(ingredient, List.of(resultTemplate), cutCount, modelId);
+   }
+
+   public ChoppingBoardRecipe(Ingredient ingredient, List<ItemStackTemplate> resultTemplates, int cutCount, Identifier modelId) {
       this.ingredient = ingredient;
-      this.resultTemplate = resultTemplate;
+      this.resultTemplates = List.copyOf(resultTemplates);
       this.cutCount = Math.max(cutCount, 1);
       this.modelId = modelId;
    }
@@ -40,15 +45,23 @@ public class ChoppingBoardRecipe implements BaseRecipe<SingleRecipeInput> {
    }
 
    public ItemStack getResult() {
-      return this.resultTemplate.create();
+      return this.resultTemplates.isEmpty() ? ItemStack.EMPTY : this.resultTemplates.getFirst().create();
    }
 
    public ItemStackTemplate getResultTemplate() {
-      return this.resultTemplate;
+      return this.resultTemplates.getFirst();
+   }
+
+   public List<ItemStackTemplate> getResultTemplates() {
+      return this.resultTemplates;
+   }
+
+   public List<ItemStack> getResults() {
+      return this.resultTemplates.stream().map(ItemStackTemplate::create).toList();
    }
 
    public ItemStack getResultItem(Provider registries) {
-      return this.resultTemplate.create();
+      return this.getResult();
    }
 
    @SuppressWarnings("unchecked")

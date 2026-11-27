@@ -7,7 +7,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.tag.TagMod;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.SteamerItem;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,7 +56,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SteamerBlock extends FallingBlock implements EntityBlock, SimpleWaterloggedBlock {
-   public static final MapCodec<SteamerBlock> CODEC = simpleCodec(p -> new SteamerBlock());
    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
    public static final BooleanProperty HALF = BooleanProperty.create("half");
    public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
@@ -73,7 +71,7 @@ public class SteamerBlock extends FallingBlock implements EntityBlock, SimpleWat
             .instrument(NoteBlockInstrument.BASEDRUM)
             .instabreak()
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .sound(SoundType.BAMBOO)
       );
       this.registerDefaultState(
@@ -115,10 +113,6 @@ public class SteamerBlock extends FallingBlock implements EntityBlock, SimpleWat
          fall.blockData = blockEntityTag;
          this.falling(fall);
       }
-   }
-
-   protected MapCodec<? extends FallingBlock> codec() {
-      return CODEC;
    }
 
    @Override

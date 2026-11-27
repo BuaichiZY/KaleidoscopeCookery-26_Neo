@@ -20,6 +20,9 @@ import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeStea
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeTableRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeTeapotRenderer;
 import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeTrashCanRenderer;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeBambooTrayRenderer;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeTeaBannerRenderer;
+import com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.model.RuntimeTeaBannerModels;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModEntities;
 import net.neoforged.api.distmarker.Dist;
@@ -40,6 +43,9 @@ public final class CoreBlockEntityRenderers {
       event.registerLayerDefinition(RuntimeTeapotModel.LAYER_LOCATION, RuntimeTeapotModel::createBodyLayer);
       event.registerLayerDefinition(RuntimeTrashCanModel.LAYER_LOCATION, RuntimeTrashCanModel::createBodyLayer);
       event.registerLayerDefinition(RuntimeStrawHatModel.LAYER_LOCATION, RuntimeStrawHatModel::createBodyLayer);
+      event.registerLayerDefinition(RuntimeTeaBannerModels.Normal.LAYER, RuntimeTeaBannerModels.Normal::createLayer);
+      event.registerLayerDefinition(RuntimeTeaBannerModels.Wall.LAYER, RuntimeTeaBannerModels.Wall::createLayer);
+      event.registerLayerDefinition(RuntimeTeaBannerModels.Pattern.LAYER, RuntimeTeaBannerModels.Pattern::createLayer);
    }
 
    @SubscribeEvent
@@ -51,12 +57,15 @@ public final class CoreBlockEntityRenderers {
       event.registerBlockEntityRenderer(ModBlocks.STOCKPOT_BE.get(), RuntimeStockpotRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.STEAMER_BE.get(), RuntimeSteamerRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.TEAPOT_BE.get(), RuntimeTeapotRenderer::new);
+      event.registerBlockEntityRenderer(ModBlocks.KITCHEN_SHELF_BE.get(), com.github.ysbbbbbb.kaleidoscopecookery.client.runtime.render.RuntimeKitchenShelfRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.KITCHENWARE_RACKS_BE.get(), RuntimeKitchenwareRacksRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.FRUIT_BASKET_BE.get(), RuntimeFruitBasketRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.RECIPE_BLOCK_BE.get(), RuntimeRecipeBlockRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.TABLE_BE.get(), RuntimeTableRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.CHAIR_BE.get(), RuntimeChairRenderer::new);
       event.registerBlockEntityRenderer(ModBlocks.TRASH_CAN_BE.get(), RuntimeTrashCanRenderer::new);
+      event.registerBlockEntityRenderer(ModBlocks.BAMBOO_TRAY_BE.get(), RuntimeBambooTrayRenderer::new);
+      event.registerBlockEntityRenderer(ModBlocks.TEA_BANNER_BE.get(), RuntimeTeaBannerRenderer::new);
       event.registerEntityRenderer(ModEntities.SCARECROW.get(), RuntimeScarecrowRenderer::new);
       event.registerEntityRenderer(ModEntities.SIT.get(), RuntimeSitRenderer::new);
       event.registerEntityRenderer(ModEntities.THROWABLE_BAOZI.get(), ThrownItemRenderer::new);

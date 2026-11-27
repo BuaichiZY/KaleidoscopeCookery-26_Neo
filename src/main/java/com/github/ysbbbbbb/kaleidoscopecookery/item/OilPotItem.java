@@ -22,7 +22,7 @@ public class OilPotItem extends BlockItem {
    private static final int HAS_OIL = 1;
 
    public OilPotItem() {
-      super((Block)ModBlocks.OIL_POT.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.OIL_POT.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    public static void setOilCount(ItemStack stack, int count) {

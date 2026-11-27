@@ -12,9 +12,12 @@ public interface TagMod {
    TagKey<Item> COOKERY_MOD_ITEMS = itemTag("cookery_mod_items");
    TagKey<Item> COOKERY_MOD_SEEDS = itemTag("cookery_mod_seeds");
    TagKey<Item> LIT_STOVE = itemTag("lit_stove");
+   TagKey<Item> KITCHEN_SHOVELS = itemTag("kitchen_shovels");
    TagKey<Item> EXTINGUISH_STOVE = itemTag("extinguish_stove");
    TagKey<Item> OIL = itemTag("oil");
    TagKey<Item> CATERPILLARS = itemTag("caterpillars");
+   TagKey<Item> FLOWER_TEA_INGREDIENTS = itemTag("flower_tea_ingredients");
+   TagKey<Item> TEA_BAGS = itemTag("tea_bags");
    TagKey<Item> STRAW_HAT = itemTag("straw_hat");
    TagKey<Item> STRAW_BALE = itemTag("straw_bale");
    TagKey<Item> KITCHEN_KNIFE = itemTag("kitchen_knife");
@@ -39,6 +42,7 @@ public interface TagMod {
    TagKey<Block> SICKLE_HARVEST_BLACKLIST = blockTag("sickle_harvest_blacklist");
    TagKey<EntityType<?>> PIG_OIL_SOURCE = entityTag("pig_oil_source");
    TagKey<EntityType<?>> MILLSTONE_BINDABLE = entityTag("millstone_bindable");
+   TagKey<EntityType<?>> MILLSTONE_BIND_BLACKLIST = entityTag("millstone_bind_blacklist");
    TagKey<EntityType<?>> RICE_GROWTH_BOOSTER = entityTag("rice_growth_booster");
    TagKey<DamageType> SATIATED_SHIELD_WEAKNESS = damageTypeTag("satiated_shield_weakness");
 

@@ -84,9 +84,9 @@ public final class ClientItemModelProperties {
       // Preserve the v29 positioning and timing, which match reference video 5.
       poseStack.translate(sign * 0.56F, -0.52F + event.getEquipProgress() * -0.6F, -0.72F);
       poseStack.translate(sign * -0.2785682F, 0.18344387F, 0.15731531F);
-      poseStack.mulPose(com.mojang.math.Axis.XP.rotationDegrees(-13.935F));
-      poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(sign * 35.3F));
-      poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(sign * -9.785F));
+      poseStack.rotateDegrees(com.mojang.math.Axis.XP, -13.935F);
+      poseStack.rotateDegrees(com.mojang.math.Axis.YP, sign * 35.3F);
+      poseStack.rotateDegrees(com.mojang.math.Axis.ZP, sign * -9.785F);
 
       float held = player.getTicksUsingItem() + event.getPartialTick();
       float power = held / 20.0F;
@@ -98,7 +98,7 @@ public final class ClientItemModelProperties {
       }
       poseStack.translate(0.0F, 0.0F, power * 0.04F);
       poseStack.scale(1.0F, 1.0F, 1.0F + power * 0.2F);
-      poseStack.mulPose(com.mojang.math.Axis.YN.rotationDegrees(sign * 45.0F));
+      poseStack.rotateDegrees(com.mojang.math.Axis.YN, sign * 45.0F);
 
       ItemStackRenderState state = new ItemStackRenderState();
       Minecraft.getInstance().getItemModelResolver().updateForTopItem(

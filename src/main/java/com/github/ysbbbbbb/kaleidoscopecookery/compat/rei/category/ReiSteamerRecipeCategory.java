@@ -71,15 +71,15 @@ public class ReiSteamerRecipeCategory implements DisplayCategory<DefaultCustomDi
    public static void registerCategories(CategoryRegistry registry) {
       registry.add(new ReiSteamerRecipeCategory());
       registry.addWorkstations(
-         ID, new EntryIngredient[]{ReiUtil.ofItem((Item)ModItems.STEAMER.get()), ReiUtil.ofIngredient(Ingredient.of(TagMod.KITCHEN_KNIFE))}
+         ID, new EntryIngredient[]{ReiUtil.ofItem((Item)ModItems.STEAMER.get()), ReiUtil.ofIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(TagMod.KITCHEN_KNIFE)))}
       );
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.STEAMER_RECIPE).forEach(r -> {
-         List<EntryIngredient> input = ReiUtil.ofIngredients(((SteamerRecipe)r.value()).getIngredients());
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.STEAMER_RECIPE).forEach(r -> {
+         List<EntryIngredient> input = ReiUtil.ofIngredients(((SteamerRecipe)r.value()).getIngredient());
          List<EntryIngredient> output = ReiUtil.ofItemStacks(((SteamerRecipe)r.value()).getResult());
-         registry.add(new DefaultCustomDisplay(r, input, output) {
+         registry.add(new DefaultCustomDisplay(input, output, java.util.Optional.of(r.id().identifier())) {
             public CategoryIdentifier<?> getCategoryIdentifier() {
                return ReiSteamerRecipeCategory.ID;
             }

@@ -24,7 +24,8 @@ public interface StockpotRecipeSchema {
    RecipeKey<String> FINISHED_TEXTURE = StringComponent.ID.otherKey("finished_texture").optional(StockpotVisuals.DEFAULT_FINISHED_TEXTURE.toString());
    RecipeKey<Integer> COOKING_BUBBLE_COLOR = NumberComponent.INT.otherKey("cooking_bubble_color").optional(16772291);
    RecipeKey<Integer> FINISHED_BUBBLE_COLOR = NumberComponent.INT.otherKey("finished_bubble_color").optional(16034443);
+   RecipeKey<Boolean> SYRUP = dev.latvian.mods.kubejs.recipe.component.BooleanComponent.BOOLEAN.otherKey("syrup").optional(false);
    RecipeSchema SCHEMA = new RecipeSchema(
-      new RecipeKey[]{OUTPUT, INGREDIENTS, SOUP_BASE, TIME, CARRIER, COOKING_TEXTURE, FINISHED_TEXTURE, COOKING_BUBBLE_COLOR, FINISHED_BUBBLE_COLOR}
+      new RecipeKey[]{OUTPUT, INGREDIENTS, SOUP_BASE, TIME, CARRIER, COOKING_TEXTURE, FINISHED_TEXTURE, COOKING_BUBBLE_COLOR, FINISHED_BUBBLE_COLOR, SYRUP}
    );
 }

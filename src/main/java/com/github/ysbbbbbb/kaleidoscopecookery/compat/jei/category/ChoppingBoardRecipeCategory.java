@@ -44,10 +44,15 @@ public class ChoppingBoardRecipeCategory implements IRecipeCategory<RecipeHolder
    }
 
    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<ChoppingBoardRecipe> recipe, IFocusGroup focuses) {
-      Ingredient input = ((ChoppingBoardRecipe)recipe.value()).getIngredient();
-      ItemStack output = ((ChoppingBoardRecipe)recipe.value()).getResult();
+      Ingredient input = recipe.value().getIngredient();
+      List<ItemStack> outputs = recipe.value().getResults();
       builder.addSlot(RecipeIngredientRole.INPUT, 38, 27).addIngredients(input);
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 30).addItemStack(output);
+      if (!outputs.isEmpty()) builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 30).addItemStack(outputs.getFirst());
+      int startX = 128 - (outputs.size() - 2) * 12;
+      for (int i = 1; i < outputs.size(); i++) {
+         builder.addSlot(RecipeIngredientRole.OUTPUT, startX + (i - 1) * 24, 54)
+            .setStandardSlotBackground().addItemStack(outputs.get(i));
+      }
    }
 
    public void draw(RecipeHolder<ChoppingBoardRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {

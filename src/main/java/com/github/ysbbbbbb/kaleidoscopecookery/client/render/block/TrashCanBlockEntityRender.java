@@ -45,8 +45,8 @@ public class TrashCanBlockEntityRender implements BlockEntityRenderer<TrashCanBl
          this.animate(trashCan.enterState, TrashCanAnimation.ENTER, ageInTicks);
          poseStack.pushPose();
          poseStack.translate(0.5, 1.5, 0.5);
-         poseStack.mulPose(Axis.ZN.rotationDegrees(180.0F));
-         poseStack.mulPose(Axis.YN.rotationDegrees(180 - facingDeg));
+         poseStack.rotateDegrees(Axis.ZN, 180.0F);
+         poseStack.rotateDegrees(Axis.YN, 180 - facingDeg);
          VertexConsumer checkerBoardBuff = buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
          this.model.renderToBuffer(poseStack, checkerBoardBuff, packedLight, packedOverlay);
          poseStack.popPose();

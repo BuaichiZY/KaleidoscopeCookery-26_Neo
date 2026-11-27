@@ -44,7 +44,7 @@ public class BaseCropBlock extends CropBlock {
    protected final DeferredItem<Item> seed;
 
    public BaseCropBlock(DeferredItem<Item> result, DeferredItem<Item> seed) {
-      super(ModRegistrationProperties.blockProperties().mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
+      super(ModRegistrationProperties.blockProperties().mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.POPPED));
       this.result = result;
       this.seed = seed;
    }

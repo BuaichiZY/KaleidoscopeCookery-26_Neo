@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "kaleidoscope_cookery:fresh_tea_leaves",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "kaleidoscope_cookery:tea_tree",
+                "state": {
+                  "age": "5"
+                }
+              }
+            },
+            {
+              "type": "minecraft:item",
+              "name": "kaleidoscope_cookery:tea_seed"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "kaleidoscope_cookery:tea_seed",
+          "modifier": {
+            "enchantment": "minecraft:fortune",
+            "formula": "minecraft:binomial_with_bonus_count",
+            "type": "minecraft:apply_bonus",
+            "parameters": {
+              "extra": 3,
+              "probability": 0.5714286
+            }
+          }
+        }
+      ],
+      "rolls": 1.0,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "kaleidoscope_cookery:tea_tree",
+        "state": {
+          "age": "5"
+        }
+      }
+    }
+  ],
+  "random_sequence": "kaleidoscope_cookery:blocks/tea_tree",
+  "modifier": {
+    "type": "minecraft:explosion_decay"
+  }
+}

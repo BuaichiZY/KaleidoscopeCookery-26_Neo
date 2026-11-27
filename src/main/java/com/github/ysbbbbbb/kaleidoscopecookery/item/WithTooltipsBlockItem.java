@@ -19,7 +19,7 @@ public class WithTooltipsBlockItem extends BlockItem {
    }
 
    public WithTooltipsBlockItem(Block block, String name) {
-      this(block, ModRegistrationProperties.itemProperties(), name);
+      this(block, ModRegistrationProperties.blockItemProperties(), name);
    }
 
    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {

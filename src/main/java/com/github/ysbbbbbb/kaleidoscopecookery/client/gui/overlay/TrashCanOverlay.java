@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class TrashCanOverlay implements Layer {
    private static final Identifier TRASH_CAN_OVERLAY = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "textures/gui/trash_can_overlay.png");

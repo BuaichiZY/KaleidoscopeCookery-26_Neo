@@ -76,18 +76,26 @@ public final class RuntimeMillstoneRenderer implements BlockEntityRenderer<Mills
       int facingDegrees = state.facing.get2DDataValue() * 90;
       poseStack.pushPose();
       poseStack.translate(0.5F, 1.5F, 0.5F);
-      poseStack.mulPose(Axis.ZN.rotationDegrees(180.0F));
-      poseStack.mulPose(Axis.YN.rotationDegrees(180.0F - facingDegrees));
+      poseStack.rotateDegrees(Axis.ZN, 180.0F);
+      poseStack.rotateDegrees(Axis.YN, 180.0F - facingDegrees);
+      RuntimeMillstoneModel.State modelState = new RuntimeMillstoneModel.State(
+         state.wheelRotation, state.rollRotation, state.stickRotation
+      );
       collector.submitModel(
          this.model,
-         new RuntimeMillstoneModel.State(state.wheelRotation, state.rollRotation, state.stickRotation),
+         modelState,
          poseStack,
          TEXTURE,
          state.lightCoords,
          OverlayTexture.NO_OVERLAY,
-         0,
-         state.breakProgress
+         0
       );
+      if (state.breakProgress != null) {
+         collector.order(1).submitCrumblingOverlay(
+            this.model, modelState, poseStack, this.model.renderType(TEXTURE), state.lightCoords,
+            OverlayTexture.NO_OVERLAY, -1, state.breakProgress
+         );
+      }
       poseStack.popPose();
 
       if (!state.item.isEmpty()) {
@@ -96,8 +104,8 @@ public final class RuntimeMillstoneRenderer implements BlockEntityRenderer<Mills
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.875F, 0.0F);
             poseStack.rotateAround(Axis.YP.rotationDegrees(i * 45.0F + random.nextInt(15)), 0.5F, 0.0F, 0.5F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(random.nextInt(20)));
-            poseStack.mulPose(Axis.XN.rotationDegrees(80.0F + random.nextInt(20)));
+            poseStack.rotateDegrees(Axis.YP, random.nextInt(20));
+            poseStack.rotateDegrees(Axis.XN, 80.0F + random.nextInt(20));
             poseStack.scale(0.65F, 0.65F, 0.65F);
             state.item.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
             poseStack.popPose();

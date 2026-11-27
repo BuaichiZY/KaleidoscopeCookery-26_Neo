@@ -62,7 +62,7 @@ public class TeapotBlockEntityRender implements BlockEntityRenderer<TeapotBlockE
             Font font = this.context.getFont();
             poseStack.pushPose();
             poseStack.translate(0.5, 1.0, 0.5);
-            poseStack.mulPose(Axis.YN.rotationDegrees(180.0F + camera.getYRot()));
+            poseStack.rotateDegrees(Axis.YN, 180.0F + camera.getYRot());
             poseStack.scale(0.015625F, -0.015625F, 0.015625F);
             Component statusText = teapot.getStatusText();
             float width = -font.width(statusText) / 2 + 0.5F;
@@ -105,8 +105,8 @@ public class TeapotBlockEntityRender implements BlockEntityRenderer<TeapotBlockE
             .ifStarted(state -> KeyframeAnimations.animate(this.model, TeapotAnimation.BOILING, state.getAccumulatedTime(), 1.0F, ANIMATION_VECTOR_CACHE));
          poseStack.pushPose();
          poseStack.translate(0.5, 1.5, 0.5);
-         poseStack.mulPose(Axis.ZN.rotationDegrees(180.0F));
-         poseStack.mulPose(Axis.YN.rotationDegrees(180 - facingDeg));
+         poseStack.rotateDegrees(Axis.ZN, 180.0F);
+         poseStack.rotateDegrees(Axis.YN, 180 - facingDeg);
          VertexConsumer checkerBoardBuff = buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
          this.model.renderToBuffer(poseStack, checkerBoardBuff, packedLight, packedOverlay);
          poseStack.popPose();

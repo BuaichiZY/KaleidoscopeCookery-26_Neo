@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:trash_can"
+        "recipes": [
+          "kaleidoscope_cookery:trash_can"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

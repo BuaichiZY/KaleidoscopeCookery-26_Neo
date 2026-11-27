@@ -1,14 +1,22 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.init;
 
+import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.KitchenShelfBlockEntity;
+
 import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.BaseCropBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.ChiliCropBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.LettuceCropBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.RiceCropBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.crop.TeaTreeBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.ChairBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.CookStoolBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.FruitBasketBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.StackableFoodBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.TableBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.EightImmortalsTableBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.LongBenchBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.RedLanternBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.TeaBannerBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.drink.ClayPotMilkTeaBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.drink.EmptyCupBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.food.FoodBiteThreeByThreeBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.ChoppingBoardBlock;
@@ -22,6 +30,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.SteamerBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.StockpotBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.StoveBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.TeapotBlock;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.BambooTrayBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.misc.ChiliRistraBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.misc.OilBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.misc.RecipeBlock;
@@ -33,6 +42,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.FruitBaske
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.OilPotBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.RecipeBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.TableBlockEntity;
+import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.TeaBannerBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.food.FoodBiteThreeByThreeBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.ChoppingBoardBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.KitchenwareRacksBlockEntity;
@@ -42,6 +52,7 @@ import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.ShawarmaSpitB
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.SteamerBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.StockpotBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.TeapotBlockEntity;
+import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.BambooTrayBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.misc.TrashCanBlockEntity;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -66,6 +77,7 @@ public class ModBlocks {
    public static DeferredBlock<Block> OIL_BLOCK = registerBlock("oil_block", OilBlock::new);
    public static DeferredBlock<Block> ENAMEL_BASIN = registerBlock("enamel_basin", EnamelBasinBlock::new);
    public static DeferredBlock<Block> KITCHENWARE_RACKS = registerBlock("kitchenware_racks", KitchenwareRacksBlock::new);
+   public static DeferredBlock<Block> BAMBOO_TRAY = registerBlock("bamboo_tray", BambooTrayBlock::new);
    public static DeferredBlock<Block> CHILI_RISTRA = registerBlock("chili_ristra", ChiliRistraBlock::new);
    public static DeferredBlock<Block> STRUNG_MUSHROOMS = registerBlock("strung_mushrooms", StrungMushroomsBlock::new);
    public static DeferredBlock<Block> STRAW_BLOCK = registerBlock("straw_block", StrawBlocks::new);
@@ -74,13 +86,16 @@ public class ModBlocks {
    public static DeferredBlock<Block> STEAMER = registerBlock("steamer", SteamerBlock::new);
    public static DeferredBlock<Block> TEAPOT = registerBlock("teapot", TeapotBlock::new);
    public static DeferredBlock<Block> EMPTY_CUP = registerBlock("empty_cup", EmptyCupBlock::new);
+   public static DeferredBlock<Block> CLAY_POT_MILK_TEA = registerBlock("clay_pot_milk_tea", ClayPotMilkTeaBlock::new);
    public static DeferredBlock<Block> TRASH_CAN = registerBlock("trash_can", TrashCanBlock::new);
    public static DeferredBlock<Block> OIL_POT = registerBlock("oil_pot", OilPotBlock::new);
    public static DeferredBlock<Block> RECIPE_BLOCK = registerBlock("recipe_block", RecipeBlock::new);
+   public static DeferredBlock<Block> TEA_BANNER = registerBlock("tea_banner", TeaBannerBlock::new);
    public static DeferredBlock<Block> TOMATO_CROP = registerBlock("tomato_crop", () -> new BaseCropBlock(ModItems.TOMATO, ModItems.TOMATO_SEED));
    public static DeferredBlock<Block> CHILI_CROP = registerBlock("chili_crop", ChiliCropBlock::new);
    public static DeferredBlock<Block> LETTUCE_CROP = registerBlock("lettuce_crop", LettuceCropBlock::new);
    public static DeferredBlock<Block> RICE_CROP = registerBlock("rice_crop", RiceCropBlock::new);
+   public static DeferredBlock<Block> TEA_TREE = registerBlock("tea_tree", TeaTreeBlock::new);
    public static DeferredBlock<Block> COOK_STOOL_OAK = registerBlock("cook_stool_oak", CookStoolBlock::new);
    public static DeferredBlock<Block> COOK_STOOL_SPRUCE = registerBlock("cook_stool_spruce", CookStoolBlock::new);
    public static DeferredBlock<Block> COOK_STOOL_ACACIA = registerBlock("cook_stool_acacia", CookStoolBlock::new);
@@ -114,6 +129,60 @@ public class ModBlocks {
    public static DeferredBlock<Block> TABLE_JUNGLE = registerBlock("table_jungle", TableBlock::new);
    public static DeferredBlock<Block> TABLE_MANGROVE = registerBlock("table_mangrove", TableBlock::new);
    public static DeferredBlock<Block> TABLE_WARPED = registerBlock("table_warped", TableBlock::new);
+   public static DeferredBlock<Block> LONG_BENCH = registerBlock("long_bench", LongBenchBlock::new);
+   public static DeferredBlock<Block> RED_LANTERN = registerBlock("red_lantern", RedLanternBlock::new);
+   public static DeferredBlock<Block> EIGHT_IMMORTALS_TABLE = registerBlock("eight_immortals_table", EightImmortalsTableBlock::new);
+   public static final DeferredBlock<Block> KITCHEN_SHELF = registerBlock("kitchen_shelf", com.github.ysbbbbbb.kaleidoscopecookery.block.kitchen.KitchenShelfBlock::new);
+    public static DeferredBlock<Block> CANDIED_GLOW_BERRY_SKEWER_UPRIGHT = candiedSkewer(
+            "candied_glow_berry_skewer_upright", 12, true,
+            () -> ModItems.CANDIED_GLOW_BERRY_SKEWER.get(), 8
+    );
+
+    public static DeferredBlock<Block> CANDIED_GLOW_BERRY_SKEWER_SIDE = candiedSkewer(
+            "candied_glow_berry_skewer_side", 5, false,
+            () -> ModItems.CANDIED_GLOW_BERRY_SKEWER.get(), 8
+    );
+
+    public static DeferredBlock<Block> CANDIED_SWEET_BERRY_SKEWER_UPRIGHT = candiedSkewer(
+            "candied_sweet_berry_skewer_upright", 12, true,
+            () -> ModItems.CANDIED_SWEET_BERRY_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_SWEET_BERRY_SKEWER_SIDE = candiedSkewer(
+            "candied_sweet_berry_skewer_side", 5, false,
+            () -> ModItems.CANDIED_SWEET_BERRY_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_CHORUS_FRUIT_SKEWER_UPRIGHT = candiedSkewer(
+            "candied_chorus_fruit_skewer_upright", 5, true,
+            () -> ModItems.CANDIED_CHORUS_FRUIT_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_CHORUS_FRUIT_SKEWER_SIDE = candiedSkewer(
+            "candied_chorus_fruit_skewer_side", 4, false,
+            () -> ModItems.CANDIED_CHORUS_FRUIT_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_APPLE_SKEWER_UPRIGHT = candiedSkewer(
+            "candied_apple_skewer_upright", 5, true,
+            () -> ModItems.CANDIED_APPLE_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_APPLE_SKEWER_SIDE = candiedSkewer(
+            "candied_apple_skewer_side", 4, false,
+            () -> ModItems.CANDIED_APPLE_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_CATERPILLAR_SKEWER_UPRIGHT = candiedSkewer(
+            "candied_caterpillar_skewer_upright", 12, true,
+            () -> ModItems.CANDIED_CATERPILLAR_SKEWER.get(), 0
+    );
+
+    public static DeferredBlock<Block> CANDIED_CATERPILLAR_SKEWER_SIDE = candiedSkewer(
+            "candied_caterpillar_skewer_side", 5, false,
+            () -> ModItems.CANDIED_CATERPILLAR_SKEWER.get(), 0
+    );
+
    public static DeferredBlock<Block> COLD_CUT_HAM_SLICES = registerBlock(
       "cold_cut_ham_slices", () -> new FoodBiteThreeByThreeBlock(ModFoods.COLD_CUT_HAM_SLICES_BLOCK, 8, null)
    );
@@ -146,6 +215,9 @@ public class ModBlocks {
    public static Supplier<BlockEntityType<KitchenwareRacksBlockEntity>> KITCHENWARE_RACKS_BE = BLOCK_ENTITIES.register(
       "kitchenware_racks", () -> new BlockEntityType<>(KitchenwareRacksBlockEntity::new, (Block)KITCHENWARE_RACKS.get())
    );
+   public static Supplier<BlockEntityType<BambooTrayBlockEntity>> BAMBOO_TRAY_BE = BLOCK_ENTITIES.register(
+      "bamboo_tray", () -> new BlockEntityType<>(BambooTrayBlockEntity::new, (Block)BAMBOO_TRAY.get())
+   );
    public static Supplier<BlockEntityType<ShawarmaSpitBlockEntity>> SHAWARMA_SPIT_BE = BLOCK_ENTITIES.register(
       "shawarma_spit", () -> new BlockEntityType<>(ShawarmaSpitBlockEntity::new, (Block)SHAWARMA_SPIT.get())
    );
@@ -154,6 +226,9 @@ public class ModBlocks {
    );
    public static Supplier<BlockEntityType<RecipeBlockEntity>> RECIPE_BLOCK_BE = BLOCK_ENTITIES.register(
       "recipe_block", () -> new BlockEntityType<>(RecipeBlockEntity::new, (Block)RECIPE_BLOCK.get())
+   );
+   public static Supplier<BlockEntityType<TeaBannerBlockEntity>> TEA_BANNER_BE = BLOCK_ENTITIES.register(
+      "tea_banner", () -> new BlockEntityType<>(TeaBannerBlockEntity::new, (Block)TEA_BANNER.get())
    );
    public static Supplier<BlockEntityType<SteamerBlockEntity>> STEAMER_BE = BLOCK_ENTITIES.register(
       "steamer", () -> new BlockEntityType<>(SteamerBlockEntity::new, (Block)STEAMER.get())
@@ -202,6 +277,14 @@ public class ModBlocks {
                (Block)TABLE_WARPED.get()
             )
    );
+
+   public static final Supplier<BlockEntityType<KitchenShelfBlockEntity>> KITCHEN_SHELF_BE =
+      BLOCK_ENTITIES.register("kitchen_shelf", () -> new BlockEntityType<>(KitchenShelfBlockEntity::new, KITCHEN_SHELF.get()));
+
+   private static DeferredBlock<Block> candiedSkewer(String name, int count, boolean upright,
+      Supplier<net.minecraft.world.item.Item> item, int light) {
+      return registerBlock(name, () -> com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.CandiedSkewerBlock.create(count, item, light, upright));
+   }
 
    private static <B extends Block> DeferredBlock<B> registerBlock(String name, Supplier<? extends B> factory) {
       return BLOCKS.register(name, id -> ModRegistrationProperties.withBlockId(id, factory));

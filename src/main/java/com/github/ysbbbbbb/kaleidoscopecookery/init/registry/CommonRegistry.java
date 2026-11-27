@@ -2,6 +2,8 @@ package com.github.ysbbbbbb.kaleidoscopecookery.init.registry;
 
 import com.github.ysbbbbbb.kaleidoscopecookery.block.decoration.PlateBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.dispenser.OilPotDispenseBehavior;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.dispenser.BambooTrayDispenseBehavior;
+import com.github.ysbbbbbb.kaleidoscopecookery.block.dispenser.TeapotDispenseBehavior;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.drink.TeacupBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.food.FoodBiteBlock;
 import com.github.ysbbbbbb.kaleidoscopecookery.block.food.FoodBiteOneByTwoBlock;
@@ -48,7 +50,7 @@ public class CommonRegistry {
             return biteBlock;
           })));
          TeacupRegistry.TEACUP_DATA_MAP.forEach((resourceLocation, data) -> event.register(BuiltInRegistries.BLOCK.key(), resourceLocation, () -> ModRegistrationProperties.withBlockId(resourceLocation, () -> {
-            TeacupBlock teacupBlock = new TeacupBlock(data.getMaxCount());
+            TeacupBlock teacupBlock = new TeacupBlock(data.getMaxCount(), data.getAnimateTick());
             VoxelShape aabb = data.getAABB();
             if (aabb != null) {
                teacupBlock.setAABB(aabb);
@@ -86,5 +88,8 @@ public class CommonRegistry {
 
    private static void addDispenserBehavior() {
       DispenserBlock.registerBehavior((ItemLike)ModItems.OIL_POT.get(), new OilPotDispenseBehavior());
+      DispenserBlock.registerBehavior((ItemLike)ModItems.BAMBOO_TRAY.get(), new BambooTrayDispenseBehavior());
+      DispenserBlock.registerBehavior((ItemLike)ModItems.TEAPOT.get(), new TeapotDispenseBehavior());
+      com.github.ysbbbbbb.kaleidoscopecookery.block.dispenser.ChoppingBoardDispenseBehavior.register();
    }
 }

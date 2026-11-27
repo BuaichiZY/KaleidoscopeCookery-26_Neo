@@ -2,7 +2,6 @@ package com.github.ysbbbbbb.kaleidoscopecookery.block.misc;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.RecipeBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModSoundType;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,7 +40,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class RecipeBlock extends FaceAttachedHorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
-   public static final MapCodec<RecipeBlock> CODEC = simpleCodec(p -> new RecipeBlock());
    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
    private static final VoxelShape CEILING_AABB_X = Block.box(1.5, 15.75, 3.0, 14.5, 16.0, 13.0);
    private static final VoxelShape CEILING_AABB_Z = Block.box(3.0, 15.75, 1.5, 13.0, 16.0, 14.5);
@@ -120,10 +118,6 @@ public class RecipeBlock extends FaceAttachedHorizontalDirectionalBlock implemen
          }
          default -> facing.getAxis() == Axis.X ? CEILING_AABB_X : CEILING_AABB_Z;
       };
-   }
-
-   protected MapCodec<? extends FaceAttachedHorizontalDirectionalBlock> codec() {
-      return CODEC;
    }
 
    @Nullable

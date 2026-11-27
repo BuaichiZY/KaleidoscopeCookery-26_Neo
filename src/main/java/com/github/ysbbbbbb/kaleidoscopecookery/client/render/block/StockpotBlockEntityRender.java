@@ -78,11 +78,11 @@ public class StockpotBlockEntityRender implements BlockEntityRenderer<StockpotBl
             }
 
             poseStack.pushPose();
-            poseStack.mulPose(Axis.XP.rotationDegrees(85 + random % 10));
+            poseStack.rotateDegrees(Axis.XP, 85 + random % 10);
             poseStack.scale(0.5F, 0.5F, 0.5F);
             poseStack.translate(0.9 + offsetX, 0.9 + offsetY, -0.5 + offsetZ);
-            poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(random % 360));
+            poseStack.rotateDegrees(Axis.YP, yRot);
+            poseStack.rotateDegrees(Axis.ZP, random % 360);
             this.context.getItemRenderer().render(stack, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay, model);
             poseStack.popPose();
          }

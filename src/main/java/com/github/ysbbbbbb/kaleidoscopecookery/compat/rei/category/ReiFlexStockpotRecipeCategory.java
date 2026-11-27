@@ -24,7 +24,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -58,7 +58,7 @@ public class ReiFlexStockpotRecipeCategory implements DisplayCategory<ReiFlexSto
       widgets.add(Widgets.createRecipeBase(bounds));
       widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 102));
       widgets.add(
-         Widgets.withTranslate(
+         ReiUtil.translate(
             Widgets.createDrawableWidget(
                (guiGraphics, mouseX, mouseY, v) -> this.drawCenteredString(guiGraphics, Component.translatable("jei.kaleidoscope_cookery.flex_recipe"), 88, 90)
             ),
@@ -79,9 +79,9 @@ public class ReiFlexStockpotRecipeCategory implements DisplayCategory<ReiFlexSto
          widgets.add(Widgets.createSlot(new Point(startX + xOffset, startY + yOffset)).entries((Collection)inputs.get(i)).disableBackground().markInput());
          if (!inputs.get(i).isEmpty()) {
             widgets.add(
-               Widgets.withTranslate(
+               ReiUtil.translate(
                   Widgets.createDrawableWidget(
-                     (guiGraphics, mouseX, mouseY, v) -> guiGraphics.drawString(
+                     (guiGraphics, mouseX, mouseY, v) -> guiGraphics.text(
                         Minecraft.getInstance().font, Component.literal("*"), xOffset, yOffset, 16777215, true
                      )
                   ),
@@ -103,10 +103,10 @@ public class ReiFlexStockpotRecipeCategory implements DisplayCategory<ReiFlexSto
       return widgets;
    }
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+   private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {
       Font font = Minecraft.getInstance().font;
       FormattedCharSequence sequence = text.getVisualOrderText();
-      guiGraphics.drawString(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
+      guiGraphics.text(font, sequence, centerX - font.width(sequence) / 2, y, 5592405, false);
    }
 
    public int getDisplayWidth(ReiFlexStockpotRecipeCategory.FlexStockpotRecipeDisplay display) {
@@ -131,7 +131,7 @@ public class ReiFlexStockpotRecipeCategory implements DisplayCategory<ReiFlexSto
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager().getAllRecipesFor(ModRecipes.FLEX_STOCKPOT_RECIPE).forEach(holder -> {
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.FLEX_STOCKPOT_RECIPE).forEach(holder -> {
          FlexStockpotRecipe r = (FlexStockpotRecipe)holder.value();
          List<EntryIngredient> inputs = ReiUtil.ofIngredients(r.getIngredients());
          List<EntryIngredient> output = ReiUtil.ofItemStacks(r.getResultItem(RegistryAccess.EMPTY));
@@ -142,12 +142,16 @@ public class ReiFlexStockpotRecipeCategory implements DisplayCategory<ReiFlexSto
          } else {
             ItemStack displayStack = soupBase.getDisplayStack();
             EntryIngredient soupBaseEntry = displayStack.isEmpty() ? EntryIngredient.empty() : ReiUtil.ofItemStack(displayStack);
-            registry.add(new ReiFlexStockpotRecipeCategory.FlexStockpotRecipeDisplay(holder.id(), inputs, output, carrier, soupBaseEntry));
+            registry.add(new ReiFlexStockpotRecipeCategory.FlexStockpotRecipeDisplay(holder.id().identifier(), inputs, output, carrier, soupBaseEntry));
          }
       });
    }
 
    public static class FlexStockpotRecipeDisplay extends BasicDisplay {
+      // Displays are built from synced recipes on the client, not serialized by REI.
+      @Override
+      public @org.jetbrains.annotations.Nullable me.shedaniel.rei.api.common.display.DisplaySerializer<? extends me.shedaniel.rei.api.common.display.Display> getSerializer() { return null; }
+
       public final EntryIngredient carrier;
       public final EntryIngredient soupBase;
 

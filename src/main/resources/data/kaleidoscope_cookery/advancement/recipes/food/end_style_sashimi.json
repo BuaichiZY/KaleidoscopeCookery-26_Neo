@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:end_style_sashimi"
+        "recipes": [
+          "kaleidoscope_cookery:end_style_sashimi"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -21,7 +21,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class TableBlockEntityRender implements BlockEntityRenderer<TableBlockEntity> {
    private static final BiFunction<DyeColor, Integer, ModelIdentifier> CACHE_MODEL = Util.memoize(

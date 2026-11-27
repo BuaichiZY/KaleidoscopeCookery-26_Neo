@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class FruitBasketBlockEntityRender implements BlockEntityRenderer<FruitBasketBlockEntity> {
    private final Context context;
@@ -26,7 +26,7 @@ public class FruitBasketBlockEntityRender implements BlockEntityRenderer<FruitBa
       int rotation = ((Direction)basket.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)).get2DDataValue() * 90;
       poseStack.pushPose();
       poseStack.translate(0.5, 0.0, 0.5);
-      poseStack.mulPose(Axis.YN.rotationDegrees(rotation));
+      poseStack.rotateDegrees(Axis.YN, rotation);
       poseStack.translate(-0.5, 0.0, -0.5);
       poseStack.translate(0.1, 0.3, 0.35);
 
@@ -40,8 +40,8 @@ public class FruitBasketBlockEntityRender implements BlockEntityRenderer<FruitBa
                poseStack.translate(0.15, 0.0, 0.0);
                poseStack.pushPose();
                poseStack.translate(0.0F, 0.0F, index % 2 == 0 ? -0.01F : 0.01F);
-               poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
-               poseStack.mulPose(Axis.XN.rotationDegrees(-30.0F));
+               poseStack.rotateDegrees(Axis.YN, 90.0F);
+               poseStack.rotateDegrees(Axis.XN, -30.0F);
                poseStack.scale(0.375F, 0.375F, 0.375F);
                itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, basket.getLevel(), 0);
                poseStack.popPose();

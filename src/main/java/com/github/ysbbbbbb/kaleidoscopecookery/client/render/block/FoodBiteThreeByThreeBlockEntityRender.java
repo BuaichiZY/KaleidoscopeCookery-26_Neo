@@ -36,8 +36,8 @@ public class FoodBiteThreeByThreeBlockEntityRender implements BlockEntityRendere
          poseStack.pushPose();
          this.coldCutHamSlicesModel.updateBites(bites);
          poseStack.translate(0.5, 1.5, 0.5);
-         poseStack.mulPose(Axis.ZN.rotationDegrees(180.0F));
-         poseStack.mulPose(Axis.YN.rotationDegrees(180 - facingDeg));
+         poseStack.rotateDegrees(Axis.ZN, 180.0F);
+         poseStack.rotateDegrees(Axis.YN, 180 - facingDeg);
          VertexConsumer checkerBoardBuff = buffer.getBuffer(RenderType.entityCutoutNoCull(COLD_CUT_HAM_SLICES_TEXTURE));
          this.coldCutHamSlicesModel.renderToBuffer(poseStack, checkerBoardBuff, packedLight, packedOverlay, -1);
          this.coldCutHamSlicesModel.resetBites();

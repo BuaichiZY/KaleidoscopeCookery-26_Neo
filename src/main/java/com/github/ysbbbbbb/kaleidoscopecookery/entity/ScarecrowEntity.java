@@ -53,8 +53,8 @@ import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class ScarecrowEntity extends LivingEntity {
    public static final EntityType<ScarecrowEntity> TYPE = Builder.<ScarecrowEntity>of(ScarecrowEntity::new, MobCategory.MISC)
@@ -165,34 +165,23 @@ public class ScarecrowEntity extends LivingEntity {
          } else {
             return InteractionResult.PASS;
          }
-      } else if (itemInHand.getItem() instanceof BlockItem blockItem
-         && blockItem.getBlock() instanceof LanternBlock
-         && this.swapHand(InteractionHand.OFF_HAND, player, itemInHand)) {
-         this.level().playSound(null, this.blockPosition(), SoundEvents.LANTERN_PLACE, this.getSoundSource());
-         return InteractionResult.SUCCESS;
-      } else if (itemInHand.isDamageableItem() && this.swapHand(InteractionHand.MAIN_HAND, player, itemInHand)) {
-         this.level().playSound(null, this.blockPosition(), SoundEvents.ITEM_FRAME_ADD_ITEM, this.getSoundSource());
-         return InteractionResult.SUCCESS;
-      } else {
-         return InteractionResult.PASS;
+      } else if (itemInHand.has(DataComponents.DAMAGE)) {
+         if (this.swapHand(InteractionHand.MAIN_HAND, player, itemInHand)
+            || this.swapHand(InteractionHand.OFF_HAND, player, itemInHand)) {
+            this.level().playSound(null, this.blockPosition(), SoundEvents.ITEM_FRAME_ADD_ITEM, this.getSoundSource());
+            return InteractionResult.SUCCESS;
+         }
       }
+      return InteractionResult.PASS;
    }
 
    private boolean swapHand(InteractionHand hand, Player player, ItemStack itemInHand) {
       ItemStack scarecrowStack = this.getItemInHand(hand);
-      if (player.getAbilities().instabuild && scarecrowStack.isEmpty() && !itemInHand.isEmpty()) {
-         this.setItemInHand(hand, itemInHand.copyWithCount(1));
-         return true;
-      } else if (itemInHand.isEmpty() || itemInHand.getCount() <= 1) {
-         this.setItemInHand(hand, itemInHand);
-         player.setItemInHand(InteractionHand.MAIN_HAND, scarecrowStack);
-         return true;
-      } else if (scarecrowStack.isEmpty()) {
-         this.setItemInHand(hand, itemInHand.split(1));
-         return true;
-      } else {
+      if (!scarecrowStack.isEmpty() || itemInHand.isEmpty()) {
          return false;
       }
+      this.setItemInHand(hand, player.getAbilities().instabuild ? itemInHand.copyWithCount(1) : itemInHand.split(1));
+      return true;
    }
 
    private boolean isClickHand(Vec3 vector) {

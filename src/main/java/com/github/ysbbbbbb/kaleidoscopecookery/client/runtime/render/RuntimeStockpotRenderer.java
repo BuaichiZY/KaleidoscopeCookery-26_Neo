@@ -92,7 +92,8 @@ public final class RuntimeStockpotRenderer implements BlockEntityRenderer<Stockp
             TextureAtlasSprite sprite = this.sprites.get(new SpriteId(TextureAtlas.LOCATION_BLOCKS, texture));
         int maxCount = Math.max(1, Math.min(blockEntity.getResult().getCount(), 9));
         float height = blockEntity.getStatus() == 3
-                ? 0.065F + 0.315F / maxCount * Math.min(blockEntity.getTakeoutCount(), maxCount)
+                ? (blockEntity.getSyrupUses() > 0 ? 0.13F + 0.3F / 9 * blockEntity.getSyrupUses()
+                    : 0.065F + 0.315F / maxCount * Math.min(blockEntity.getTakeoutCount(), maxCount))
                 : 0.38F;
             state.surface = new Surface(sprite, color, height);
          }
@@ -156,7 +157,7 @@ public final class RuntimeStockpotRenderer implements BlockEntityRenderer<Stockp
          poseStack.pushPose();
          float bob = (float)Math.sin(state.age * 0.1F + state.mobYaw) * 0.035F;
          poseStack.translate(0.5F, 0.39F + bob, 0.5F);
-         poseStack.mulPose(Axis.YP.rotationDegrees(state.mobYaw));
+         poseStack.rotateDegrees(Axis.YP, state.mobYaw);
          poseStack.scale(state.mobScale, state.mobScale, state.mobScale);
          this.entityRenderer.submit(state.mobEntity, camera, 0.0, 0.0, 0.0, poseStack, collector);
          poseStack.popPose();
@@ -169,11 +170,11 @@ public final class RuntimeStockpotRenderer implements BlockEntityRenderer<Stockp
          float wave = (float)Math.sin((hash + state.age * 50.0F) * 0.0005F) * 0.2F;
          float yaw = (Math.floorMod(hash, 2) == 0 ? -20.0F : 20.0F) + Math.floorMod(hash, 10);
          poseStack.pushPose();
-         poseStack.mulPose(Axis.XP.rotationDegrees(85.0F + Math.floorMod(hash, 10)));
+         poseStack.rotateDegrees(Axis.XP, 85.0F + Math.floorMod(hash, 10));
          poseStack.scale(0.5F, 0.5F, 0.5F);
          poseStack.translate(0.9F + offsetX, 0.9F + offsetY, -0.5F + wave);
-         poseStack.mulPose(Axis.YP.rotationDegrees(yaw));
-         poseStack.mulPose(Axis.ZP.rotationDegrees(Math.floorMod(hash, 360)));
+         poseStack.rotateDegrees(Axis.YP, yaw);
+         poseStack.rotateDegrees(Axis.ZP, Math.floorMod(hash, 360));
          item.model().submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();
       }

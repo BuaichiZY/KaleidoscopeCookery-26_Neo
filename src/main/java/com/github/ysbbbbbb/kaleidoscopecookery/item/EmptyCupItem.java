@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 
 public class EmptyCupItem extends BlockItem {
    public EmptyCupItem() {
-      super((Block)ModBlocks.EMPTY_CUP.get(), ModRegistrationProperties.itemProperties().stacksTo(16));
+      super((Block)ModBlocks.EMPTY_CUP.get(), ModRegistrationProperties.blockItemProperties().stacksTo(16));
    }
 
    public InteractionResult useOn(UseOnContext context) {

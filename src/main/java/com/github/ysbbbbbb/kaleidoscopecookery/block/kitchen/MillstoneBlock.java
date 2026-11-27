@@ -6,7 +6,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.MillstoneBloc
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModBlocks;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModTrigger;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -52,7 +51,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class MillstoneBlock extends HorizontalDirectionalBlock implements EntityBlock {
-   public static final MapCodec<MillstoneBlock> CODEC = simpleCodec(p -> new MillstoneBlock());
    public static final EnumProperty<NinePart> PART = EnumProperty.create("part", NinePart.class);
    private static final VoxelShape CENTER = Block.box(-2.0, 0.0, -2.0, 18.0, 15.0, 18.0);
    private static final VoxelShape LEFT_UP = Shapes.or(Block.box(11.0, 0.0, 11.0, 16.0, 6.0, 16.0), Block.box(8.0, 6.0, 8.0, 16.0, 14.0, 16.0));
@@ -144,7 +142,7 @@ public class MillstoneBlock extends HorizontalDirectionalBlock implements Entity
    }
 
    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-      if (pEntity instanceof Mob mob && !pLevel.isClientSide() && pLevel.getGameTime() % 5L == 4L) {
+      if (pEntity instanceof LivingEntity mob && !pLevel.isClientSide() && pLevel.getGameTime() % 5L == 4L) {
          NinePart part = (NinePart)pState.getValue(PART);
          BlockPos centerPos = pPos.subtract(new Vec3i(part.getPosX(), 0, part.getPosY()));
          if (pLevel.getBlockEntity(centerPos) instanceof MillstoneBlockEntity millstone && !millstone.hasEntity() && millstone.canBindEntity(mob)) {
@@ -228,9 +226,5 @@ public class MillstoneBlock extends HorizontalDirectionalBlock implements Entity
 
    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
       tooltip.add(Component.translatable("tooltip.kaleidoscope_cookery.millstone").withStyle(ChatFormatting.GRAY));
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return CODEC;
    }
 }

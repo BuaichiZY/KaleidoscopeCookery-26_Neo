@@ -9,7 +9,6 @@
     }
   },
   "display": {
-    "background": "kaleidoscope_cookery:textures/advancement/background.png",
     "description": {
       "translate": "advancements.kaleidoscope_cookery.transmutation_lunch_bag.description"
     },

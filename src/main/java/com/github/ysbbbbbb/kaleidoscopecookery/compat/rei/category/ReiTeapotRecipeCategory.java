@@ -23,7 +23,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -51,7 +51,7 @@ public class ReiTeapotRecipeCategory implements DisplayCategory<ReiTeapotRecipeC
       widgets.add(Widgets.createRecipeBase(bounds));
       widgets.add(Widgets.createTexturedWidget(BG, startX, startY, 0.0F, 0.0F, 176, 88));
       widgets.add(
-         Widgets.withTranslate(
+         ReiUtil.translate(
             Widgets.createDrawableWidget((guiGraphics, mouseX, mouseY, v) -> this.drawCenteredString(guiGraphics, brewTime, 88, 70)), startX, startY, 0.0
          )
       );
@@ -63,9 +63,9 @@ public class ReiTeapotRecipeCategory implements DisplayCategory<ReiTeapotRecipeC
       return widgets;
    }
 
-   private void drawCenteredString(GuiGraphics guiGraphics, Component text, int centerX, int y) {
+   private void drawCenteredString(GuiGraphicsExtractor guiGraphics, Component text, int centerX, int y) {
       Font font = Minecraft.getInstance().font;
-      guiGraphics.drawString(font, text, centerX - font.width(text) / 2, y, 5592405, false);
+      guiGraphics.text(font, text, centerX - font.width(text) / 2, y, 5592405, false);
    }
 
    public int getDisplayWidth(ReiTeapotRecipeCategory.TeapotRecipeDisplay display) {
@@ -90,8 +90,7 @@ public class ReiTeapotRecipeCategory implements DisplayCategory<ReiTeapotRecipeC
    }
 
    public static void registerDisplays(DisplayRegistry registry) {
-      registry.getRecipeManager()
-         .getAllRecipesFor(ModRecipes.TEAPOT_RECIPE)
+      com.github.ysbbbbbb.kaleidoscopecookery.compat.jei.RuntimeRecipeCache.getRecipes(ModRecipes.TEAPOT_RECIPE)
          .forEach(
             r -> {
                Fluid fluid = (Fluid)BuiltInRegistries.FLUID.getValue(((TeapotRecipe)r.value()).teaFluid());
@@ -99,18 +98,22 @@ public class ReiTeapotRecipeCategory implements DisplayCategory<ReiTeapotRecipeC
                List<EntryIngredient> fluidInput = ReiUtil.ofItems(bucket);
                List<EntryIngredient> inputs = List.of(
                   EntryIngredient.of(
-                     Arrays.stream(((TeapotRecipe)r.value()).ingredient().getItems())
+                     ((TeapotRecipe)r.value()).ingredient().items().map(item -> new net.minecraft.world.item.ItemStack(item.value()))
                         .map(stack -> EntryStacks.of(stack.copyWithCount(((TeapotRecipe)r.value()).ingredientCount())))
                         .toList()
                   )
                );
                List<EntryIngredient> output = ReiUtil.ofItemStacks(((TeapotRecipe)r.value()).result().copyWithCount(12));
-               registry.add(new ReiTeapotRecipeCategory.TeapotRecipeDisplay(r.id(), fluidInput, inputs, output, ((TeapotRecipe)r.value()).time()));
+               registry.add(new ReiTeapotRecipeCategory.TeapotRecipeDisplay(r.id().identifier(), fluidInput, inputs, output, ((TeapotRecipe)r.value()).time()));
             }
          );
    }
 
    public static class TeapotRecipeDisplay extends BasicDisplay {
+      // Displays are built from synced recipes on the client, not serialized by REI.
+      @Override
+      public @org.jetbrains.annotations.Nullable me.shedaniel.rei.api.common.display.DisplaySerializer<? extends me.shedaniel.rei.api.common.display.Display> getSerializer() { return null; }
+
       public final int brewTime;
 
       public TeapotRecipeDisplay(

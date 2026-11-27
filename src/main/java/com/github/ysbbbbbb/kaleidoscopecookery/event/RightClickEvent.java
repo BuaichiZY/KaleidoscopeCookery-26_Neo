@@ -35,6 +35,16 @@ public class RightClickEvent {
       InteractionHand hand = event.getHand();
       ItemStack itemInHand = player.getItemInHand(hand);
       Item item = itemInHand.getItem();
+      if (player.isSecondaryUseActive() && hand == InteractionHand.MAIN_HAND && !itemInHand.isEmpty()
+         && !(item instanceof com.github.ysbbbbbb.kaleidoscopecookery.item.RecipeItem)
+         && !itemInHand.is(com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems.KITCHEN_SHELF.get())
+         && level.getBlockEntity(pos) instanceof com.github.ysbbbbbb.kaleidoscopecookery.blockentity.kitchen.KitchenShelfBlockEntity shelf) {
+         if (level.isClientSide() || shelf.interact(player, true)) {
+            event.setCancellationResult(net.minecraft.world.InteractionResult.SUCCESS);
+            event.setCanceled(true);
+         }
+         return;
+      }
       Item maidItem = (Item)BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("touhou_little_maid", "smart_slab_has_maid"));
       if (player.isSecondaryUseActive()
          && hand == InteractionHand.MAIN_HAND

@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.Block;
 
 public class BambooTubeRiceBlockItem extends BlockItem implements IHasContainer {
    public BambooTubeRiceBlockItem(Block block, FoodProperties properties) {
-      super(block, ModRegistrationProperties.itemProperties().food(properties));
+      super(block, ModRegistrationProperties.blockItemProperties().food(properties));
    }
 
    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {

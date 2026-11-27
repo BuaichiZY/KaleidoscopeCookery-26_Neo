@@ -30,7 +30,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
 
 public class StrungMushroomsBlock extends Block {
    public static final BooleanProperty IS_HEAD = BooleanProperty.create("is_head");
@@ -39,7 +39,7 @@ public class StrungMushroomsBlock extends Block {
    private static final VoxelShape AABB_BODY = Block.box(3.5, 0.0, 3.5, 12.5, 16.0, 12.5);
 
    public StrungMushroomsBlock() {
-      super(ModRegistrationProperties.blockProperties().mapColor(MapColor.COLOR_BROWN).noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+      super(ModRegistrationProperties.blockProperties().mapColor(MapColor.COLOR_BROWN).noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED));
       this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(IS_HEAD, true)).setValue(SHEARED, false));
    }
 

@@ -96,6 +96,38 @@ public interface ModFoods {
       .alwaysEdible()
       .effect(() -> new MobEffectInstance(MobEffects.NAUSEA, 200), 1.0F)
       .build();
+    // 果串
+    FoodProperties BERRY_SKEWER = new LegacyBuilder()
+            .nutrition(4).saturationModifier(0.1F)
+            .alwaysEdible().build();
+
+    FoodProperties FRUIT_SKEWER = new LegacyBuilder()
+            .nutrition(8).saturationModifier(0.3F)
+            .alwaysEdible().build();
+
+    FoodProperties CATERPILLAR_SKEWER = new LegacyBuilder()
+            .nutrition(18).saturationModifier(7F / 36F).alwaysEdible()
+            .effect(() -> new MobEffectInstance(MobEffects.NAUSEA, 15 * 20), 1F)
+            .build();
+
+    // 裹糖果串
+    FoodProperties CANDIED_GLOW_BERRY_SKEWER = new LegacyBuilder()
+            .nutrition(10).saturationModifier(0.08F).alwaysEdible()
+            .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * 20), 1F)
+            .build();
+
+    FoodProperties CANDIED_SWEET_BERRY_SKEWER = new LegacyBuilder()
+            .nutrition(10).saturationModifier(0.08F)
+            .alwaysEdible().build();
+
+    FoodProperties CANDIED_FRUIT_SKEWER = new LegacyBuilder()
+            .nutrition(16).saturationModifier(0.3F)
+            .alwaysEdible().build();
+
+    FoodProperties CANDIED_CATERPILLAR_SKEWER = new LegacyBuilder()
+            .nutrition(36).saturationModifier(7F / 36F)
+            .alwaysEdible().build();
+
    FoodProperties SASHIMI = new LegacyBuilder().nutrition(1).saturationModifier(0.5F).alwaysEdible().build();
    FoodProperties RAW_LAMB_CHOPS = new LegacyBuilder().nutrition(1).saturationModifier(0.5F).alwaysEdible().build();
    FoodProperties RAW_COW_OFFAL = new LegacyBuilder().nutrition(2).saturationModifier(0.3F).alwaysEdible().build();
@@ -152,36 +184,37 @@ public interface ModFoods {
    FoodProperties RAW_BAMBOO_TUBE_RICE = new LegacyBuilder().nutrition(10).saturationModifier(0.5F).alwaysEdible().build();
    FoodProperties BAMBOO_TUBE_RICE = new LegacyBuilder().nutrition(10).saturationModifier(0.5F).alwaysEdible().build();
    FoodProperties BEEF_NOODLE = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties HUI_NOODLE = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties UDON_NOODLE = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties HOT_DRY_NOODLES = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.VITALITY, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties LABA_CONGEE = new LegacyBuilder()
-      .nutrition(12)
+            .nutrition(12).saturationModifier(0.5F)
+            .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 5 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
+   FoodProperties FRIED_EGG = new LegacyBuilder().nutrition(4).saturationModifier(0.5F).alwaysEdible().build();
+   FoodProperties TEA_EGG = new LegacyBuilder()
+      .nutrition(4)
       .saturationModifier(0.5F)
-      .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 6000), 1.0F)
+      .effect(() -> new MobEffectInstance(ModEffects.SULFUR, 1200), 1.0F)
       .alwaysEdible()
       .build();
-   FoodProperties FRIED_EGG = new LegacyBuilder().nutrition(4).saturationModifier(0.5F).alwaysEdible().build();
    FoodProperties DARK_CUISINE_BLOCK = new LegacyBuilder()
       .nutrition(1)
       .saturationModifier(0.0F)
@@ -476,11 +509,10 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties SCRAMBLE_EGG_WITH_TOMATOES = new LegacyBuilder()
-      .nutrition(9)
-      .saturationModifier(0.611F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 1800), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(9).saturationModifier(0.611f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 90 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties STIR_FRIED_BEEF_OFFAL = new LegacyBuilder()
       .nutrition(9)
       .saturationModifier(0.611F)
@@ -488,37 +520,39 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties BRAISED_BEEF = new LegacyBuilder()
-      .nutrition(9)
-      .saturationModifier(0.611F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 1800), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(9).saturationModifier(0.611f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 90 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties STIR_FRIED_PORK_WITH_PEPPERS = new LegacyBuilder()
-      .nutrition(9)
-      .saturationModifier(0.611F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 1800), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(9).saturationModifier(0.611f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 90 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties SWEET_AND_SOUR_PORK = new LegacyBuilder()
-      .nutrition(9)
-      .saturationModifier(0.611F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 1800), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(9).saturationModifier(0.611f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 90 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties FISH_FLAVORED_SHREDDED_PORK = new LegacyBuilder()
-      .nutrition(9)
-      .saturationModifier(0.611F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 1800), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(9).saturationModifier(0.611f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 90 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties COUNTRY_STYLE_MIXED_VEGETABLES = new LegacyBuilder()
       .nutrition(9)
       .saturationModifier(0.611F)
       .effect(() -> new MobEffectInstance(ModEffects.PRESERVATION, 1800), 1.0F)
       .alwaysEdible()
       .build();
-   FoodProperties COOKED_RICE = new LegacyBuilder().nutrition(6).saturationModifier(1.0F).alwaysEdible().build();
-   FoodProperties EGG_FRIED_RICE = new LegacyBuilder().nutrition(8).saturationModifier(0.875F).alwaysEdible().build();
+   FoodProperties COOKED_RICE = new LegacyBuilder()
+            .nutrition(6).saturationModifier(1)
+            
+            .alwaysEdible().build();
+   FoodProperties EGG_FRIED_RICE = new LegacyBuilder()
+            .nutrition(8).saturationModifier(0.875F)
+            
+            .alwaysEdible().build();
    FoodProperties DELICIOUS_EGG_FRIED_RICE = new LegacyBuilder()
       .nutrition(12)
       .saturationModifier(0.667F)
@@ -537,11 +571,10 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties SCRAMBLE_EGG_WITH_TOMATOES_RICE_BOWL = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties STIR_FRIED_BEEF_OFFAL_RICE_BOWL = new LegacyBuilder()
       .nutrition(14)
       .saturationModifier(0.643F)
@@ -549,29 +582,25 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties BRAISED_BEEF_RICE_BOWL = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties STIR_FRIED_PORK_WITH_PEPPERS_RICE_BOWL = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties SWEET_AND_SOUR_PORK_RICE_BOWL = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties FISH_FLAVORED_SHREDDED_PORK_RICE_BOWL = new LegacyBuilder()
-      .nutrition(14)
-      .saturationModifier(0.643F)
-      .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(14).saturationModifier(0.643f)
+            .effect(() -> new MobEffectInstance(ModEffects.SATIATED_SHIELD, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties BRAISED_FISH_RICE_BOWL = new LegacyBuilder()
       .nutrition(14)
       .saturationModifier(0.643F)
@@ -585,41 +614,35 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties PORK_BONE_SOUP = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 6000), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.VIGOR, 5 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties SEAFOOD_MISO_SOUP = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(MobEffects.WATER_BREATHING, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties FEARSOME_THICK_SOUP = new LegacyBuilder()
-      .nutrition(4)
-      .saturationModifier(0.0F)
-      .effect(() -> new MobEffectInstance(ModEffects.SULFUR, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(4).saturationModifier(0)
+            .effect(() -> new MobEffectInstance(ModEffects.SULFUR, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties LAMB_AND_RADISH_SOUP = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.TUNDRA_STRIDER, 6000), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.TUNDRA_STRIDER, 5 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties BRAISED_BEEF_WITH_POTATOES = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties WILD_MUSHROOM_RABBIT_SOUP = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(MobEffects.SPEED, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(MobEffects.SPEED, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties TOMATO_BEEF_BRISKET_SOUP = new LegacyBuilder()
       .nutrition(6)
       .saturationModifier(0.667F)
@@ -627,29 +650,25 @@ public interface ModFoods {
       .alwaysEdible()
       .build();
    FoodProperties PUFFERFISH_SOUP = new LegacyBuilder()
-      .nutrition(4)
-      .saturationModifier(0.0F)
-      .effect(() -> new MobEffectInstance(ModEffects.MUSTARD, 12000), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(4).saturationModifier(0)
+            .effect(() -> new MobEffectInstance(ModEffects.MUSTARD, 10 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties BORSCHT = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.FLATULENCE, 3600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.FLATULENCE, 3 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties BEEF_MEATBALL_SOUP = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties CHICKEN_AND_MUSHROOM_STEW = new LegacyBuilder()
-      .nutrition(6)
-      .saturationModifier(0.667F)
-      .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 9600), 1.0F)
-      .alwaysEdible()
-      .build();
+            .nutrition(6).saturationModifier(0.667f)
+            .effect(() -> new MobEffectInstance(ModEffects.WARMTH, 8 * 60 * 20), 1.0F)
+            
+            .alwaysEdible().build();
    FoodProperties DONKEY_SOUP = new LegacyBuilder()
       .nutrition(6)
       .saturationModifier(0.667F)

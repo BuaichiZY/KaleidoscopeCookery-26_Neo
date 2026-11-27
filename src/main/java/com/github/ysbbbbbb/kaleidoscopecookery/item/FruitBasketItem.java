@@ -15,13 +15,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemStackHandler;
 
 public class FruitBasketItem extends BlockItem {
    private static final int MAX_SLOTS = 8;
 
    public FruitBasketItem() {
-      super((Block)ModBlocks.FRUIT_BASKET.get(), ModRegistrationProperties.itemProperties().stacksTo(1));
+      super((Block)ModBlocks.FRUIT_BASKET.get(), ModRegistrationProperties.blockItemProperties().stacksTo(1));
    }
 
    public static ItemStackHandler getItems(ItemStack stack) {

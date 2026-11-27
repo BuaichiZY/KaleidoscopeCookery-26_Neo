@@ -3,7 +3,6 @@ import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.github.ysbbbbbb.kaleidoscopecookery.blockentity.decoration.OilPotBlockEntity;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModItems;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.OilPotItem;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,23 +45,18 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class OilPotBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
-   public static final MapCodec<OilPotBlock> CODEC = simpleCodec(p -> new OilPotBlock());
    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
    public static final BooleanProperty HAS_OIL = BooleanProperty.create("has_oil");
    private static final VoxelShape AABB = Block.box(5.0, 0.0, 5.0, 11.0, 10.0, 11.0);
 
    public OilPotBlock() {
       super(
-         ModRegistrationProperties.blockProperties().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.BELL).instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.LANTERN)
+         ModRegistrationProperties.blockProperties().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.BELL).instabreak().pushReaction(PushReaction.POPPED).sound(SoundType.LANTERN)
       );
       this.registerDefaultState(
          (BlockState)((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(WATERLOGGED, false)).setValue(FACING, Direction.NORTH))
             .setValue(HAS_OIL, false)
       );
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return CODEC;
    }
 
    public BlockState updateShape(

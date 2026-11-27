@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Item.Properties;
@@ -18,13 +18,13 @@ import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-public class KitchenShovelItem extends ShovelItem {
+public class KitchenShovelItem extends Item {
    public static final Identifier HAS_OIL_PROPERTY = Identifier.fromNamespaceAndPath("kaleidoscope_cookery", "has_oil");
    private static final int NO_OIL = 0;
    private static final int HAS_OIL = 1;
 
    public KitchenShovelItem() {
-      super(ToolMaterial.IRON, -1.0F, -2.0F, ModRegistrationProperties.itemProperties());
+      super(ModRegistrationProperties.itemProperties().shovel(ToolMaterial.IRON, -1.0F, -2.0F));
    }
 
    public static void setHasOil(ItemStack stack, boolean hasOil) {

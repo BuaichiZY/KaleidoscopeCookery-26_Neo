@@ -1,7 +1,6 @@
 package com.github.ysbbbbbb.kaleidoscopecookery.block.decoration;
 import com.github.ysbbbbbb.kaleidoscopecookery.init.ModRegistrationProperties;
 import com.google.common.collect.Lists;
-import com.mojang.serialization.MapCodec;
 import java.util.List;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
@@ -30,12 +29,11 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.github.ysbbbbbb.kaleidoscopecookery.inventory.itemhandler.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 public class PlateBlock extends HorizontalDirectionalBlock {
    public static final VoxelShape AABB = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-   protected static final MapCodec<PlateBlock> PLATE_BLOCK_CODEC = simpleCodec(p -> new PlateBlock(1, List.of()));
    // Five is the largest serving count registered by any plate.
    private static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 5);
    protected final IntegerProperty servings;
@@ -44,7 +42,7 @@ public class PlateBlock extends HorizontalDirectionalBlock {
    protected VoxelShape aabb = AABB;
 
    public PlateBlock(int maxCount, List<Supplier<Item>> items) {
-      super(ModRegistrationProperties.blockProperties().forceSolidOn().instabreak().mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).noOcclusion());
+      super(ModRegistrationProperties.blockProperties().forceSolidOn().instabreak().mapColor(MapColor.WOOD).sound(SoundType.WOOD).pushReaction(PushReaction.POPPED).noOcclusion());
       this.servings = SERVINGS;
       this.maxCount = maxCount;
       this.items = items;
@@ -133,9 +131,5 @@ public class PlateBlock extends HorizontalDirectionalBlock {
       }
 
       return drops;
-   }
-
-   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-      return PLATE_BLOCK_CODEC;
    }
 }

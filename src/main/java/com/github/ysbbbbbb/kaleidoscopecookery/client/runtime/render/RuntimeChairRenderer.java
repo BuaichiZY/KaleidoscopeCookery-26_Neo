@@ -64,7 +64,7 @@ public final class RuntimeChairRenderer implements BlockEntityRenderer<ChairBloc
 
       poseStack.pushPose();
       poseStack.translate(0.5F, 0.5F, 0.5F);
-      poseStack.mulPose(Axis.YP.rotationDegrees(-state.facing.getOpposite().get2DDataValue() * 90.0F));
+      poseStack.rotateDegrees(Axis.YP, -state.facing.getOpposite().get2DDataValue() * 90.0F);
       state.carpet.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
       poseStack.popPose();
    }

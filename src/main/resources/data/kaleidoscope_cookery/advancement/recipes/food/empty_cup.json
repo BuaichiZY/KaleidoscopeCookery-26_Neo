@@ -13,7 +13,9 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "kaleidoscope_cookery:empty_cup"
+        "recipes": [
+          "kaleidoscope_cookery:empty_cup"
+        ]
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -19,7 +19,7 @@ public final class ModArmorMaterials {
    public static final ArmorMaterial FARMER = new ArmorMaterial(
       15,
       Map.of(
-         ArmorType.HELMET, 1,
+         ArmorType.HELMET, 3,
          ArmorType.CHESTPLATE, 4,
          ArmorType.LEGGINGS, 5,
          ArmorType.BOOTS, 2,

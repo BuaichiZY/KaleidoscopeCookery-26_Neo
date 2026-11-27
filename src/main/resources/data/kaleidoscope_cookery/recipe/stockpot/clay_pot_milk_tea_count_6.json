@@ -1,0 +1,17 @@
+{
+  "type": "kaleidoscope_cookery:stockpot",
+  "carrier": "minecraft:flower_pot",
+  "ingredients": [
+    "#kaleidoscope_cookery:tea_bags",
+    "#kaleidoscope_cookery:tea_bags",
+    "#kaleidoscope_cookery:tea_bags",
+    "#kaleidoscope_cookery:tea_bags",
+    "#kaleidoscope_cookery:tea_bags",
+    "#kaleidoscope_cookery:tea_bags"
+  ],
+  "result": {
+    "count": 6,
+    "id": "kaleidoscope_cookery:clay_pot_milk_tea"
+  },
+  "soup_base": "minecraft:milk"
+}

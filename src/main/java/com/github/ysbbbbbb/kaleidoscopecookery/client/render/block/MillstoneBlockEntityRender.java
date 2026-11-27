@@ -69,8 +69,8 @@ public class MillstoneBlockEntityRender implements BlockEntityRenderer<Millstone
 
       poseStack.pushPose();
       poseStack.translate(0.5, 1.5, 0.5);
-      poseStack.mulPose(Axis.ZN.rotationDegrees(180.0F));
-      poseStack.mulPose(Axis.YN.rotationDegrees(180 - facingDeg));
+      poseStack.rotateDegrees(Axis.ZN, 180.0F);
+      poseStack.rotateDegrees(Axis.YN, 180 - facingDeg);
       VertexConsumer checkerBoardBuff = bufferIn.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
       this.bodyModel.renderToBuffer(poseStack, checkerBoardBuff, combinedLightIn, combinedOverlayIn);
       poseStack.popPose();
@@ -96,8 +96,8 @@ public class MillstoneBlockEntityRender implements BlockEntityRenderer<Millstone
          poseStack.pushPose();
          poseStack.translate(0.0, 0.875, 0.0);
          poseStack.rotateAround(Axis.YP.rotationDegrees(i * 45 + source.nextInt(15)), 0.5F, 0.0F, 0.5F);
-         poseStack.mulPose(Axis.YP.rotationDegrees(source.nextInt(20)));
-         poseStack.mulPose(Axis.XN.rotationDegrees(80 + source.nextInt(20)));
+         poseStack.rotateDegrees(Axis.YP, source.nextInt(20));
+         poseStack.rotateDegrees(Axis.XN, 80 + source.nextInt(20));
          poseStack.scale(0.65F, 0.65F, 0.65F);
          itemRenderer.render(renderItem, ItemDisplayContext.FIXED, false, poseStack, buffer, packedLight, packedOverlay, model);
          poseStack.popPose();

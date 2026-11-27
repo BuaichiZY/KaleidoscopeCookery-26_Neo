@@ -40,8 +40,8 @@ public class RecipeBlockEntityRender implements BlockEntityRenderer<RecipeBlockE
                ItemRenderer itemRenderer = this.context.getItemRenderer();
                poseStack.pushPose();
                poseStack.translate(0.5, 0.5, 0.5);
-               poseStack.mulPose(Axis.YP.rotationDegrees(-rotationY * 90));
-               poseStack.mulPose(Axis.XP.rotationDegrees(90 - rotationX * 90));
+               poseStack.rotateDegrees(Axis.YP, -rotationY * 90);
+               poseStack.rotateDegrees(Axis.XP, 90 - rotationX * 90);
                poseStack.translate(-0.5, -0.5, -0.5);
                poseStack.scale(0.5F, 0.5F, 0.5F);
                if (attachFace == AttachFace.WALL) {

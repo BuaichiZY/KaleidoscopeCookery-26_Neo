@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 
 public record StockpotRecipe(
-   NonNullList<Ingredient> ingredients, Identifier soupBase, ItemStackTemplate resultTemplate, int time, Ingredient carrier, StockpotVisuals visuals
+   NonNullList<Ingredient> ingredients, Identifier soupBase, ItemStackTemplate resultTemplate, int time, Ingredient carrier, StockpotVisuals visuals, boolean syrup
 ) implements BaseRecipe<StockpotInput> {
    public StockpotRecipe(List<Ingredient> ingredients, Identifier soupBase, ItemStack result, int time, Ingredient carrier, StockpotVisuals visuals) {
       this(
@@ -25,7 +25,8 @@ public record StockpotRecipe(
          result.isEmpty() ? null : ItemStackTemplate.fromNonEmptyStack(result),
          time,
          carrier,
-         visuals
+         visuals,
+         false
       );
    }
 
@@ -35,7 +36,8 @@ public record StockpotRecipe(
       ItemStackTemplate resultTemplate,
       int time,
       Ingredient carrier,
-      StockpotVisuals visuals
+      StockpotVisuals visuals,
+      boolean syrup
    ) {
       this(
          NonNullList.of(com.github.ysbbbbbb.kaleidoscopecookery.init.ModRecipes.EMPTY_INGREDIENT, BaseRecipe.fillInputs(ingredients)),
@@ -43,7 +45,8 @@ public record StockpotRecipe(
          resultTemplate,
          time,
          carrier,
-         visuals
+         visuals,
+         syrup
       );
    }
 
@@ -53,8 +56,9 @@ public record StockpotRecipe(
          StockpotRecipeSerializer.DEFAULT_SOUP_BASE,
          result.isEmpty() ? null : ItemStackTemplate.fromNonEmptyStack(result),
          time,
-         Ingredient.of(container.getItem()),
-         StockpotVisuals.DEFAULT
+         container.isEmpty() ? ModRecipes.EMPTY_INGREDIENT : Ingredient.of(container.getItem()),
+         StockpotVisuals.DEFAULT,
+         false
       );
    }
 

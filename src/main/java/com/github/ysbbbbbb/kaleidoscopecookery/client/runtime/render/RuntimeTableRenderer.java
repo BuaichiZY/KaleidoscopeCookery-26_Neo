@@ -76,7 +76,7 @@ public final class RuntimeTableRenderer implements BlockEntityRenderer<TableBloc
                itemState, stack, ItemDisplayContext.FIXED, blockEntity.getLevel(), null, (int)(blockEntity.getBlockPos().asLong() + slot)
             );
             state.items.add(itemState);
-            state.blockItems.add(stack.getItem() instanceof BlockItem);
+            state.blockItems.add(stack.getItem() instanceof BlockItem && itemState.usesBlockLight());
          }
       }
    }
@@ -86,7 +86,7 @@ public final class RuntimeTableRenderer implements BlockEntityRenderer<TableBloc
       if (!state.carpet.isEmpty()) {
          poseStack.pushPose();
          poseStack.translate(0.5F, 0.5F, 0.5F);
-         poseStack.mulPose(Axis.YP.rotationDegrees(state.axis == Direction.Axis.X ? -180.0F : -270.0F));
+         poseStack.rotateDegrees(Axis.YP, state.axis == Direction.Axis.X ? -180.0F : -270.0F);
          state.carpet.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();
       }
@@ -97,7 +97,7 @@ public final class RuntimeTableRenderer implements BlockEntityRenderer<TableBloc
          poseStack.pushPose();
          poseStack.translate(0.5F, 1.3125F, 0.5F);
          poseStack.scale(0.65F, 0.65F, 0.65F);
-         poseStack.mulPose(Axis.YP.rotationDegrees(state.axis == Direction.Axis.X ? 180.0F : 90.0F));
+         poseStack.rotateDegrees(Axis.YP, state.axis == Direction.Axis.X ? 180.0F : 90.0F);
          poseStack.translate(offset[0], offset[1] - (state.blockItems.get(i) ? 0.25F : 0.0F), offset[2]);
          state.items.get(i).submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();

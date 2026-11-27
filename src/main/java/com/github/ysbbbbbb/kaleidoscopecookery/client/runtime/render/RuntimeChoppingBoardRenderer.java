@@ -70,7 +70,7 @@ public final class RuntimeChoppingBoardRenderer
 
       poseStack.pushPose();
       poseStack.translate(0.5F, 0.0F, 0.5F);
-      poseStack.mulPose(Axis.YP.rotationDegrees(state.facing.get2DDataValue() * 90.0F));
+      poseStack.rotateDegrees(Axis.YP, state.facing.get2DDataValue() * 90.0F);
       // ItemStackRenderState centers baked item models by another half block.
       // Compensate here so the original block-space chopping model sits on the board.
       poseStack.translate(0.0F, 0.625F, 0.0F);

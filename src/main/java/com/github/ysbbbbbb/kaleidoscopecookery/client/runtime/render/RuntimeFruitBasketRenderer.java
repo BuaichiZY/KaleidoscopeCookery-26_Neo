@@ -61,7 +61,7 @@ public final class RuntimeFruitBasketRenderer
    public void submit(State state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
       poseStack.pushPose();
       poseStack.translate(0.5F, 0.0F, 0.5F);
-      poseStack.mulPose(Axis.YN.rotationDegrees(state.facing.get2DDataValue() * 90.0F));
+      poseStack.rotateDegrees(Axis.YN, state.facing.get2DDataValue() * 90.0F);
       poseStack.translate(-0.5F, 0.0F, -0.5F);
       for (BasketItem basketItem : state.items) {
          int slot = basketItem.slot();
@@ -69,8 +69,8 @@ public final class RuntimeFruitBasketRenderer
          int column = slot % 4;
          poseStack.pushPose();
          poseStack.translate(0.25F + column * 0.15F, 0.31F + (slot % 2) * 0.012F, 0.35F + row * 0.32F);
-         poseStack.mulPose(Axis.YN.rotationDegrees(90.0F));
-         poseStack.mulPose(Axis.XN.rotationDegrees(-30.0F));
+         poseStack.rotateDegrees(Axis.YN, 90.0F);
+         poseStack.rotateDegrees(Axis.XN, -30.0F);
          poseStack.scale(0.375F, 0.375F, 0.375F);
          basketItem.item().submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
          poseStack.popPose();
